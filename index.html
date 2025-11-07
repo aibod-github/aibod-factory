@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>AIBOD Factory | 製造業向けソフトウェアラインナップ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AIBOD Factory は、製造業向けにAIBODが提供する実務直結型ソフトウェアのパッケージシリーズです。" />
+  <style>
+    :root {
+      --aibod-light: #00b3ec;
+      --aibod-mid: #0068b6;
+      --aibod-deep: #1d2087;
+      --bg: #0f172a;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #182a4f 0%, #0a1120 40%, #000 100%);
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0,0,0,0.35);
+    }
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1rem;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: .06em;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .brand-dot {
+      width: 26px;
+      height: 26px;
+      background: conic-gradient(from 0deg, var(--aibod-light), var(--aibod-mid), var(--aibod-deep), var(--aibod-light));
+      border-radius: 9999px;
+      box-shadow: 0 0 20px rgba(0,179,236,.65);
+    }
+    .nav a {
+      color: #cbd5f5;
+      text-decoration: none;
+      font-size: .85rem;
+      margin-left: 1.2rem;
+      opacity: .85;
+    }
+    .hero {
+      max-width: 1100px;
+      margin: 2.2rem auto 1.5rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 3fr 2.2fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      margin-bottom: .6rem;
+    }
+    .hero p {
+      max-width: 36rem;
+      color: rgba(226,232,240,.7);
+    }
+    .tagline {
+      display: inline-flex;
+      gap: .35rem;
+      align-items: center;
+      background: rgba(0,179,236,0.1);
+      border: 1px solid rgba(0,179,236,0.25);
+      color: #fff;
+      border-radius: 9999px;
+      padding: .35rem .8rem;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: .7rem;
+    }
+    .hero-panel {
+      background: linear-gradient(160deg, rgba(0,179,236,0.14), rgba(13, 33, 80, 0));
+      border: 1px solid rgba(0,179,236,0.15);
+      border-radius: 1.4rem;
+      padding: 1rem 1.2rem 1.2rem;
+    }
+    .hero-panel h2 {
+      font-size: .95rem;
+      margin-bottom: .4rem;
+    }
+    .hero-panel ul {
+      padding-left: 1rem;
+      margin: .3rem 0 0;
+      font-size: .8rem;
+      color: rgba(226,232,240,.7);
+    }
+    .section {
+      max-width: 1100px;
+      margin: 1rem auto 3rem;
+      padding: 0 1rem;
+    }
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.3rem;
+    }
+    .card {
+      background: radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(5,5,7,0.05));
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 1.3rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      min-height: 280px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+    }
+    .card-title {
+      font-weight: 600;
+    }
+    .badge {
+      background: rgba(0,179,236,0.1);
+      border: 1px solid rgba(0,179,236,0.2);
+      padding: .2rem .5rem;
+      border-radius: 9999px;
+      font-size: .6rem;
+    }
+    .card p {
+      font-size: .78rem;
+      color: rgba(226,232,240,.68);
+    }
+    .card small {
+      font-size: .68rem;
+      color: rgba(226,232,240,.45);
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-top: .4rem;
+    }
+    .meta span {
+      background: rgba(15,23,42,0.28);
+      border: 1px solid rgba(255,255,255,0.03);
+      border-radius: .6rem;
+      padding: .15rem .5rem;
+      font-size: .6rem;
+    }
+    .footer {
+      text-align: center;
+      font-size: .65rem;
+      opacity: .5;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="brand-dot"></div>
+        <div>AIBOD Factory</div>
+      </div>
+      <div>
+        <!-- 既存のGitHub Pagesに合わせてリンクを追記してください -->
+        <!-- <a href="/aibod-whitepapers/">Lean Integration</a>
+        <a href="/aibod-whitepapers/ai-fusion.html">AI Fusion</a> -->
+        <a href="#lineup">製品一覧</a>
+        <a href="#about">コンセプト</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="tagline">Manufacturing Intelligence Suite</div>
+        <h1>AIBOD Factory</h1>
+        <p>
+          自動車・工業製品・半導体など、日本の現場で実際に使われている業務ロジックをそのままソフトウェア化。
+          クラウド／ローカル／デスクトップに最適配置し、小さく導入してすぐに運用を開始できます。
+        </p>
+      </div>
+      <div class="hero-panel">
+        <h2>初期ラインナップ</h2>
+        <ul>
+          <li>系列受注生産プランナ（クラウド）</li>
+          <li>自動倉庫オーガナイザ（ローカルサーバー）</li>
+          <li>Wafermap アナライザ（Windows / Mac）</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="lineup">
+      <h2 class="section-title">製品一覧</h2>
+      <div class="cards">
+
+        <!-- 1) 系列受注生産プランナ -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">系列受注生産プランナ</div>
+            <span class="badge">クラウド</span>
+          </div>
+          <p>
+            OEM企業からの「内示」「確定」注文CSVを取り込み、在庫ポリシーと突き合わせて日々の製品別生産数量を自動算出します。
+            系列サプライヤとしての計画業務を標準化します。
+          </p>
+          <div class="meta">
+            <span>対象：自動車製造業</span>
+            <span>入力：内示/確定CSV</span>
+            <span>出力：生産数計画CSV</span>
+            <span>販売：ライセンス＋月額</span>
+          </div>
+        </article>
+
+        <!-- 2) 自動倉庫オーガナイザ -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">自動倉庫オーガナイザ</div>
+            <span class="badge">ローカルサーバー</span>
+          </div>
+          <p>
+            製品ごとの使用部品をタイムリーに製造ラインへ搬送するためのWMSです。
+            自動倉庫・AGVなどのサブシステムとTCPで連携し、現場内の部品供給を見える化します。
+          </p>
+          <div class="meta">
+            <span>対象：自動車/工業製品</span>
+            <span>入力：生産スケジュール</span>
+            <span>出力：進捗表</span>
+            <span>販売：ライセンス＋保守</span>
+            <span>タブレットUI可</span>
+          </div>
+        </article>
+
+        <!-- 3) Wafermap アナライザ -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Wafermap アナライザ</div>
+            <span class="badge">デスクトップ</span>
+          </div>
+          <p>
+            半導体のウエーハマップ画像を読み込み、特徴抽出と過去マップの類似検索を行うエンジニア向け解析ツール。
+            工程異常の早期検知や不良パターン管理に活用できます。
+          </p>
+          <div class="meta">
+            <span>対象：半導体製造・装置</span>
+            <span>入力：ウエーハ画像</span>
+            <span>出力：分析結果</span>
+            <span>販売：買い切り</span>
+            <span>Win / Mac</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2 class="section-title">AIBOD Factory の考え方</h2>
+      <p style="font-size:.8rem; color:rgba(226,232,240,.65); max-width:52rem;">
+        これらのソフトウェアは、AIBODが顧客プロジェクトで実際に遭遇した「現場の課題」から逆算して開発したものです。
+        そのため、導入の初期段階で大規模なERP/MESを入れなくても、特定工程だけを素早くデジタル化できます。
+        今後は、Lean Integration / AI Fusion のコンセプトとも連動し、分析・可視化・生成AIによる説明機能を順次追加していきます。
+      </p>
+    </section>
+
+    <footer class="footer">
+      © AIBOD Inc. – AIBOD Factory draft page
+    </footer>
+  </main>
+</body>
+</html>
+
