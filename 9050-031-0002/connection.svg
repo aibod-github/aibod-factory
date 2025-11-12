@@ -1,0 +1,65 @@
+<svg width="800" height="360" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .box { fill:#ffffff; stroke:#1d2087; stroke-width:1.4; }
+    .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans JP", sans-serif; font-size:12px; font-weight:600; fill:#1f2933; }
+    .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans JP", sans-serif; font-size:11px; fill:#1f2933; }
+    .small { font-size:10px; fill:#52616b; }
+  </style>
+
+  <!-- background -->
+  <rect x="0" y="0" width="800" height="360" fill="#f5f7fa" rx="8"/>
+
+  <!-- left: API consumers -->
+  <rect class="box" x="30" y="45" width="160" height="110" rx="10"/>
+  <text class="title" x="40" y="65">上位アプリ / MES / WMS</text>
+  <text class="small" x="40" y="85">・Django/Node.js</text>
+  <text class="small" x="40" y="100">・工場内の既存画面</text>
+  <text class="small" x="40" y="115">・タブレットUI(任意)</text>
+  <text class="small" x="40" y="135" fill="#1d2087">→ REST APIで連携</text>
+
+  <!-- center: organizer -->
+  <rect class="box" x="250" y="30" width="300" height="190" rx="12" fill="#fff"/>
+  <text class="title" x="265" y="52">自動倉庫オーガナイザ（ローカルサーバ）</text>
+  <text class="small" x="265" y="72">・マスター管理（製品・使用部品）</text>
+  <text class="small" x="265" y="88">・生産スケジュール取込</text>
+  <text class="small" x="265" y="104">・出庫/搬送指示の生成</text>
+  <text class="small" x="265" y="120">・進捗/設備状態の集約</text>
+
+  <!-- center bottom: REST -->
+  <rect x="295" y="136" width="210" height="65" rx="8" fill="#e9f5fc" stroke="#00b3ec" stroke-width="1.1"/>
+  <text class="label" x="305" y="155">REST API公開</text>
+  <text class="small" x="305" y="172">GET /masters/... /schedule /progress ...</text>
+  <text class="small" x="305" y="188">AIBOD Factory配布モジュールからも利用可</text>
+
+  <!-- right: devices -->
+  <rect class="box" x="590" y="25" width="170" height="210" rx="12"/>
+  <text class="title" x="605" y="45">自動倉庫・AGV群</text>
+  <text class="small" x="605" y="65">・AS/RSコントローラ</text>
+  <text class="small" x="605" y="80">・AGV/AMR制御PC</text>
+  <text class="small" x="605" y="95">・コンベヤPLC</text>
+  <text class="small" x="605" y="115" fill="#0068b6">TCP/ソケットで接続</text>
+
+  <!-- arrows -->
+  <!-- left -> center (REST) -->
+  <line x1="190" y1="100" x2="250" y2="100" stroke="#0068b6" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text class="small" x="200" y="92" fill="#0068b6">REST/HTTPS</text>
+
+  <!-- center -> right (TCP) -->
+  <line x1="550" y1="140" x2="590" y2="140" stroke="#1d2087" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text class="small" x="525" y="130" fill="#1d2087">TCPコマンド</text>
+
+  <!-- bottom: sales -->
+  <rect class="box" x="200" y="250" width="400" height="80" rx="10"/>
+  <text class="title" x="215" y="272">AIBOD Factoryでの展開</text>
+  <text class="small" x="215" y="289">・コアサーバ（本製品）をライセンス提供</text>
+  <text class="small" x="215" y="304">・装置アダプタを追加モジュールとして配布</text>
+  <text class="small" x="215" y="319">・月額保守でログ・死活監視</text>
+
+  <!-- defs -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="4" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L6,3 z" fill="#1d2087" />
+    </marker>
+  </defs>
+</svg>
+
