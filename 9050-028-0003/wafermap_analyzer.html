@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AIBOD Factory | Wafermap アナライザ</title>
+<meta name="theme-color" content="#0068b6" />
+<style>
+  :root {
+    --c1:#00b3ec; --c2:#0068b6; --c3:#1d2087; --bg:#f8f9fb; --ink:#333;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Hiragino Sans","Noto Sans JP",system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  /* Nav */
+  .nav-wrap{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+  .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .logo{width:28px;height:28px;background:conic-gradient(from 0deg, var(--c1) 0 120deg, var(--c2) 120deg 240deg, var(--c3) 240deg 360deg);border-radius:50%}
+  .brand span{font-weight:700;color:var(--c3)}
+  .links{margin-left:auto;display:flex;gap:18px}
+  .links a{color:#213;opacity:.9;text-decoration:none;font-weight:600}
+  .links a:hover{color:var(--c2)}
+  .cta{margin-left:8px;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--c1),var(--c2));color:#fff !important}
+  /* Mobile menu */
+  .menu-btn{display:none;margin-left:auto;background:none;border:0;width:38px;height:38px;border-radius:8px}
+  .menu-btn:focus{outline:2px solid var(--c1)}
+  .bar{display:block;width:22px;height:2px;background:#333;margin:4px auto}
+  @media(max-width:860px){
+    .links{display:none;position:absolute;top:58px;left:0;right:0;background:#fff;border-top:1px solid #eee;padding:10px 16px;flex-direction:column}
+    .links.show{display:flex}
+    .menu-btn{display:block}
+  }
+
+  header{background:linear-gradient(90deg,var(--c1),var(--c2));color:#fff;padding:52px 20px}
+  .hero{max-width:1100px;margin:0 auto}
+  .hero h1{margin:0 0 6px;font-size:clamp(22px,4vw,32px)}
+  .hero p{margin:6px 0 0;opacity:.95}
+
+  .container{max-width:1000px;margin:28px auto 60px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);overflow:hidden}
+  .pad{padding:26px 22px}
+  h2{border-left:6px solid var(--c1);padding-left:10px;color:var(--c3);margin:22px 0 12px;font-size:1.35rem}
+  h3{color:var(--c2);margin-top:18px}
+  ul{padding-left:20px}
+  table.meta td{padding:6px 8px;vertical-align:top}
+  table.meta td:first-child{white-space:nowrap;color:#555;font-weight:600}
+
+  .breadcrumb{max-width:1100px;margin:0 auto;padding:10px 16px;font-size:.9rem}
+  .breadcrumb a{color:#fff;opacity:.95}
+  .breadcrumb span{opacity:.9}
+  .mono{background:#f4f6fb;border-radius:10px;padding:12px;overflow:auto;border:1px solid #eef2f6}
+
+  footer{background:var(--c3);color:#fff;text-align:center;padding:20px;font-size:.92rem}
+  .anchor{scroll-margin-top:80px}
+</style>
+<script>
+  // Mobile menu toggler
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('menuBtn');
+    const links = document.getElementById('navLinks');
+    btn?.addEventListener('click', ()=> links.classList.toggle('show'));
+  });
+</script>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="../index.html">
+      <span class="logo" aria-hidden="true"></span>
+      <span>AIBOD Factory</span>
+    </a>
+
+    <button id="menuBtn" class="menu-btn" aria-label="メニューを開閉">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <div id="navLinks" class="links">
+      <!-- ★必要に応じて実URLに変更してください -->
+      <a href="/aibod-factory/">Home</a>
+      <a href="/aibod-factory/#products">Products</a>
+      <a href="/aibod-factory/#whitepapers">Whitepapers</a>
+      <a href="/aibod-factory/docs/">Docs</a>
+      <a href="../index.htmly">Homeに戻る</a>
+      <a class="cta" href="/aibod-factory/contact.html">Contact</a>
+    </div>
+  </nav>
+</div>
+
+<header>
+  <div class="hero">
+    <div class="breadcrumb">
+      <a href="/aibod-factory/">AIBOD Factory</a> <span>›</span> <span>Wafermap アナライザ</span>
+    </div>
+    <h1>Wafermap アナライザ</h1>
+    <p>半導体製造工程の「ウエーハマップ」解析を高度化するAIツール</p>
+  </div>
+</header>
+
+<main class="container">
+  <div class="pad">
+    <section id="overview" class="anchor">
+      <h2>概要</h2>
+      <p><b>Wafermap アナライザ</b>は、ウエーハ検査（Bin Map）の画像をもとに、<b>欠陥パターンの特徴抽出</b>と<b>過去マップの類似検索</b>を提供する解析ツールです。ピクセル比較に依らず、<b>分布・方向・密度</b>などのセマンティック特徴で評価します。</p>
+      <p class="mono">販売形式：売り切り / 対応OS：Windows・macOS・Linux / 入力：ウエーハ画像（PNG, JPG） / 出力：分析結果（画面表示）</p>
+    </section>
+
+    <section id="industries" class="anchor">
+      <h2>対象業界</h2>
+      <ul>
+        <li>半導体製造業（前工程・後工程）</li>
+        <li>半導体検査/評価装置メーカー</li>
+        <li>品質保証・不良解析・設備保全</li>
+      </ul>
+    </section>
+
+    <section id="features" class="anchor">
+      <h2>主な機能</h2>
+      <h3>欠陥パターン分類</h3>
+      <p>7種の代表的パターン（Edge/Center/Ring/Radial/Random/…）に自動分類。</p>
+      <h3>高密度領域（ホットスポット）検出</h3>
+      <p>半径×角度=56セルで欠陥密度を定量化し、「Outer-3:00」等で座標表示。</p>
+      <h3>類似検索（Pattern-based Similarity）</h3>
+      <p>パターン型・位置・方向・カバレッジ・放射/角度分布の6要素から類似スコアを算出。</p>
+      <h3>特徴抽出の選択</h3>
+      <p>Radial-Angular / HOG / Zernike / Radon など目的に応じて選択可能。</p>
+      <h3>GUI操作</h3>
+      <p>画像フォルダ設定→検索→パターン分析をワンクリックで実行。</p>
+    </section>
+
+    <section id="specs" class="anchor">
+      <h2>システム仕様</h2>
+      <table class="meta">
+        <tr><td>システム構成</td><td>スタンドアロンアプリ（Python 3.10+ / Tkinter / NumPy / scikit-image / scikit-learn）</td></tr>
+        <tr><td>入力</td><td>ウエーハ画像ファイル（PNG, JPG）</td></tr>
+        <tr><td>画面出力</td><td>分析結果（分類・方向・密度ヒートマップ・類似スコア等）</td></tr>
+        <tr><td>ファイル出力</td><td>なし（※将来：JSON/レポート出力を計画）</td></tr>
+        <tr><td>販売形態</td><td>売り切りライセンス</td></tr>
+      </table>
+    </section>
+
+    <section id="usecases" class="anchor">
+      <h2>活用シーン</h2>
+      <ul>
+        <li><b>品質管理：</b>ロット間のパターン変化を定量監視し異常を早期検出</li>
+        <li><b>設備診断：</b>方向性欠陥と装置位置/搬送機構の相関を可視化</li>
+        <li><b>歩留まり改善：</b>過去類似マップの迅速抽出で原因特定を高速化</li>
+        <li><b>故障解析：</b>リング/エッジ集中パターンを自動抽出し優先度付け</li>
+      </ul>
+    </section>
+
+    <section id="arch" class="anchor">
+      <h2>システム構成図</h2>
+      <pre class="mono">┌────────────────────────────────────────────┐
+│ GUI Layer (Tkinter)                        │
+│  ├─ Image Folder Config                    │
+│  ├─ Similar Image Search                   │
+│  └─ Pattern Analysis                       │
+├────────────────────────────────────────────┤
+│ Application Layer                          │
+│  ├─ Feature Extraction                     │
+│  ├─ Similarity Search                      │
+│  └─ Pattern Classification                 │
+├────────────────────────────────────────────┤
+│ Data Layer                                 │
+│  └─ Wafer Image Files / Vector Cache       │
+└────────────────────────────────────────────┘</pre>
+    </section>
+
+    <section id="roadmap" class="anchor">
+      <h2>今後の展開</h2>
+      <ul>
+        <li>ディープラーニング埋め込み（CNN）対応</li>
+        <li>Lotレベル集計と自動レポート生成</li>
+        <li>MES/クラウド連携のWeb UI</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 AIBOD Inc. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
