@@ -304,6 +304,17 @@ font-size: .7rem;
 color: var(--muted);
 }
 
+.process-image {
+margin-top: 1.5rem;
+text-align: center;
+}
+
+.process-image img {
+max-width: 100%;
+height: auto;
+opacity: 0.9;
+}
+
 /* Contact */
 .contact {
 border-radius: 1rem;
