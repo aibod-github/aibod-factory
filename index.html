@@ -69,94 +69,106 @@
           <span class="icon"></span>
           <span data-i18n="hero.tagline">Software Manufacturing Factory</span>
         </div>
-        <h1 data-i18n="hero.title">Your Software, Manufactured.</h1>
-        <p class="hero-lead" data-i18n="hero.lead">
-          ほしいソフトウェアをすぐにご提供！<br>
-          ラインアップにあれば即使用可。<br>
-          なければ即設計し製造します。
-        </p>
+        <div class="hero-title-lead">
+          <h1 data-i18n="hero.title">Your Software, Manufactured.</h1>
+          <p class="hero-lead" data-i18n="hero.lead">
+            ほしいソフトウェアをすぐにご提供！<br>
+            ラインアップにあれば即使用可。<br>
+            なければ即設計し製造します。
+          </p>
+        </div>
       </div>
-      <aside class="hero-factory" id="factory">
-        <div style="font-size:.8rem; color:var(--muted);" data-i18n="factory.caption">
-          Software Factory Model
-        </div>
-        <div style="margin-top:.2rem; font-size:.9rem; font-weight:600;" data-i18n="factory.subtitle">
-          設計 → 試作 → 製造 → 改善 の“製造ライン”でソフトウェアを作る
-        </div>
-        <div class="factory-grid">
-          <div class="factory-step">
-            <span class="label" data-i18n="factory.step1.label">01 Blueprint</span>
-            <strong data-i18n="factory.step1.title">設計図を作る</strong>
-            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step1.body">
-              SVA/VLP で分解し、設計図を定義。
-            </span>
-          </div>
-          <div class="factory-step">
-            <span class="label" data-i18n="factory.step2.label">02 Prototype</span>
-            <strong data-i18n="factory.step2.title">試作する</strong>
-            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step2.body">
-              小さく動くものを短期間で提供。
-            </span>
-          </div>
-          <div class="factory-step">
-            <span class="label" data-i18n="factory.step3.label">03 Production</span>
-            <strong data-i18n="factory.step3.title">量産する</strong>
-            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step3.body">
-              安定版として製造・展開。
-            </span>
-          </div>
-          <div class="factory-step">
-            <span class="label" data-i18n="factory.step4.label">04 Kaizen</span>
-            <strong data-i18n="factory.step4.title">改善する</strong>
-            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step4.body">
-              ログ・現場の声から継続改善。
-            </span>
-          </div>
-        </div>
-      </aside>
     </section>
 
     <!-- Factory process -->
-    <section class="section">
+    <section class="section" id="factory">
       <div class="section-header">
-        <h2 class="section-title" data-i18n="process.title">Factory Process｜ソフトウェア製造プロセス</h2>
-        <div class="section-sub" data-i18n="process.subtitle">設計図を起点とした4つの工程</div>
+        <h2 class="section-title" data-i18n="factory.subtitle">設計 → 試作 → 製造 → 改善 の「製造ライン」でソフトウェアを作る</h2>
+        <div class="section-sub" data-i18n="factory.caption">Software Factory Model</div>
       </div>
       <div class="process">
-        <div class="process-step">
-          <div class="process-step-title" data-i18n="process.step1.title">1. Blueprint Studio（設計室）</div>
-          <small data-i18n="process.step1.body">
-            現場の課題を分解し、SVA/VLP に基づいた設計図を作成。どのレイヤーを標準化し、どこをカスタムするかを決めます。
-          </small>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Blueprint</div>
+              <div class="process-step-title" data-i18n="factory.step1.title">設計図を作る</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step1.body"></small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step1.title">1. Blueprint Studio（設計室）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span data-i18n="process.step1.body">現場の課題を分解し、最適なツール・システムを設計。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
         </div>
-        <div class="process-step">
-          <div class="process-step-title" data-i18n="process.step2.title">2. Prototype Line（試作ライン）</div>
-          <small data-i18n="process.step2.body">
-            設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に“効くポイント”を探ります。
-          </small>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Prototype</div>
+              <div class="process-step-title" data-i18n="factory.step2.title">試作する</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step2.body">小さく動くものを短期間で提供。</small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step2.title">2. Prototype Line（試作ライン）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span data-i18n="process.step2.body">設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に"効くポイント"を探ります。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
         </div>
-        <div class="process-step">
-          <div class="process-step-title" data-i18n="process.step3.title">3. Production Line（量産ライン）</div>
-          <small data-i18n="process.step3.body">
-            試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた“製品”に仕上げます。
-          </small>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Production</div>
+              <div class="process-step-title" data-i18n="factory.step3.title">量産する</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step3.body">
+                安定版として製造・展開。
+              </small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step3.title">3. Production Line（量産ライン）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span data-i18n="process.step3.body">試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた"製品"に仕上げます。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
         </div>
-        <div class="process-step">
-          <div class="process-step-title" data-i18n="process.step4.title">4. Kaizen Loop（改善ライン）</div>
-          <small data-i18n="process.step4.body">
-            ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。
-          </small>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Kaizen</div>
+              <div class="process-step-title" data-i18n="factory.step4.title">改善する</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step4.body">
+                ログ・現場の声から継続改善。
+              </small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step4.title">4. Kaizen Loop（改善ライン）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span data-i18n="process.step4.body">ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="process-image">
-        <img src="img/processsteps.svg" alt="Process steps diagram" />
-      </div>
+      <!div class="process-image">
+        <!img src="img/processsteps.svg" alt="Process steps diagram" />
+      <!/div>
     </section>
 
     <!-- Production Lines (products) -->
     <section class="section" id="lines">
       <div class="section-header">
-        <h2 class="section-title" data-i18n="lines.title">Production Lines｜量産済みソフトウェア</h2>
+        <h2 class="section-title" data-i18n="lines.title">Production Lines｜量産ソフトウェア</h2>
         <div class="section-sub" data-i18n="lines.subtitle">
           すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。
         </div>
@@ -395,7 +407,7 @@
 
         'hero.tagline': 'Software Manufacturing System',
         'hero.title': 'Your Software, Manufactured.',
-        'hero.lead': 'AIBOD Factory は、ソフトウェア開発を“工場のものづくり”に進化させた <strong>Software Manufacturing Platform</strong> です。 設計図（Blueprint）さえあれば、試作から量産、改善までを一気通貫で実現します。',
+        'hero.lead': 'AIBOD Factory は、ほしいソフトウェアをすぐにご提供！<br>ラインアップにあれば即使用可。なければ即設計し製造します。',
         'hero.btn.products': 'プロダクトを見る',
         'hero.btn.services': '工場のサービスを見る',
         'hero.btn.contact': '相談してみる',
@@ -415,29 +427,37 @@
         'factory.subtitle': '設計 → 試作 → 製造 → 改善 の“製造ライン”でソフトウェアを作る',
         'factory.step1.label': '01 Blueprint',
         'factory.step1.title': '設計図を作る',
-        'factory.step1.body': 'SVA/VLP で分解し、設計図を定義。',
+        'factory.step1.body': 'AIBODの得意分野です。すばやく設計！',
         'factory.step2.label': '02 Prototype',
         'factory.step2.title': '試作する',
-        'factory.step2.body': '小さく動くものを短期間で提供。',
+        'factory.step2.body': '小さく動くものを短期間で提供！',
         'factory.step3.label': '03 Production',
         'factory.step3.title': '量産する',
-        'factory.step3.body': '安定版として製造・展開。',
+        'factory.step3.body': '安定版として製造・展開！',
         'factory.step4.label': '04 Kaizen',
         'factory.step4.title': '改善する',
-        'factory.step4.body': 'ログ・現場の声から継続改善。',
+        'factory.step4.body': 'ログ・現場の声から継続改善！',
 
         'process.title': 'Factory Process｜ソフトウェア製造プロセス',
         'process.subtitle': '設計図を起点とした4つの工程',
         'process.step1.title': '1. Blueprint Studio（設計室）',
-        'process.step1.body': '現場の課題を分解し、SVA/VLP に基づいた設計図を作成。どのレイヤーを標準化し、どこをカスタムするかを決めます。',
+        'process.step1.body': '現場の課題を分解し、最適なツール・システムを設計。',
+        'process.step1.detail.title': '設計図の作成プロセス',
+        'process.step1.detail.body': 'SVA/VLP手法を用いて、現場の課題を構造化し、標準化可能な部分とカスタマイズが必要な部分を明確に定義します。',
         'process.step2.title': '2. Prototype Line（試作ライン）',
-        'process.step2.body': '設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に“効くポイント”を探ります。',
+        'process.step2.body': '設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に"効くポイント"を探ります。',
+        'process.step2.detail.title': '試作の目的',
+        'process.step2.detail.body': '設計図に基づき、数週間で動作する試作品を提供。実際の使用環境で検証し、改善点を特定します。',
         'process.step3.title': '3. Production Line（量産ライン）',
-        'process.step3.body': '試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた“製品”に仕上げます。',
+        'process.step3.body': '試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた"製品"に仕上げます。',
+        'process.step3.detail.title': '本番環境への展開',
+        'process.step3.detail.body': '試作で検証した機能を、本番運用に耐える堅牢なソフトウェアとして製造。テスト、監視、運用体制まで整備します。',
         'process.step4.title': '4. Kaizen Loop（改善ライン）',
         'process.step4.body': 'ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。',
+        'process.step4.detail.title': '継続的改善',
+        'process.step4.detail.body': '運用ログや現場からのフィードバックを分析し、設計図に反映。製造業の改善活動（Kaizen）と同様に、継続的に品質を向上させます。',
 
-        'lines.title': 'Production Lines｜量産済みソフトウェア',
+        'lines.title': 'Production Lines｜量産ソフトウェア',
         'lines.subtitle': 'すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。',
         'lines.planner.line': 'Planning Line',
         'lines.planner.title': '系列受注生産プランナ',
@@ -539,12 +559,20 @@
         'process.subtitle': 'Four stages starting from the blueprint',
         'process.step1.title': '1. Blueprint Studio',
         'process.step1.body': 'Break down on-site problems and create a blueprint based on SVA/VLP. Decide what to standardize and what to customize.',
+        'process.step1.detail.title': 'Blueprint Creation Process',
+        'process.step1.detail.body': 'Using SVA/VLP methodology, we structure on-site challenges and clearly define what can be standardized and what requires customization.',
         'process.step2.title': '2. Prototype Line',
         'process.step2.body': 'Manufacture small prototypes according to the blueprint and explore what really works together with your team.',
+        'process.step2.detail.title': 'Purpose of Prototyping',
+        'process.step2.detail.body': 'Based on the blueprint, we deliver working prototypes in weeks. We validate in real usage environments and identify improvement points.',
         'process.step3.title': '3. Production Line',
         'process.step3.body': 'Based on the validated prototype, manufacture robust production software including tests, monitoring, and operations.',
+        'process.step3.detail.title': 'Production Deployment',
+        'process.step3.detail.body': 'We manufacture robust production software from validated prototypes. We set up testing, monitoring, and operational systems.',
         'process.step4.title': '4. Kaizen Loop',
         'process.step4.body': 'Analyze logs and feedback, feed them back into design, and keep updating just like Kaizen in physical factories.',
+        'process.step4.detail.title': 'Continuous Improvement',
+        'process.step4.detail.body': 'We analyze operational logs and on-site feedback, reflect them in the blueprint, and continuously improve quality, just like Kaizen in manufacturing.',
 
         'lines.title': 'Production Lines｜Ready-made Software',
         'lines.subtitle': 'Pre-built product lines that can be used immediately and customized in the Factory when needed.',
