@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050816"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00B3EC"/>
+      <stop offset="100%" stop-color="#1D2087"/>
+    </linearGradient>
+    <style>
+      .label-main {
+        font-family: "Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+        fill: #e5e7eb;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .label-sub {
+        font-family: "Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+        fill: #9fb1ca;
+        font-size: 11px;
+      }
+      .step-box {
+        fill: rgba(15,23,42,0.95);
+        stroke: rgba(148,163,184,0.7);
+        stroke-width: 1.2;
+      }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="260" fill="url(#bg)"/>
+
+  <!-- タイトル -->
+  <g transform="translate(60,48)">
+    <text class="label-main">AIBOD Factory｜Blueprint First Software Flow</text>
+    <text class="label-sub" y="20">
+      現場の課題から、Blueprint設計 → 試作 → 製造 → 改善 → 現場価値までを一気通貫でつなぐワークフロー
+    </text>
+  </g>
+
+  <!-- ステップ1：現場の課題・データ -->
+  <g transform="translate(80,130)">
+    <rect class="step-box" x="0" y="-32" rx="12" ry="12" width="150" height="64"/>
+    <text class="label-main" x="16" y="-6">現場の課題</text>
+    <text class="label-sub" x="16" y="14">既存データ／設備</text>
+  </g>
+
+  <!-- 矢印1 -->
+  <g transform="translate(230,130)">
+    <line x1="0" y1="0" x2="70" y2="0"
+          stroke="#00B3EC" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="70,0 58,-7 58,7" fill="#00B3EC"/>
+  </g>
+
+  <!-- ステップ2：Blueprint設計 -->
+  <g transform="translate(300,130)">
+    <rect class="step-box" x="0" y="-32" rx="12" ry="12" width="170" height="64"/>
+    <text class="label-main" x="16" y="-6">Blueprint設計</text>
+    <text class="label-sub" x="16" y="14">SVA/VLPで構造設計</text>
+  </g>
+
+  <!-- 矢印2 -->
+  <g transform="translate(470,130)">
+    <line x1="0" y1="0" x2="70" y2="0"
+          stroke="#00B3EC" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="70,0 58,-7 58,7" fill="#00B3EC"/>
+  </g>
+
+  <!-- ステップ3：Prototype試作 -->
+  <g transform="translate(540,130)">
+    <rect class="step-box" x="0" y="-32" rx="12" ry="12" width="160" height="64"/>
+    <text class="label-main" x="16" y="-6">Prototype試作</text>
+    <text class="label-sub" x="16" y="14">小さく動く版で検証</text>
+  </g>
+
+  <!-- 矢印3 -->
+  <g transform="translate(700,130)">
+    <line x1="0" y1="0" x2="70" y2="0"
+          stroke="#00B3EC" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="70,0 58,-7 58,7" fill="#00B3EC"/>
+  </g>
+
+  <!-- ステップ4：Production製造 -->
+  <g transform="translate(770,130)">
+    <rect class="step-box" x="0" y="-32" rx="12" ry="12" width="170" height="64"/>
+    <text class="label-main" x="16" y="-6">Production製造</text>
+    <text class="label-sub" x="16" y="14">本番用ソフトウェア量産</text>
+  </g>
+
+  <!-- 矢印4 -->
+  <g transform="translate(940,130)">
+    <line x1="0" y1="0" x2="70" y2="0"
+          stroke="#00B3EC" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="70,0 58,-7 58,7" fill="#00B3EC"/>
+  </g>
+
+  <!-- ステップ5：Kaizen改善＋価値 -->
+  <g transform="translate(1010,130)">
+    <rect class="step-box" x="0" y="-32" rx="12" ry="12" width="150" height="64"/>
+    <text class="label-main" x="16" y="-6">Kaizen改善</text>
+    <text class="label-sub" x="16" y="14">現場価値・成果の最大化</text>
+  </g>
+
+  <!-- 上部の小さなループ矢印（Prototype→Blueprint） -->
+  <g transform="translate(620,70)">
+    <path d="M0 40 C 0 10 -90 10 -90 26"
+          fill="none"
+          stroke="#38bdf8"
+          stroke-width="1.6"
+          stroke-dasharray="4 3"
+          stroke-linecap="round"/>
+    <polygon points="-90,26 -84,19 -96,19" fill="#38bdf8"/>
+    <text class="label-sub" x="-120" y="0">フィードバック</text>
+    <text class="label-sub" x="-120" y="14">（試作結果→設計見直し）</text>
+  </g>
+</svg>
+
