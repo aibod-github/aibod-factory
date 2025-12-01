@@ -364,79 +364,277 @@ opacity: .8;
     background-repeat: no-repeat;
     background-image: url('./img/Google Gemini Image.png');
     /* 画像パス変更OK */
-  }
+}
   
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 20, 40, 0.45);
-    backdrop-filter: blur(1px);
-  }
+.hero-overlay {
+position: absolute;
+inset: 0;
+background: rgba(0, 20, 40, 0.45);
+backdrop-filter: blur(1px);
+}
+
+.hero-content {
+position: relative;
+max-width: 880px;
+z-index: 2;
+opacity: 0;
+animation: fadeInUp 1.5s ease-out forwards;
+}
+
+.rotating-text {
+font-size: 2.2rem;
+font-weight: 700;
+min-height: 2.8rem;
+margin-bottom: 1.2rem;
+line-height: 1.3;
+transition: opacity 0.6s ease;
+}
+
+.hero-sub {
+font-size: 1.2rem;
+margin-bottom: 1.5rem;
+opacity: 0;
+animation: fadeInUp 2.4s ease-out forwards;
+}
+
+.hero-desc {
+font-size: 1rem;
+opacity: 0;
+margin-bottom: 2rem;
+animation: fadeInUp 3s ease-out forwards;
+}
+
+.hero-cta {
+opacity: 0;
+animation: fadeInUp 3.6s ease-out forwards;
+display: flex;
+justify-content: center;
+gap: 0.8rem;
+flex-wrap: wrap;
+}
   
-  .hero-content {
-    position: relative;
-    max-width: 880px;
-    z-index: 2;
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
-    animation: fadeInUp 1.5s ease-out forwards;
+    transform: translateY(18px);
   }
   
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  
+@media (max-width: 640px) {
   .rotating-text {
-    font-size: 2.2rem;
-    font-weight: 700;
-    min-height: 2.8rem;
-    margin-bottom: 1.2rem;
-    line-height: 1.3;
-    transition: opacity 0.6s ease;
+    font-size: 1.6rem;
   }
   
   .hero-sub {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeInUp 2.4s ease-out forwards;
-  }
-  
-  .hero-desc {
     font-size: 1rem;
-    opacity: 0;
-    margin-bottom: 2rem;
-    animation: fadeInUp 3s ease-out forwards;
   }
-  
-  .hero-cta {
-    opacity: 0;
-    animation: fadeInUp 3.6s ease-out forwards;
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-  }
-  
-  /* Fade In Up Animation */
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-  
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .rotating-text {
-      font-size: 1.6rem;
-    }
-  
-    .hero-sub {
-      font-size: 1rem;
-    }
-  }
+}
 
-  /* 提供プログラム一覧セクションを目立たせる */
+
+/* Filter Section */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(3, 8, 18, 0.3);
+  border-radius: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-right: 0.2rem;
+}
+
+.filter-btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: rgba(0, 179, 236, 0.15);
+  border-color: rgba(0, 179, 236, 0.3);
+  color: var(--cyan);
+}
+
+.filter-btn.active {
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-color: transparent;
+  color: #04101f;
+  font-weight: 600;
+}
+
+.filter-btn-clear {
+  opacity: 0.7;
+}
+
+.tile-container {
+  perspective: 1000px;
+  height: 100%;
+  min-height: 280px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tile-container.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  height: 0;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.tile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+  cursor: pointer;
+  transform: rotateY(0deg);
+}
+
+.tile.flipped {
+  transform: rotateY(180deg) !important;
+}
+
+.tile-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tile-front {
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.06), transparent 60%),
+    var(--card);
+  border: 1px solid var(--card-bd);
+  color: var(--ink);
+}
+
+.tile-back {
+  background:
+    radial-gradient(circle at top, rgba(0,179,236,.12), transparent 60%),
+    linear-gradient(145deg, rgba(0,179,236,.08), rgba(29,32,135,.12));
+  border: 1px solid rgba(0, 179, 236, 0.3);
+  color: var(--ink);
+  transform: rotateY(180deg);
+}
+
+.tile-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tile-title-line {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.tile-character {
+  width: 60px;
+  height: auto;
+  margin: 0.5rem 0;
+  opacity: 0.9;
+  align-self: center;
+}
+
+.tile-character-large {
+    width: 120px;
+    height: auto;
+    margin: 0.5rem 0;
+    opacity: 0.9;
+    align-self: center;
+  }
+  
+.tile-content {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.68);
+  flex-grow: 1;
+}
+
+.tile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+.tile-meta span {
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.5rem;
+  border: 1px dashed rgba(255,255,255,.2);
+  font-size: 0.72rem;
+  opacity: 0.9;
+}
+
+.tile-footer {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tile-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  background: rgba(255,255,255,0.1);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+}
+
+.tile.flipped:hover {
+  transform: translateY(-2px) rotateY(180deg);
+}
+
+/* 提供SW一覧セクションを目立たせる */
 
 #lines {
   background: rgba(3, 8, 18, 0.4);
@@ -449,24 +647,52 @@ opacity: .8;
   border-radius: 1rem;
   margin-top: 2rem;
 }
-
+  
 /* 見出しを少しだけ強調 */
 #lines .section-header h2 {
   font-size: 1.7rem;
   letter-spacing: 0.04em;
 }
-
+  
 /* セクション下のハイライトボックスの境界を消して一体化 */
-#programs .highlight-box {
+#lines .highlight-box {
   border-color: transparent;
   background: rgba(0, 179, 236, 0.1);
   /* ダークテーマに合わせた背景 */
 }
+  
+/* サービスセクションを目立たせる */
 
-/* カードのホバー演出を強める */
+#services {
+    background: rgba(3, 8, 18, 0.4);
+    /* ダークテーマに合わせた背景 */
+    border-top: 3px solid var(--cyan);
+    /* 上部にアクセントライン */
+    padding-top: 3rem;
+    /* 少し余白を増やす */
+    padding-bottom: 3rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+  }
+    
+  /* 見出しを少しだけ強調 */
+  #services .section-header h2 {
+    font-size: 1.7rem;
+    letter-spacing: 0.04em;
+  }
+    
+  /* セクション下のハイライトボックスの境界を消して一体化 */
+  #services .highlight-box {
+    border-color: transparent;
+    background: rgba(0, 179, 236, 0.1);
+    /* ダークテーマに合わせた背景 */
+  }
+    
+  /* カードのホバー演出を強める */
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 22px rgba(0, 179, 236, 0.2);
   border-color: rgba(0, 179, 236, 0.4);
   /* cyan寄り */
 }
+  

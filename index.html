@@ -71,11 +71,6 @@
           ラインアップにあれば即使用可。<br>
           なければ即設計し製造します。
         </p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#lines" data-i18n="hero.btn.products">プロダクトを見る</a>
-          <a class="btn" href="#services" data-i18n="hero.btn.services">工場のサービスを見る</a>
-          <a class="btn" href="#contact" data-i18n="hero.btn.contact">相談してみる</a>
-        </div>
       </div>
       <aside class="hero-factory" id="factory">
         <div style="font-size:.8rem; color:var(--muted);" data-i18n="factory.caption">
@@ -159,90 +154,152 @@
           すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。
         </div>
       </div>
+      <!-- Filter Buttons -->
+      <div class="filter-section">
+        <div class="filter-group">
+          <span class="filter-label" data-i18n="filter.industry.label">業界:</span>
+          <button class="filter-btn" data-filter-type="industry" data-filter-value="自動車" data-i18n="filter.industry.automotive">自動車</button>
+          <button class="filter-btn" data-filter-type="industry" data-filter-value="半導体" data-i18n="filter.industry.semiconductor">半導体</button>
+          <button class="filter-btn filter-btn-clear" data-filter-type="industry" data-filter-value="" data-i18n="filter.all">すべて</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label" data-i18n="filter.keyword.label">キーワード:</span>
+          <button class="filter-btn" data-filter-type="keyword" data-filter-value="受注" data-i18n="filter.keyword.order">受注</button>
+          <button class="filter-btn" data-filter-type="keyword" data-filter-value="部品物流" data-i18n="filter.keyword.logistics">部品物流</button>
+          <button class="filter-btn" data-filter-type="keyword" data-filter-value="テスト分析" data-i18n="filter.keyword.testing">テスト分析</button>
+          <button class="filter-btn filter-btn-clear" data-filter-type="keyword" data-filter-value="" data-i18n="filter.all">すべて</button>
+        </div>
+      </div>
+
       <div class="cards">
         <!-- ① Planner -->
-        <article class="card">
-          <div class="card-header">
-            <div>
-              <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);" data-i18n="lines.planner.line">
-                Planning Line
+        <div class="tile-container" data-industry="自動車" data-keyword="受注">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <img src="img/Factory_naiji.png" alt="Planner character" class="tile-character" />
+                <div>
+                  <div class="tile-title-line" data-i18n="lines.planner.line">Planning Line</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.planner.title">系列受注生産プランナ</h3>
+                </div>
+                <span class="card-badge" data-i18n="lines.planner.badge">クラウド</span>
               </div>
-              <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.planner.title">
-                系列受注生産プランナ
-              </h3>
+              <p class="tile-content" data-i18n="lines.planner.body">
+                OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて
+                日々の生産数量を自動算出するプランニングエンジンです。
+              </p>
+              <div class="tile-meta">
+                <span data-i18n="lines.planner.meta1">対象：自動車系列</span>
+                <span data-i18n="lines.planner.meta2">入力：内示/確定CSV</span>
+                <span data-i18n="lines.planner.meta3">出力：日次生産計画CSV</span>
+              </div>
+              <div class="tile-hint">詳細 →</div>
             </div>
-            <span class="card-badge" data-i18n="lines.planner.badge">クラウド</span>
+            <div class="tile-face tile-back">
+              <div class="tile-title">
+                <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.planner.title">系列受注生産プランナ</h3>
+              </div>
+              <div class="tile-footer">
+                <img src="img/Factory_naiji.png" alt="Planner character" class="tile-character-large" />
+                <p class="tile-content" data-i18n="lines.planner.body2">
+                  内示読み　揺らぎを掴む　先を見る<br>
+                  日々の数　予測はできても　責任が…
+                </p>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
           </div>
-          <p data-i18n="lines.planner.body">
-            OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて
-            日々の生産数量を自動算出するプランニングエンジンです。
-          </p>
-          <div class="card-meta">
-            <span data-i18n="lines.planner.meta1">対象：自動車系列</span>
-            <span data-i18n="lines.planner.meta2">入力：内示/確定CSV</span>
-            <span data-i18n="lines.planner.meta3">出力：日次生産計画CSV</span>
-          </div>
-          <div class="card-footer">
+          <div class="tile-footer">
             <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
             <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
-        </article>
+        </div>
 
         <!-- ② Organizer -->
-        <article class="card">
-          <div class="card-header">
-            <div>
-              <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);" data-i18n="lines.organizer.line">
-                Logistics Line
+        <div class="tile-container" data-industry="自動車" data-keyword="部品物流">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <img src="img/Factory_ao.png" alt="Organizer character" class="tile-character" />
+                <div>
+                  <div class="tile-title-line" data-i18n="lines.organizer.line">Logistics Line</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.organizer.title">自動倉庫オーガナイザ</h3>
+                </div>
+                <span class="card-badge" data-i18n="lines.organizer.badge">ローカルサーバー</span>
               </div>
-              <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.organizer.title">
-                自動倉庫オーガナイザ
-              </h3>
+              <p class="tile-content" data-i18n="lines.organizer.body">
+                部品を製造ラインへタイムリーに搬送するための WMS サブシステム。
+                自動倉庫・AGVとTCPで連携し、供給の進捗を見える化します。
+              </p>
+              <div class="tile-meta">
+                <span data-i18n="lines.organizer.meta1">対象：自動車/工業製品</span>
+                <span data-i18n="lines.organizer.meta2">入力：生産スケジュール</span>
+                <span data-i18n="lines.organizer.meta3">出力：進捗画面</span>
+              </div>
+              <div class="tile-hint">詳細 →</div>
             </div>
-            <span class="card-badge" data-i18n="lines.organizer.badge">ローカルサーバー</span>
+            <div class="tile-face tile-back">
+              <div class="tile-title">
+                <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.organizer.title">自動倉庫オーガナイザ</h3>
+              </div>
+              <div class="tile-footer">
+                <img src="img/Factory_ao.png" alt="Organizer character" class="tile-character-large" />
+                <p class="tile-content" data-i18n="lines.organizer.body2">
+                  呼べば来る　部品が走る　影の手足<br>
+                  入庫出庫　流れを整え　ミスを断つ
+                </p>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
           </div>
-          <p data-i18n="lines.organizer.body">
-            部品を製造ラインへタイムリーに搬送するための WMS サブシステム。
-            自動倉庫・AGVとTCPで連携し、供給の進捗を見える化します。
-          </p>
-          <div class="card-meta">
-            <span data-i18n="lines.organizer.meta1">対象：自動車/工業製品</span>
-            <span data-i18n="lines.organizer.meta2">入力：生産スケジュール</span>
-            <span data-i18n="lines.organizer.meta3">出力：進捗画面</span>
-          </div>
-          <div class="card-footer">
-            <a class="btn primary" href="product.html?p=organizer" data-i18n="lines.btn.detail">詳細ページへ</a>
+          <div class="tile-footer">
+            <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
             <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
-        </article>
+        </div>
 
         <!-- ③ Wafermap -->
-        <article class="card">
-          <div class="card-header">
-            <div>
-              <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);" data-i18n="lines.wafermap.line">
-                Inspection Line
+        <div class="tile-container" data-industry="半導体" data-keyword="テスト分析">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character" />
+                <div>
+                  <div class="tile-title-line" data-i18n="lines.wafermap.line">Inspection Line</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.wafermap.title">Wafermap アナライザ</h3>
+                </div>
+                <span class="card-badge" data-i18n="lines.wafermap.badge">デスクトップ</span>
               </div>
-              <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.wafermap.title">
-                Wafermap アナライザ
-              </h3>
+              <p class="tile-content" data-i18n="lines.wafermap.body">
+                半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。
+                工程異常や不良パターンを素早く把握するための"検査ライン"です。
+              </p>
+              <div class="tile-meta">
+                <span data-i18n="lines.wafermap.meta1">対象：半導体製造/装置</span>
+                <span data-i18n="lines.wafermap.meta2">入力：ウエーハ画像</span>
+                <span data-i18n="lines.wafermap.meta3">出力：解析結果画面</span>
+              </div>
+              <div class="tile-hint">詳細 →</div>
             </div>
-            <span class="card-badge" data-i18n="lines.wafermap.badge">デスクトップ</span>
+            <div class="tile-face tile-back">
+              <div class="tile-title">
+                <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.wafermap.title">Wafermap アナライザ</h3>
+              </div>
+              <div class="tile-footer">
+                <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character-large" />
+                <p class="tile-content" data-i18n="lines.wafermap.body2">
+                  点が語る　過去との距離　今の癖<br>
+                  散る欠陥　束ねて示す　根の方向
+                </p>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
           </div>
-          <p data-i18n="lines.wafermap.body">
-            半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。
-            工程異常や不良パターンを素早く把握するための“検査ライン”です。
-          </p>
-          <div class="card-meta">
-            <span data-i18n="lines.wafermap.meta1">対象：半導体製造/装置</span>
-            <span data-i18n="lines.wafermap.meta2">入力：ウエーハ画像</span>
-            <span data-i18n="lines.wafermap.meta3">出力：解析結果画面</span>
-          </div>
-          <div class="card-footer">
-            <a class="btn primary" href="product.html?p=wafermap" data-i18n="lines.btn.detail">詳細ページへ</a>
+          <div class="tile-footer">
+            <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
             <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
@@ -377,6 +434,7 @@
         'lines.planner.title': '系列受注生産プランナ',
         'lines.planner.badge': 'クラウド',
         'lines.planner.body': 'OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて 日々の生産数量を自動算出するプランニングエンジンです。',
+        'lines.planner.body2': '内示読み　揺らぎを掴む　先を見る  日々の数　予測はできても　責任が…',
         'lines.planner.meta1': '対象：自動車系列',
         'lines.planner.meta2': '入力：内示/確定CSV',
         'lines.planner.meta3': '出力：日次生産計画CSV',
@@ -384,6 +442,7 @@
         'lines.organizer.title': '自動倉庫オーガナイザ',
         'lines.organizer.badge': 'ローカルサーバー',
         'lines.organizer.body': '部品を製造ラインへタイムリーに搬送するための WMS サブシステム。 自動倉庫・AGVとTCPで連携し、供給の進捗を見える化します。',
+        'lines.organizer.body2': '呼べば来る　部品が走る　影の手足   入庫出庫　流れを整え　ミスを断つ',
         'lines.organizer.meta1': '対象：自動車/工業製品',
         'lines.organizer.meta2': '入力：生産スケジュール',
         'lines.organizer.meta3': '出力：進捗画面',
@@ -391,11 +450,21 @@
         'lines.wafermap.title': 'Wafermap アナライザ',
         'lines.wafermap.badge': 'デスクトップ',
         'lines.wafermap.body': '半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。 工程異常や不良パターンを素早く把握するための“検査ライン”です。',
+        'lines.wafermap.body2': '点が語る　過去との距離　今の癖    散る欠陥　束ねて示す　根の方向',
         'lines.wafermap.meta1': '対象：半導体製造/装置',
         'lines.wafermap.meta2': '入力：ウエーハ画像',
         'lines.wafermap.meta3': '出力：解析結果画面',
         'lines.btn.detail': '詳細ページへ',
         'lines.btn.consult': 'このラインで相談',
+
+        'filter.industry.label': '業界:',
+        'filter.industry.automotive': '自動車',
+        'filter.industry.semiconductor': '半導体',
+        'filter.keyword.label': 'キーワード:',
+        'filter.keyword.order': '受注',
+        'filter.keyword.logistics': '部品物流',
+        'filter.keyword.testing': 'テスト分析',
+        'filter.all': 'すべて',
 
         'services.title': 'Factory Services｜工場でできること',
         'services.subtitle': '量産済みソフトだけでなく、「設計」「試作」「製造」の工程ごとにサポートします。',
@@ -472,6 +541,7 @@
         'lines.planner.title': 'Series Production Planner',
         'lines.planner.badge': 'Cloud',
         'lines.planner.body': 'A planning engine that ingests OEM “forecast” and “firm” CSV orders and automatically calculates daily production quantities based on inventory policies.',
+        'lines.planner.body2': 'Adapt to moving Forecast',
         'lines.planner.meta1': 'Target: Automotive tier suppliers',
         'lines.planner.meta2': 'Input: Forecast / firm CSV',
         'lines.planner.meta3': 'Output: Daily production plan CSV',
@@ -479,6 +549,7 @@
         'lines.organizer.title': 'Autowarehouse Organizer',
         'lines.organizer.badge': 'Local server',
         'lines.organizer.body': 'A WMS sub-system that delivers parts to production lines just in time. Connects to automated warehouses and AGVs via TCP and visualizes supply progress.',
+        'lines.organizer.body2': 'Everytime comes when called',
         'lines.organizer.meta1': 'Target: Automotive / industrial products',
         'lines.organizer.meta2': 'Input: Production schedule',
         'lines.organizer.meta3': 'Output: Progress dashboard',
@@ -486,11 +557,21 @@
         'lines.wafermap.title': 'Wafermap Analyzer',
         'lines.wafermap.badge': 'Desktop',
         'lines.wafermap.body': 'An analysis tool that extracts features and searches similar patterns in wafer map images to quickly identify process anomalies and defect patterns.',
+        'lines.wafermap.body2': 'Analyze defect distribution wisely',
         'lines.wafermap.meta1': 'Target: Semiconductor fabs / tool vendors',
         'lines.wafermap.meta2': 'Input: Wafer map images',
         'lines.wafermap.meta3': 'Output: Analysis results on screen',
         'lines.btn.detail': 'View details',
         'lines.btn.consult': 'Consult on this line',
+
+        'filter.industry.label': 'Industry:',
+        'filter.industry.automotive': 'Automotive',
+        'filter.industry.semiconductor': 'Semiconductor',
+        'filter.keyword.label': 'Keyword:',
+        'filter.keyword.order': 'Order',
+        'filter.keyword.logistics': 'Logistics',
+        'filter.keyword.testing': 'Testing',
+        'filter.all': 'All',
 
         'services.title': 'Factory Services｜What the Factory Can Do',
         'services.subtitle': 'We support each stage: design, prototyping, and manufacturing—not just finished products.',
@@ -596,6 +677,79 @@
       }
       applyLang(lang);
     })();
+
+    // Tile flipping functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tiles = document.querySelectorAll('.tile');
+      
+      tiles.forEach((tile) => {
+        tile.addEventListener('click', function(e) {
+          // Don't flip if clicking on a link
+          if (e.target.closest('a')) {
+            return;
+          }
+          
+          // Toggle flipped class
+          this.classList.toggle('flipped');
+        });
+      });
+    });
+
+    // Filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const tileContainers = document.querySelectorAll('.tile-container');
+      let activeFilters = {
+        industry: '',
+        keyword: ''
+      };
+
+      function applyFilters() {
+        tileContainers.forEach(container => {
+          const industry = container.getAttribute('data-industry');
+          const keyword = container.getAttribute('data-keyword');
+          
+          let show = true;
+          
+          // Check industry filter
+          if (activeFilters.industry && industry !== activeFilters.industry) {
+            show = false;
+          }
+          
+          // Check keyword filter
+          if (activeFilters.keyword && keyword !== activeFilters.keyword) {
+            show = false;
+          }
+          
+          if (show) {
+            container.classList.remove('hidden');
+          } else {
+            container.classList.add('hidden');
+          }
+        });
+      }
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const filterType = this.getAttribute('data-filter-type');
+          const filterValue = this.getAttribute('data-filter-value');
+          
+          // Update active filter
+          activeFilters[filterType] = filterValue;
+          
+          // Update button states
+          filterButtons.forEach(b => {
+            if (b.getAttribute('data-filter-type') === filterType) {
+              b.classList.remove('active');
+            }
+          });
+          this.classList.add('active');
+          
+          // Apply filters
+          applyFilters();
+        });
+      });
+    });
   </script>
 </body>
 </html>
