@@ -54,6 +54,10 @@
         <a href="#services" class="btn-primary" data-i18n="hero-visual.btn.lines">サービスを見る</a>
         <a href="#contact" class="btn-secondary" data-i18n="hero-visual.btn.contact">まずは相談する</a>
       </div>
+      <div class="hero-cta">
+        <a href="#services" class="btn-primary" data-i18n="hero-visual.btn.lines031" data-filter-industry="自動車">自動車業界のサービスを見る</a>
+        <a href="#services" class="btn-primary" data-i18n="hero-visual.btn.lines018" data-filter-industry="半導体">半導体業界のサービスを見る</a>
+      </div>
     </div>
   </section>
 
@@ -404,6 +408,8 @@
         'hero-visual.btn.factory': '工場を見る',
         'hero-visual.btn.lines': 'サービスを見る',
         'hero-visual.btn.contact': 'まずは相談する',
+        'hero-visual.btn.lines031': '自動車業界のサービスを見る',
+        'hero-visual.btn.lines018': '自動車業界のサービスを見る',
 
         'factory.caption': 'Software Factory Model',
         'factory.subtitle': '設計 → 試作 → 製造 → 改善 の“製造ライン”でソフトウェアを作る',
@@ -502,6 +508,8 @@
         'hero.btn.products': 'View Products',
         'hero.btn.services': 'View Factory Services',
         'hero.btn.contact': 'Talk to Us',
+        'hero.btn.services031': 'View Factory Services for Auto',
+        'hero.btn.services018': 'View Factory Services for semicon',
 
         'hero-visual.rotating.0': 'Your Software, Manufactured.',
         'hero-visual.rotating.1': 'From "building" software to "manufacturing" it.',
@@ -732,26 +740,65 @@
         });
       }
 
+      function setFilter(filterType, filterValue) {
+        activeFilters[filterType] = filterValue;
+        
+        // Update button states
+        filterButtons.forEach(b => {
+          if (b.getAttribute('data-filter-type') === filterType) {
+            b.classList.remove('active');
+            if (b.getAttribute('data-filter-value') === filterValue) {
+              b.classList.add('active');
+            }
+          }
+        });
+        
+        // Apply filters
+        applyFilters();
+      }
+
       filterButtons.forEach(btn => {
         btn.addEventListener('click', function() {
           const filterType = this.getAttribute('data-filter-type');
           const filterValue = this.getAttribute('data-filter-value');
-          
-          // Update active filter
-          activeFilters[filterType] = filterValue;
-          
-          // Update button states
-          filterButtons.forEach(b => {
-            if (b.getAttribute('data-filter-type') === filterType) {
-              b.classList.remove('active');
-            }
-          });
-          this.classList.add('active');
-          
-          // Apply filters
-          applyFilters();
+          setFilter(filterType, filterValue);
         });
       });
+
+      // Handle links with filter data attributes
+      document.querySelectorAll('a[data-filter-industry]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const industry = this.getAttribute('data-filter-industry');
+          const targetHash = this.getAttribute('href');
+          if (industry) {
+            e.preventDefault();
+            // Apply the filter
+            setFilter('industry', industry);
+            // Scroll to target after a short delay to allow filter to apply
+            setTimeout(() => {
+              const target = document.querySelector(targetHash);
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 200);
+          }
+        });
+      });
+
+      // Check URL hash for filter parameters
+      function checkHashFilters() {
+        const hash = window.location.hash;
+        if (hash === '#services') {
+          // Check if there's a filter parameter in the link that was clicked
+          // This will be handled by the click event above
+        }
+      }
+
+      // Check on page load
+      checkHashFilters();
+      
+      // Check on hash change
+      window.addEventListener('hashchange', checkHashFilters);
     });
   </script>
 </body>
