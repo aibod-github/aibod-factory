@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIBOD Factory｜製品を探す入口</title>
+  <meta name="description" content="AIBOD Factory の製品を、ユースケース／現場ペイン／業界の観点から素早く探せるエントリーページ。系列受注生産プランナ・自動倉庫オーガナイザ・Wafermapアナライザ。" />
+  <style>
+    :root {
+      --light: #00b3ec;
+      --mid: #0068b6;
+      --deep: #1d2087;
+      --ink: #e5e7eb;
+      --muted: #a6b0c3;
+      --bg0: #070b14;
+      --bg1: #0e1830;
+      --card: rgba(255,255,255,.05);
+      --card-bd: rgba(255,255,255,.08);
+      --chip: rgba(255,255,255,.08);
+      --chip-bd: rgba(255,255,255,.2);
+      --ok: #22c55e;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI",sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1200px 600px at 15% -10%, rgba(0,179,236,.18), transparent 45%),
+                  radial-gradient(900px 500px at 85% -10%, rgba(29,32,135,.18), transparent 50%),
+                  linear-gradient(180deg, #0a1224, #070b14 40%, #05070c);
+    }
+    a{color:#cfe6ff}
+    header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(3,6,12,.6);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{max-width:1200px;margin:0 auto;padding:.7rem 1rem;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.04em}
+    .brand-dot{width:26px;height:26px;border-radius:9999px;background:conic-gradient(from 0deg,var(--light),var(--mid),var(--deep),var(--light));box-shadow:0 0 24px rgba(0,179,236,.6)}
+    .nav a{margin-left:1rem;text-decoration:none;color:#cfe6ff;opacity:.85;font-size:.9rem}
+    .hero{max-width:1200px;margin:1.4rem auto 1rem;padding:0 1rem;display:grid;gap:1.2rem;grid-template-columns:1.7fr 1.1fr;align-items:center}
+    .hero h1{font-size:clamp(1.8rem,3.2vw,2.4rem);margin:.2rem 0 .6rem}
+    .tagline{display:inline-flex;gap:.4rem;align-items:center;padding:.35rem .7rem;border-radius:9999px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,179,236,.12);border:1px solid rgba(0,179,236,.25)}
+    .hero-panel{background:linear-gradient(160deg, rgba(0,179,236,.14), rgba(13,33,80,0));border:1px solid rgba(0,179,236,.15);border-radius:1rem;padding:1rem}
+    .hero-panel h2{font-size:1rem;margin:0 0 .4rem}
+    .hero-panel ul{margin:.3rem 0 0 1.1rem;font-size:.9rem;color:var(--muted)}
+
+    .section{max-width:1200px;margin:1rem auto 2rem;padding:0 1rem}
+    .section h2{font-size:1.1rem;margin:.2rem 0 1rem}
+
+    .switcher{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
+    .tab{padding:.4rem .7rem;border:1px solid var(--chip-bd);background:var(--chip);border-radius:.6rem;font-size:.85rem;cursor:pointer}
+    .tab[aria-selected="true"]{outline:2px solid var(--light)}
+
+    .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+    .chip{padding:.35rem .6rem;border:1px solid var(--chip-bd);background:var(--chip);border-radius:9999px;font-size:.8rem;cursor:pointer}
+    .chip[aria-pressed="true"]{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.5)}
+
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:1rem}
+    .panel{border:1px solid var(--card-bd);background:var(--card);border-radius:1rem;padding:1rem}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .card{border:1px solid var(--card-bd);background:radial-gradient(circle at top, rgba(255,255,255,.06), rgba(5,5,7,.06));border-radius:1rem;padding:1rem;display:flex;flex-direction:column;gap:.6rem}
+    .badge{font-size:.68rem;padding:.2rem .45rem;border:1px solid rgba(255,255,255,.25);border-radius:.4rem;opacity:.85}
+    .meta{display:flex;flex-wrap:wrap;gap:.35rem}
+    .meta span{border:1px dashed rgba(255,255,255,.22);border-radius:.4rem;padding:.15rem .45rem;font-size:.7rem;opacity:.85}
+    .card .cta{margin-top:auto;display:flex;gap:.5rem;flex-wrap:wrap}
+    .btn{padding:.5rem .7rem;border-radius:.6rem;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:var(--ink);text-decoration:none;font-size:.85rem}
+    .btn.primary{border-color:transparent;background:linear-gradient(90deg,var(--light),var(--mid));color:#051021;font-weight:700}
+
+    .filters h3{font-size:.95rem;margin:.2rem 0 .4rem}
+    .hint{font-size:.8rem;color:var(--muted)}
+    .active-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+    .active-tags .tag{font-size:.72rem;padding:.2rem .5rem;border-radius:9999px;background:rgba(0,179,236,.15);border:1px solid rgba(0,179,236,.35)}
+
+    .foot{max-width:1200px;margin:1.2rem auto 3rem;padding:0 1rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+    @media (max-width:980px){.layout{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav" aria-label="メイン">
+      <div class="brand">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span>AIBOD Factory</span>
+      </div>
+      <div>
+        <!-- 必要に応じて既存サイトのリンクを追記 -->
+        <!-- <a href="/aibod-whitepapers/">ホワイトペーパー</a> -->
+        <!-- <a href="/aibod-factory.html">製品トップ</a> -->
+        <a href="#finder">製品を探す</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="tagline">Find by Use Case / Pain / Industry</div>
+        <h1>製品を探す入口</h1>
+        <p style="color:var(--muted);max-width:46rem">
+          来訪者が実際に抱える<strong>ユースケース</strong>、<strong>現場ペイン</strong>、<strong>業界</strong>の観点から、AIBOD Factory の3製品（①系列受注生産プランナ ②自動倉庫オーガナイザ ③Wafermap アナライザ）を素早く絞り込みます。
+          左のフィルタで条件を選ぶと、右側のカードがリアルタイムに更新されます。
+        </p>
+      </div>
+      <aside class="hero-panel" aria-label="ショートカット">
+        <h2>クイック選択</h2>
+        <ul>
+          <li><a href="#" data-preset="automotive">自動車業界ですぐ見たい</a></li>
+          <li><a href="#" data-preset="pain-planning">計画作成の手作業をなくしたい</a></li>
+          <li><a href="#" data-preset="semiconductor">半導体工程の不良要因を早く掴みたい</a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="finder">
+      <div class="switcher" role="tablist" aria-label="観点の切替">
+        <button class="tab" role="tab" aria-selected="true" data-panel="usecase">ユースケース</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="pain">現場ペイン</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="industry">業界</button>
+      </div>
+
+      <div class="layout">
+        <!-- 左：フィルタ -->
+        <aside class="panel filters" aria-label="フィルタ">
+          <!-- ユースケース -->
+          <div class="panel-body" data-panel="usecase">
+            <h3>ユースケースで絞り込む</h3>
+            <div class="chips" id="chips-usecase">
+              <button class="chip" data-type="usecase" data-value="日次生産計画自動化">日次生産計画自動化</button>
+              <button class="chip" data-type="usecase" data-value="在庫ポリシー反映">在庫ポリシー反映</button>
+              <button class="chip" data-type="usecase" data-value="CSV連携">CSV連携</button>
+              <button class="chip" data-type="usecase" data-value="AGV連携搬送">AGV連携搬送</button>
+              <button class="chip" data-type="usecase" data-value="WMSサブシステム">WMSサブシステム</button>
+              <button class="chip" data-type="usecase" data-value="タブレット現場操作">タブレット現場操作</button>
+              <button class="chip" data-type="usecase" data-value="類似マップ検索">類似マップ検索</button>
+              <button class="chip" data-type="usecase" data-value="不良パターン解析">不良パターン解析</button>
+              <button class="chip" data-type="usecase" data-value="ローカル解析">ローカル解析</button>
+            </div>
+            <p class="hint">複数選択可。条件に合致する製品だけが表示されます。</p>
+          </div>
+          <!-- ペイン -->
+          <div class="panel-body" data-panel="pain" hidden>
+            <h3>現場ペインで絞り込む</h3>
+            <div class="chips" id="chips-pain">
+              <button class="chip" data-type="pain" data-value="計画が手作業で重い">計画が手作業で重い</button>
+              <button class="chip" data-type="pain" data-value="内示変動に追従できない">内示変動に追従できない</button>
+              <button class="chip" data-type="pain" data-value="在庫過多と欠品が発生">在庫過多と欠品が発生</button>
+              <button class="chip" data-type="pain" data-value="部品供給の遅延が多い">部品供給の遅延が多い</button>
+              <button class="chip" data-type="pain" data-value="進捗が見えない">進捗が見えない</button>
+              <button class="chip" data-type="pain" data-value="不良要因の特定に時間">不良要因の特定に時間</button>
+              <button class="chip" data-type="pain" data-value="ノウハウが属人化">ノウハウが属人化</button>
+            </div>
+            <p class="hint">現場の課題からアプローチしたい方向け。</p>
+          </div>
+          <!-- 業界 -->
+          <div class="panel-body" data-panel="industry" hidden>
+            <h3>業界で絞り込む</h3>
+            <div class="chips" id="chips-industry">
+              <button class="chip" data-type="industry" data-value="自動車">自動車</button>
+              <button class="chip" data-type="industry" data-value="工業製品">工業製品</button>
+              <button class="chip" data-type="industry" data-value="半導体">半導体</button>
+            </div>
+            <p class="hint">「自動車」など該当業界を選択。</p>
+          </div>
+
+          <div class="active-tags" id="activeTags" aria-live="polite"></div>
+          <div style="display:flex;gap:.5rem;margin-top:.7rem;flex-wrap:wrap">
+            <button class="btn" id="clearBtn">条件をクリア</button>
+            <button class="btn" id="shareBtn" title="選択条件をURLに保存">URLを共有</button>
+          </div>
+        </aside>
+
+        <!-- 右：結果 -->
+        <section class="cards" id="cards" aria-label="製品一覧">
+          <!-- 系列受注生産プランナ -->
+          <article class="card"
+            data-industry='["自動車"]'
+            data-pain='["計画が手作業で重い","内示変動に追従できない","在庫過多と欠品が発生"]'
+            data-usecase='["日次生産計画自動化","在庫ポリシー反映","CSV連携"]'>
+            <div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center">
+              <h3 style="margin:.2rem 0">系列受注生産プランナ</h3>
+              <span class="badge">クラウド</span>
+            </div>
+            <p>OEMの「内示・確定」CSVを取り込み、在庫ポリシーに基づく日次生産計画を自動生成。計画の標準化と負荷削減に。</p>
+            <div class="meta">
+              <span>対象：自動車</span>
+              <span>出力：生産数計画CSV</span>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="/aibod-factory/series-planner.html">詳しく見る</a>
+              <a class="btn" href="#contact">デモ依頼</a>
+            </div>
+          </article>
+
+          <!-- 自動倉庫オーガナイザ -->
+          <article class="card"
+            data-industry='["自動車","工業製品"]'
+            data-pain='["部品供給の遅延が多い","進捗が見えない"]'
+            data-usecase='["AGV連携搬送","WMSサブシステム","タブレット現場操作"]'>
+            <div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center">
+              <h3 style="margin:.2rem 0">自動倉庫オーガナイザ</h3>
+              <span class="badge">ローカルサーバー</span>
+            </div>
+            <p>自動倉庫・AGVとTCPで連携し、部品搬送タイミングを自動最適化。現場の進捗を可視化して供給ロスを削減。</p>
+            <div class="meta">
+              <span>対象：自動車/工業製品</span>
+              <span>出力：進捗画面</span>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="/aibod-factory/autowarehouse-organizer.html">詳しく見る</a>
+              <a class="btn" href="#contact">相談する</a>
+            </div>
+          </article>
+
+          <!-- Wafermap アナライザ -->
+          <article class="card"
+            data-industry='["半導体"]'
+            data-pain='["不良要因の特定に時間","ノウハウが属人化"]'
+            data-usecase='["類似マップ検索","不良パターン解析","ローカル解析"]'>
+            <div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center">
+              <h3 style="margin:.2rem 0">Wafermap アナライザ</h3>
+              <span class="badge">デスクトップ</span>
+            </div>
+            <p>ウエーハマップ画像の特徴抽出と類似検索で、不良傾向を素早く把握。工程改善と知見の形式知化を支援。</p>
+            <div class="meta">
+              <span>対象：半導体</span>
+              <span>出力：分析結果</span>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="/aibod-factory/wafermap-analyzer.html">詳しく見る</a>
+              <a class="btn" href="#contact">トライアル</a>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="panel" style="display:grid;gap:.8rem">
+        <h2>お問い合わせ</h2>
+        <p class="hint">要件や現場ペイン、検討中のユースケースをお知らせください。最適なデモ構成をご提案します。</p>
+        <form onsubmit="event.preventDefault(); alert('送信ありがとうございました。担当よりご連絡します。'); this.reset();" style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr">
+          <label>会社名<br><input required name="company" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid var(--card-bd);background:rgba(255,255,255,.04);color:var(--ink)"></label>
+          <label>ご担当者名<br><input required name="name" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid var(--card-bd);background:rgba(255,255,255,.04);color:var(--ink)"></label>
+          <label style="grid-column:1/-1">メールアドレス<br><input type="email" required name="email" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid var(--card-bd);background:rgba(255,255,255,.04);color:var(--ink)"></label>
+          <label style="grid-column:1/-1">ご相談内容（ユースケース／現場ペイン）<br><textarea required name="msg" rows="4" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid var(--card-bd);background:rgba(255,255,255,.04);color:var(--ink)"></textarea></label>
+          <div style="grid-column:1/-1;display:flex;gap:.5rem;justify-content:flex-end">
+            <button class="btn" type="reset">クリア</button>
+            <button class="btn primary" type="submit">送信</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <p class="foot">© AIBOD Inc. – Product Finder Entry (Draft)</p>
+  </main>
+
+  <script>
+    // --- タブ切替 ---
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel-body');
+    tabs.forEach(t=>t.addEventListener('click',()=>{
+      tabs.forEach(x=>x.setAttribute('aria-selected','false'));
+      t.setAttribute('aria-selected','true');
+      const id=t.dataset.panel;
+      panels.forEach(p=>p.hidden = p.dataset.panel!==id);
+    }));
+
+    // --- フィルタロジック ---
+    const state = { usecase:new Set(), pain:new Set(), industry:new Set() };
+    const cards = [...document.querySelectorAll('#cards .card')];
+    const activeTagsBox = document.getElementById('activeTags');
+
+    function renderActiveTags(){
+      activeTagsBox.innerHTML='';
+      ['usecase','pain','industry'].forEach(type=>{
+        [...state[type]].forEach(val=>{
+          const s=document.createElement('span');
+          s.className='tag';
+          s.textContent=val;
+          s.title=type;
+          s.addEventListener('click',()=>toggleChip(type,val));
+          activeTagsBox.appendChild(s);
+        });
+      });
+    }
+
+    function toggleChip(type,value){
+      const key = type;
+      if(state[key].has(value)) state[key].delete(value); else state[key].add(value);
+      // ボタンの見た目更新
+      document.querySelectorAll(`.chip[data-type="${type}"][data-value="${CSS.escape(value)}"]`).forEach(btn=>{
+        const pressed = state[key].has(value);
+        btn.setAttribute('aria-pressed', pressed ? 'true':'false');
+      });
+      filterCards();
+      renderActiveTags();
+    }
+
+    function matchesAll(selected, values){
+      // selected: Set, values: array (card側)
+      if(selected.size===0) return true;
+      return [...selected].every(v=>values.includes(v));
+    }
+
+    function filterCards(){
+      cards.forEach(card=>{
+        const inds = JSON.parse(card.dataset.industry);
+        const pains = JSON.parse(card.dataset.pain);
+        const uses = JSON.parse(card.dataset.usecase);
+        const ok = matchesAll(state.industry, inds) && matchesAll(state.pain, pains) && matchesAll(state.usecase, uses);
+        card.style.display = ok ? '' : 'none';
+      });
+    }
+
+    // クリック委譲
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.chip');
+      if(btn){ toggleChip(btn.dataset.type, btn.dataset.value); }
+      const pre = e.target.closest('[data-preset]');
+      if(pre){ e.preventDefault(); applyPreset(pre.dataset.preset); }
+    });
+
+    // クリア & 共有
+    document.getElementById('clearBtn').addEventListener('click',()=>{
+      ['usecase','pain','industry'].forEach(k=>state[k].clear());
+      document.querySelectorAll('.chip[aria-pressed="true"]').forEach(c=>c.setAttribute('aria-pressed','false'));
+      renderActiveTags();
+      filterCards();
+      history.replaceState({},'',location.pathname);
+    });
+
+    document.getElementById('shareBtn').addEventListener('click',()=>{
+      const payload = {
+        u:[...state.usecase], p:[...state.pain], i:[...state.industry]
+      };
+      const q = new URLSearchParams({q: encodeURIComponent(JSON.stringify(payload))}).toString();
+      const url = location.origin + location.pathname + '?' + q;
+      navigator.clipboard.writeText(url).then(()=>{
+        alert('現在の選択をURLにコピーしました');
+      });
+    });
+
+    // プリセット
+    function applyPreset(name){
+      const presets = {
+        automotive: {u:[], p:[], i:['自動車']},
+        semiconductor: {u:['類似マップ検索','不良パターン解析'], p:['不良要因の特定に時間'], i:['半導体']},
+        'pain-planning': {u:['日次生産計画自動化'], p:['計画が手作業で重い','内示変動に追従できない'], i:[]}
+      };
+      const sel = presets[name];
+      if(!sel) return;
+      ['usecase','pain','industry'].forEach(k=>state[k].clear());
+      sel.u.forEach(v=>state.usecase.add(v));
+      sel.p.forEach(v=>state.pain.add(v));
+      sel.i.forEach(v=>state.industry.add(v));
+      // UI反映
+      document.querySelectorAll('.chip').forEach(c=>{
+        const on = (state[c.dataset.type]||new Set()).has(c.dataset.value);
+        c.setAttribute('aria-pressed', on?'true':'false');
+      });
+      renderActiveTags();
+      filterCards();
+    }
+
+    // URLから状態復元
+    (function initFromUrl(){
+      const u = new URLSearchParams(location.search).get('q');
+      if(!u) return;
+      try{
+        const payload = JSON.parse(decodeURIComponent(u));
+        (payload.u||[]).forEach(v=>state.usecase.add(v));
+        (payload.p||[]).forEach(v=>state.pain.add(v));
+        (payload.i||[]).forEach(v=>state.industry.add(v));
+        document.querySelectorAll('.chip').forEach(c=>{
+          const on = (state[c.dataset.type]||new Set()).has(c.dataset.value);
+          c.setAttribute('aria-pressed', on?'true':'false');
+        });
+        renderActiveTags();
+        filterCards();
+      }catch(e){/* noop */}
+    })();
+  </script>
+</body>
+</html>
+

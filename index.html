@@ -2,310 +2,601 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>AIBOD Factory | 製造業向けソフトウェアラインナップ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="AIBOD Factory は、製造業向けにAIBODが提供する実務直結型ソフトウェアのパッケージシリーズです。" />
-  <style>
-    :root {
-      --aibod-light: #00b3ec;
-      --aibod-mid: #0068b6;
-      --aibod-deep: #1d2087;
-      --bg: #0f172a;
-      --card-bg: rgba(255, 255, 255, 0.04);
-      --border: rgba(255, 255, 255, 0.12);
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #182a4f 0%, #0a1120 40%, #000 100%);
-      color: #e2e8f0;
-      line-height: 1.6;
-    }
-    header {
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      backdrop-filter: blur(16px);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(0,0,0,0.35);
-    }
-    .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.6rem 1rem;
-    }
-    .brand {
-      font-weight: 700;
-      letter-spacing: .06em;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .brand-dot {
-      width: 26px;
-      height: 26px;
-      background: conic-gradient(from 0deg, var(--aibod-light), var(--aibod-mid), var(--aibod-deep), var(--aibod-light));
-      border-radius: 9999px;
-      box-shadow: 0 0 20px rgba(0,179,236,.65);
-    }
-    .nav a {
-      color: #cbd5f5;
-      text-decoration: none;
-      font-size: .85rem;
-      margin-left: 1.2rem;
-      opacity: .85;
-    }
-    .hero {
-      max-width: 1100px;
-      margin: 2.2rem auto 1.5rem;
-      padding: 0 1rem;
-      display: grid;
-      grid-template-columns: 3fr 2.2fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-    .hero h1 {
-      font-size: clamp(2.1rem, 4vw, 2.7rem);
-      margin-bottom: .6rem;
-    }
-    .hero p {
-      max-width: 36rem;
-      color: rgba(226,232,240,.7);
-    }
-    .tagline {
-      display: inline-flex;
-      gap: .35rem;
-      align-items: center;
-      background: rgba(0,179,236,0.1);
-      border: 1px solid rgba(0,179,236,0.25);
-      color: #fff;
-      border-radius: 9999px;
-      padding: .35rem .8rem;
-      font-size: .7rem;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      margin-bottom: .7rem;
-    }
-    .hero-panel {
-      background: linear-gradient(160deg, rgba(0,179,236,0.14), rgba(13, 33, 80, 0));
-      border: 1px solid rgba(0,179,236,0.15);
-      border-radius: 1.4rem;
-      padding: 1rem 1.2rem 1.2rem;
-    }
-    .hero-panel h2 {
-      font-size: .95rem;
-      margin-bottom: .4rem;
-    }
-    .hero-panel ul {
-      padding-left: 1rem;
-      margin: .3rem 0 0;
-      font-size: .8rem;
-      color: rgba(226,232,240,.7);
-    }
-    .section {
-      max-width: 1100px;
-      margin: 1rem auto 3rem;
-      padding: 0 1rem;
-    }
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 1.3rem;
-    }
-    .card {
-      background: radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(5,5,7,0.05));
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 1.3rem;
-      padding: 1.1rem 1.1rem 1.2rem;
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      gap: .4rem;
-      min-height: 280px;
-    }
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .6rem;
-    }
-    .card-title {
-      font-weight: 600;
-    }
-    .badge {
-      background: rgba(0,179,236,0.1);
-      border: 1px solid rgba(0,179,236,0.2);
-      padding: .2rem .5rem;
-      border-radius: 9999px;
-      font-size: .6rem;
-    }
-    .card p {
-      font-size: .78rem;
-      color: rgba(226,232,240,.68);
-    }
-    .card small {
-      font-size: .68rem;
-      color: rgba(226,232,240,.45);
-    }
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .35rem;
-      margin-top: .4rem;
-    }
-    .meta span {
-      background: rgba(15,23,42,0.28);
-      border: 1px solid rgba(255,255,255,0.03);
-      border-radius: .6rem;
-      padding: .15rem .5rem;
-      font-size: .6rem;
-    }
-    .footer {
-      text-align: center;
-      font-size: .65rem;
-      opacity: .5;
-      margin-bottom: 2.5rem;
-    }
-    @media (max-width: 850px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <title>AIBOD Factory｜Software Manufacturing</title>
+  <meta name="description" content="AIBOD Factory は、設計図（Blueprint）からソフトウェアを製造する“ソフトウェア工場”です。設計→試作→製造→改善まで一気通貫で提供します。" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
     <div class="nav">
       <div class="brand">
-        <div class="brand-dot"></div>
-        <div>AIBOD Factory</div>
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span>AIBOD Factory</span>
       </div>
-      <div>
-        <!-- 既存のGitHub Pagesに合わせてリンクを追記してください -->
-        <!-- <a href="/aibod-factory/">AIBOD Factory</a>
-        <a href="/aibod-factory/9050-031-0002/autowarehouse_organizer.html">AI Fusion</a> -->
-        <a href="#lineup">製品一覧</a>
-        <a href="#about">コンセプト</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#factory" data-i18n="nav.factory">Factory Model</a>
+          <a href="#lines" data-i18n="nav.lines">Production Lines</a>
+          <a href="#services" data-i18n="nav.services">Services</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="lang-switch" aria-label="language switch">
+          <button class="lang-btn active" data-lang="ja">日本語</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <div class="tagline">Manufacturing Intelligence Suite</div>
-        <h1>AIBOD Factory</h1>
-        <p>
-          自動車・工業製品・半導体など、日本の現場で実際に使われている業務ロジックをそのままソフトウェア化。
-          クラウド／ローカル／デスクトップに最適配置し、小さく導入してすぐに運用を開始できます。
-        </p>
+  <section class="hero-visual">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+      <!-- ▼ 自動切替するテキスト ▼ -->
+      <div class="rotating-text" id="rotatingText" data-i18n="hero-visual.rotating.0">
+        Your Software, Manufactured.
       </div>
-      <div class="hero-panel">
-        <h2>初期ラインナップ</h2>
-        <ul>
-          <li>系列受注生産プランナ（クラウド）</li>
-          <li>自動倉庫オーガナイザ（ローカルサーバー）</li>
-          <li>Wafermap アナライザ（Windows / Mac）</li>
-        </ul>
+
+      <div class="hero-sub" data-i18n="hero-visual.sub">
+        ほしいソフトウェアをすぐにご提供！
       </div>
-    </section>
 
-    <section class="section" id="lineup">
-      <h2 class="section-title">製品一覧</h2>
-      <div class="cards">
-
-        <!-- 1) 系列受注生産プランナ -->
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <a href="./9050-031-0001/series_production_planner.html" style="color: inherit; text-decoration: none;">系列受注生産プランナ</a>
-            </div>
-            <span class="badge">クラウド</span>
-          </div>
-          <p>
-            OEM企業からの「内示」「確定」注文CSVを取り込み、在庫ポリシーと突き合わせて日々の製品別生産数量を自動算出します。
-            系列サプライヤとしての計画業務を標準化します。
-            <a href="./9050-031-0001/series_production_planner.html" style="color: var(--aibod-light); text-decoration: underline; margin-left: 0.5rem;">詳細</a>
-          </p>
-          <div class="meta">
-            <span>対象：自動車製造業</span>
-            <span>入力：内示/確定CSV</span>
-            <span>出力：生産数計画CSV</span>
-            <span>販売：ライセンス＋月額</span>
-          </div>
-        </article>
-
-        <!-- 2) 自動倉庫オーガナイザ -->
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <a href="./9050-031-0002/autowarehouse_organizer.html" style="color: inherit; text-decoration: none;">自動倉庫オーガナイザ</a>
-            </div>
-            <span class="badge">ローカルサーバー</span>
-          </div>
-          <p>
-            製品ごとの使用部品をタイムリーに製造ラインへ搬送するためのWMSです。
-            自動倉庫・AGVなどのサブシステムとTCPで連携し、現場内の部品供給を見える化します。
-            <a href="./9050-031-0002/autowarehouse_organizer.html" style="color: var(--aibod-light); text-decoration: underline; margin-left: 0.5rem;">詳細</a>
-          </p>
-          <div class="meta">
-            <span>対象：自動車/工業製品</span>
-            <span>入力：生産スケジュール</span>
-            <span>出力：進捗表</span>
-            <span>販売：ライセンス＋保守</span>
-            <span>タブレットUI可</span>
-          </div>
-        </article>
-
-        <!-- 3) Wafermap アナライザ -->
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <a href="./9050-028-0003/wafermap_analyzer.html" style="color: inherit; text-decoration: none;">Wafermap アナライザ</a>
-            </div>
-            <span class="badge">デスクトップ</span>
-          </div>
-          <p>
-            半導体のウエーハマップ画像を読み込み、特徴抽出と過去マップの類似検索を行うエンジニア向け解析ツール。
-            工程異常の早期検知や不良パターン管理に活用できます。
-            <a href="./9050-028-0003/wafermap_analyzer.html" style="color: var(--aibod-light); text-decoration: underline; margin-left: 0.5rem;">詳細</a>
-          </p>
-          <div class="meta">
-            <span>対象：半導体製造・装置</span>
-            <span>入力：ウエーハ画像</span>
-            <span>出力：分析結果</span>
-            <span>販売：買い切り</span>
-            <span>Win / Mac</span>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <h2 class="section-title">AIBOD Factory の考え方</h2>
-      <p style="font-size:.8rem; color:rgba(226,232,240,.65); max-width:52rem;">
-        これらのソフトウェアは、AIBODが顧客プロジェクトで実際に遭遇した「現場の課題」から逆算して開発したものです。
-        そのため、導入の初期段階で大規模なERP/MESを入れなくても、特定工程だけを素早くデジタル化できます。
-        今後は、Lean Integration / AI Fusion のコンセプトとも連動し、分析・可視化・生成AIによる説明機能を順次追加していきます。
+      <p class="hero-desc" data-i18n="hero-visual.desc">
+        AIBOD Factory は、ソフトウェア開発を"工場のものづくり"に進化させた
+        <strong>Software Manufacturing Platform</strong> です。
+        設計図（Blueprint）さえあれば、試作から量産、改善までを一気通貫で実現します。
       </p>
+
+      <div class="hero-cta">
+        <a href="#lines" class="btn-primary" data-i18n="hero-visual.btn.factory">工場を見る</a>
+        <a href="#services" class="btn-primary" data-i18n="hero-visual.btn.lines">サービスを見る</a>
+        <a href="#contact" class="btn-secondary" data-i18n="hero-visual.btn.contact">まずは相談する</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div>
+        <div class="tagline">
+          <span class="icon"></span>
+          <span data-i18n="hero.tagline">Software Manufacturing Factory</span>
+        </div>
+        <h1 data-i18n="hero.title">Your Software, Manufactured.</h1>
+        <p class="hero-lead" data-i18n="hero.lead">
+          ほしいソフトウェアをすぐにご提供！<br>
+          ラインアップにあれば即使用可。<br>
+          なければ即設計し製造します。
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#lines" data-i18n="hero.btn.products">プロダクトを見る</a>
+          <a class="btn" href="#services" data-i18n="hero.btn.services">工場のサービスを見る</a>
+          <a class="btn" href="#contact" data-i18n="hero.btn.contact">相談してみる</a>
+        </div>
+      </div>
+      <aside class="hero-factory" id="factory">
+        <div style="font-size:.8rem; color:var(--muted);" data-i18n="factory.caption">
+          Software Factory Model
+        </div>
+        <div style="margin-top:.2rem; font-size:.9rem; font-weight:600;" data-i18n="factory.subtitle">
+          設計 → 試作 → 製造 → 改善 の“製造ライン”でソフトウェアを作る
+        </div>
+        <div class="factory-grid">
+          <div class="factory-step">
+            <span class="label" data-i18n="factory.step1.label">01 Blueprint</span>
+            <strong data-i18n="factory.step1.title">設計図を作る</strong>
+            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step1.body">
+              SVA/VLP で分解し、設計図を定義。
+            </span>
+          </div>
+          <div class="factory-step">
+            <span class="label" data-i18n="factory.step2.label">02 Prototype</span>
+            <strong data-i18n="factory.step2.title">試作する</strong>
+            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step2.body">
+              小さく動くものを短期間で提供。
+            </span>
+          </div>
+          <div class="factory-step">
+            <span class="label" data-i18n="factory.step3.label">03 Production</span>
+            <strong data-i18n="factory.step3.title">量産する</strong>
+            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step3.body">
+              安定版として製造・展開。
+            </span>
+          </div>
+          <div class="factory-step">
+            <span class="label" data-i18n="factory.step4.label">04 Kaizen</span>
+            <strong data-i18n="factory.step4.title">改善する</strong>
+            <span style="font-size:.7rem; color:var(--muted);" data-i18n="factory.step4.body">
+              ログ・現場の声から継続改善。
+            </span>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <footer class="footer">
-      © AIBOD Inc. – AIBOD Factory draft page
-    </footer>
+    <!-- Factory process -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="process.title">Factory Process｜ソフトウェア製造プロセス</h2>
+        <div class="section-sub" data-i18n="process.subtitle">設計図を起点とした4つの工程</div>
+      </div>
+      <div class="process">
+        <div class="process-step">
+          <div class="process-step-title" data-i18n="process.step1.title">1. Blueprint Studio（設計室）</div>
+          <small data-i18n="process.step1.body">
+            現場の課題を分解し、SVA/VLP に基づいた設計図を作成。どのレイヤーを標準化し、どこをカスタムするかを決めます。
+          </small>
+        </div>
+        <div class="process-step">
+          <div class="process-step-title" data-i18n="process.step2.title">2. Prototype Line（試作ライン）</div>
+          <small data-i18n="process.step2.body">
+            設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に“効くポイント”を探ります。
+          </small>
+        </div>
+        <div class="process-step">
+          <div class="process-step-title" data-i18n="process.step3.title">3. Production Line（量産ライン）</div>
+          <small data-i18n="process.step3.body">
+            試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた“製品”に仕上げます。
+          </small>
+        </div>
+        <div class="process-step">
+          <div class="process-step-title" data-i18n="process.step4.title">4. Kaizen Loop（改善ライン）</div>
+          <small data-i18n="process.step4.body">
+            ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Production Lines (products) -->
+    <section class="section" id="lines">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="lines.title">Production Lines｜量産済みソフトウェア</h2>
+        <div class="section-sub" data-i18n="lines.subtitle">
+          すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。
+        </div>
+      </div>
+      <div class="cards">
+        <!-- ① Planner -->
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);" data-i18n="lines.planner.line">
+                Planning Line
+              </div>
+              <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.planner.title">
+                系列受注生産プランナ
+              </h3>
+            </div>
+            <span class="card-badge" data-i18n="lines.planner.badge">クラウド</span>
+          </div>
+          <p data-i18n="lines.planner.body">
+            OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて
+            日々の生産数量を自動算出するプランニングエンジンです。
+          </p>
+          <div class="card-meta">
+            <span data-i18n="lines.planner.meta1">対象：自動車系列</span>
+            <span data-i18n="lines.planner.meta2">入力：内示/確定CSV</span>
+            <span data-i18n="lines.planner.meta3">出力：日次生産計画CSV</span>
+          </div>
+          <div class="card-footer">
+            <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
+            <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
+          </div>
+        </article>
+
+        <!-- ② Organizer -->
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);" data-i18n="lines.organizer.line">
+                Logistics Line
+              </div>
+              <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.organizer.title">
+                自動倉庫オーガナイザ
+              </h3>
+            </div>
+            <span class="card-badge" data-i18n="lines.organizer.badge">ローカルサーバー</span>
+          </div>
+          <p data-i18n="lines.organizer.body">
+            部品を製造ラインへタイムリーに搬送するための WMS サブシステム。
+            自動倉庫・AGVとTCPで連携し、供給の進捗を見える化します。
+          </p>
+          <div class="card-meta">
+            <span data-i18n="lines.organizer.meta1">対象：自動車/工業製品</span>
+            <span data-i18n="lines.organizer.meta2">入力：生産スケジュール</span>
+            <span data-i18n="lines.organizer.meta3">出力：進捗画面</span>
+          </div>
+          <div class="card-footer">
+            <a class="btn primary" href="product.html?p=organizer" data-i18n="lines.btn.detail">詳細ページへ</a>
+            <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
+          </div>
+        </article>
+
+        <!-- ③ Wafermap -->
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);" data-i18n="lines.wafermap.line">
+                Inspection Line
+              </div>
+              <h3 style="margin:.1rem 0 .2rem; font-size:1rem;" data-i18n="lines.wafermap.title">
+                Wafermap アナライザ
+              </h3>
+            </div>
+            <span class="card-badge" data-i18n="lines.wafermap.badge">デスクトップ</span>
+          </div>
+          <p data-i18n="lines.wafermap.body">
+            半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。
+            工程異常や不良パターンを素早く把握するための“検査ライン”です。
+          </p>
+          <div class="card-meta">
+            <span data-i18n="lines.wafermap.meta1">対象：半導体製造/装置</span>
+            <span data-i18n="lines.wafermap.meta2">入力：ウエーハ画像</span>
+            <span data-i18n="lines.wafermap.meta3">出力：解析結果画面</span>
+          </div>
+          <div class="card-footer">
+            <a class="btn primary" href="product.html?p=wafermap" data-i18n="lines.btn.detail">詳細ページへ</a>
+            <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Factory Services -->
+    <section class="section" id="services">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="services.title">Factory Services｜工場でできること</h2>
+        <div class="section-sub" data-i18n="services.subtitle">
+          量産済みソフトだけでなく、「設計」「試作」「製造」の工程ごとにサポートします。
+        </div>
+      </div>
+      <div class="service-grid">
+        <article class="service-card">
+          <div class="service-tag">Design as a Service</div>
+          <h3 style="margin:.1rem 0 .4rem; font-size:.95rem;" data-i18n="services.design.title">
+            Blueprint Studio（設計支援）
+          </h3>
+          <p data-i18n="services.design.body">
+            現場の課題をヒアリングし、SVA/VLP を使って構造化。
+            どの範囲を標準モジュールとし、どこをカスタムするかを含めた
+            「ソフトウェア設計図」を提供します。
+          </p>
+        </article>
+        <article class="service-card">
+          <div class="service-tag">Prototype as a Service</div>
+          <h3 style="margin:.1rem 0 .4rem; font-size:.95rem;" data-i18n="services.prototype.title">
+            Prototype Line（試作）
+          </h3>
+          <p data-i18n="services.prototype.body">
+            設計図をもとに、まずは小さく動く試作版を製造。
+            画面やレポート、AIモデルの組み合わせなど、
+            数週間レベルで検証できるアウトプットを出荷します。
+          </p>
+        </article>
+        <article class="service-card">
+          <div class="service-tag">Manufacturing as a Service</div>
+          <h3 style="margin:.1rem 0 .4rem; font-size:.95rem;" data-i18n="services.production.title">
+            Production Line（製造・量産）
+          </h3>
+          <p data-i18n="services.production.body">
+            試作で確認した要件をもとに、本番運用向けのソフトウェアとして製造。
+            テスト、自動デプロイ、監視まで含めた“工場レベルの製品”を提供します。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="contact">
+        <div class="section-header" style="margin-bottom:.4rem;">
+          <h2 class="section-title" data-i18n="contact.title">お問い合わせ / ご相談</h2>
+          <div class="section-sub" data-i18n="contact.subtitle">
+            「工場モデルでソフトウェアを作ってみたい」「まずは試作から始めたい」など、お気軽にご相談ください。
+          </div>
+        </div>
+        <div class="contact-kv">
+          <span data-i18n="contact.kv1">現場ペイン（例：計画・供給・検査）</span>
+          <span data-i18n="contact.kv2">導入したい時期</span>
+          <span data-i18n="contact.kv3">対象ライン（①〜③ / その他）</span>
+          <span data-i18n="contact.kv4">既存システムの有無</span>
+        </div>
+        <p style="font-size:.8rem; color:var(--muted); margin-bottom:.6rem;" data-i18n="contact.note">
+          ※ 実際のフォームやメールアドレスへのリンクをここに配置してください。
+        </p>
+        <div class="hero-cta" style="margin-top:.3rem;">
+          <!-- 実運用では mailto や外部フォームURLに変更 -->
+          <a class="btn primary" href="mailto:info@example.com" data-i18n="contact.btn.mail">メールで問い合わせる</a>
+          <a class="btn" href="#top" data-i18n="contact.btn.top">トップに戻る</a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <span data-i18n="footer">© AIBOD Inc. – AIBOD Factory / Software Manufacturing Platform</span>
+  </footer>
+
+  <script>
+    const I18N = {
+      ja: {
+        'nav.factory': 'Factory Model',
+        'nav.lines': 'Production Lines',
+        'nav.services': 'Services',
+        'nav.contact': 'Contact',
+
+        'hero.tagline': 'Software Manufacturing System',
+        'hero.title': 'Your Software, Manufactured.',
+        'hero.lead': 'AIBOD Factory は、ソフトウェア開発を“工場のものづくり”に進化させた <strong>Software Manufacturing Platform</strong> です。 設計図（Blueprint）さえあれば、試作から量産、改善までを一気通貫で実現します。',
+        'hero.btn.products': 'プロダクトを見る',
+        'hero.btn.services': '工場のサービスを見る',
+        'hero.btn.contact': '相談してみる',
+
+        'hero-visual.rotating.0': 'Your Software, Manufactured.',
+        'hero-visual.rotating.1': 'ソフトウェアは"作る"ものから、"製造する"ものへ。',
+        'hero-visual.rotating.2': '設計図があれば、量産まで一気通貫で製造します。',
+        'hero-visual.sub': 'ほしいソフトウェアをすぐにご提供！',
+        'hero-visual.desc': 'AIBOD Factory は、ソフトウェア開発を"工場のものづくり"に進化させた <strong>Software Manufacturing Platform</strong> です。 設計図（Blueprint）さえあれば、試作から量産、改善までを一気通貫で実現します。',
+        'hero-visual.btn.factory': '工場を見る',
+        'hero-visual.btn.lines': 'サービスを見る',
+        'hero-visual.btn.contact': 'まずは相談する',
+
+        'factory.caption': 'Software Factory Model',
+        'factory.subtitle': '設計 → 試作 → 製造 → 改善 の“製造ライン”でソフトウェアを作る',
+        'factory.step1.label': '01 Blueprint',
+        'factory.step1.title': '設計図を作る',
+        'factory.step1.body': 'SVA/VLP で分解し、設計図を定義。',
+        'factory.step2.label': '02 Prototype',
+        'factory.step2.title': '試作する',
+        'factory.step2.body': '小さく動くものを短期間で提供。',
+        'factory.step3.label': '03 Production',
+        'factory.step3.title': '量産する',
+        'factory.step3.body': '安定版として製造・展開。',
+        'factory.step4.label': '04 Kaizen',
+        'factory.step4.title': '改善する',
+        'factory.step4.body': 'ログ・現場の声から継続改善。',
+
+        'process.title': 'Factory Process｜ソフトウェア製造プロセス',
+        'process.subtitle': '設計図を起点とした4つの工程',
+        'process.step1.title': '1. Blueprint Studio（設計室）',
+        'process.step1.body': '現場の課題を分解し、SVA/VLP に基づいた設計図を作成。どのレイヤーを標準化し、どこをカスタムするかを決めます。',
+        'process.step2.title': '2. Prototype Line（試作ライン）',
+        'process.step2.body': '設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に“効くポイント”を探ります。',
+        'process.step3.title': '3. Production Line（量産ライン）',
+        'process.step3.body': '試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた“製品”に仕上げます。',
+        'process.step4.title': '4. Kaizen Loop（改善ライン）',
+        'process.step4.body': 'ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。',
+
+        'lines.title': 'Production Lines｜量産済みソフトウェア',
+        'lines.subtitle': 'すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。',
+        'lines.planner.line': 'Planning Line',
+        'lines.planner.title': '系列受注生産プランナ',
+        'lines.planner.badge': 'クラウド',
+        'lines.planner.body': 'OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて 日々の生産数量を自動算出するプランニングエンジンです。',
+        'lines.planner.meta1': '対象：自動車系列',
+        'lines.planner.meta2': '入力：内示/確定CSV',
+        'lines.planner.meta3': '出力：日次生産計画CSV',
+        'lines.organizer.line': 'Logistics Line',
+        'lines.organizer.title': '自動倉庫オーガナイザ',
+        'lines.organizer.badge': 'ローカルサーバー',
+        'lines.organizer.body': '部品を製造ラインへタイムリーに搬送するための WMS サブシステム。 自動倉庫・AGVとTCPで連携し、供給の進捗を見える化します。',
+        'lines.organizer.meta1': '対象：自動車/工業製品',
+        'lines.organizer.meta2': '入力：生産スケジュール',
+        'lines.organizer.meta3': '出力：進捗画面',
+        'lines.wafermap.line': 'Inspection Line',
+        'lines.wafermap.title': 'Wafermap アナライザ',
+        'lines.wafermap.badge': 'デスクトップ',
+        'lines.wafermap.body': '半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。 工程異常や不良パターンを素早く把握するための“検査ライン”です。',
+        'lines.wafermap.meta1': '対象：半導体製造/装置',
+        'lines.wafermap.meta2': '入力：ウエーハ画像',
+        'lines.wafermap.meta3': '出力：解析結果画面',
+        'lines.btn.detail': '詳細ページへ',
+        'lines.btn.consult': 'このラインで相談',
+
+        'services.title': 'Factory Services｜工場でできること',
+        'services.subtitle': '量産済みソフトだけでなく、「設計」「試作」「製造」の工程ごとにサポートします。',
+        'services.design.title': 'Blueprint Studio（設計支援）',
+        'services.design.body': '現場の課題をヒアリングし、SVA/VLP を使って構造化。 どの範囲を標準モジュールとし、どこをカスタムするかを含めた 「ソフトウェア設計図」を提供します。',
+        'services.prototype.title': 'Prototype Line（試作）',
+        'services.prototype.body': '設計図をもとに、まずは小さく動く試作版を製造。 画面やレポート、AIモデルの組み合わせなど、 数週間レベルで検証できるアウトプットを出荷します。',
+        'services.production.title': 'Production Line（製造・量産）',
+        'services.production.body': '試作で確認した要件をもとに、本番運用向けのソフトウェアとして製造。 テスト、自動デプロイ、監視まで含めた“工場レベルの製品”を提供します。',
+
+        'contact.title': 'お問い合わせ / ご相談',
+        'contact.subtitle': '「工場モデルでソフトウェアを作ってみたい」「まずは試作から始めたい」など、お気軽にご相談ください。',
+        'contact.kv1': '現場ペイン（例：計画・供給・検査）',
+        'contact.kv2': '導入したい時期',
+        'contact.kv3': '対象ライン（①〜③ / その他）',
+        'contact.kv4': '既存システムの有無',
+        'contact.note': '※ 実際のフォームやメールアドレスへのリンクをここに配置してください。',
+        'contact.btn.mail': 'メールで問い合わせる',
+        'contact.btn.top': 'トップに戻る',
+
+        'footer': '© AIBOD Inc. – AIBOD Factory / Software Manufacturing Platform'
+      },
+      en: {
+        'nav.factory': 'Factory Model',
+        'nav.lines': 'Production Lines',
+        'nav.services': 'Services',
+        'nav.contact': 'Contact',
+
+        'hero.tagline': 'Software Manufacturing System',
+        'hero.title': 'Your Software, Manufactured.',
+        'hero.lead': 'AIBOD Factory is a <strong>Software Manufacturing Platform</strong> that turns software development into factory-style production. Once the blueprint is ready, we can deliver prototypes, production systems, and continuous improvements end to end.',
+        'hero.btn.products': 'View Products',
+        'hero.btn.services': 'View Factory Services',
+        'hero.btn.contact': 'Talk to Us',
+
+        'hero-visual.rotating.0': 'Your Software, Manufactured.',
+        'hero-visual.rotating.1': 'From "building" software to "manufacturing" it.',
+        'hero-visual.rotating.2': 'With a blueprint, we manufacture from prototype to mass production end to end.',
+        'hero-visual.sub': 'Get the software you need, right away!',
+        'hero-visual.desc': 'AIBOD Factory is a <strong>Software Manufacturing Platform</strong> that transforms software development into factory-style production. Once the blueprint is ready, we deliver prototypes, production systems, and continuous improvements end to end.',
+        'hero-visual.btn.factory': 'View Factory',
+        'hero-visual.btn.lines': 'View Our Services',
+        'hero-visual.btn.contact': 'Talk to Us',
+
+        'factory.caption': 'Software Factory Model',
+        'factory.subtitle': 'Build software on a manufacturing line: Design → Prototype → Production → Kaizen.',
+        'factory.step1.label': '01 Blueprint',
+        'factory.step1.title': 'Create the blueprint',
+        'factory.step1.body': 'Decompose with SVA / VLP and define the architecture.',
+        'factory.step2.label': '02 Prototype',
+        'factory.step2.title': 'Prototype',
+        'factory.step2.body': 'Provide a small working version in a short time.',
+        'factory.step3.label': '03 Production',
+        'factory.step3.title': 'Produce',
+        'factory.step3.body': 'Harden and deploy as a production system.',
+        'factory.step4.label': '04 Kaizen',
+        'factory.step4.title': 'Improve',
+        'factory.step4.body': 'Continuously improve based on logs and user feedback.',
+
+        'process.title': 'Factory Process｜Software Manufacturing Flow',
+        'process.subtitle': 'Four stages starting from the blueprint',
+        'process.step1.title': '1. Blueprint Studio',
+        'process.step1.body': 'Break down on-site problems and create a blueprint based on SVA/VLP. Decide what to standardize and what to customize.',
+        'process.step2.title': '2. Prototype Line',
+        'process.step2.body': 'Manufacture small prototypes according to the blueprint and explore what really works together with your team.',
+        'process.step3.title': '3. Production Line',
+        'process.step3.body': 'Based on the validated prototype, manufacture robust production software including tests, monitoring, and operations.',
+        'process.step4.title': '4. Kaizen Loop',
+        'process.step4.body': 'Analyze logs and feedback, feed them back into design, and keep updating just like Kaizen in physical factories.',
+
+        'lines.title': 'Production Lines｜Ready-made Software',
+        'lines.subtitle': 'Pre-built product lines that can be used immediately and customized in the Factory when needed.',
+        'lines.planner.line': 'Planning Line',
+        'lines.planner.title': 'Series Production Planner',
+        'lines.planner.badge': 'Cloud',
+        'lines.planner.body': 'A planning engine that ingests OEM “forecast” and “firm” CSV orders and automatically calculates daily production quantities based on inventory policies.',
+        'lines.planner.meta1': 'Target: Automotive tier suppliers',
+        'lines.planner.meta2': 'Input: Forecast / firm CSV',
+        'lines.planner.meta3': 'Output: Daily production plan CSV',
+        'lines.organizer.line': 'Logistics Line',
+        'lines.organizer.title': 'Autowarehouse Organizer',
+        'lines.organizer.badge': 'Local server',
+        'lines.organizer.body': 'A WMS sub-system that delivers parts to production lines just in time. Connects to automated warehouses and AGVs via TCP and visualizes supply progress.',
+        'lines.organizer.meta1': 'Target: Automotive / industrial products',
+        'lines.organizer.meta2': 'Input: Production schedule',
+        'lines.organizer.meta3': 'Output: Progress dashboard',
+        'lines.wafermap.line': 'Inspection Line',
+        'lines.wafermap.title': 'Wafermap Analyzer',
+        'lines.wafermap.badge': 'Desktop',
+        'lines.wafermap.body': 'An analysis tool that extracts features and searches similar patterns in wafer map images to quickly identify process anomalies and defect patterns.',
+        'lines.wafermap.meta1': 'Target: Semiconductor fabs / tool vendors',
+        'lines.wafermap.meta2': 'Input: Wafer map images',
+        'lines.wafermap.meta3': 'Output: Analysis results on screen',
+        'lines.btn.detail': 'View details',
+        'lines.btn.consult': 'Consult on this line',
+
+        'services.title': 'Factory Services｜What the Factory Can Do',
+        'services.subtitle': 'We support each stage: design, prototyping, and manufacturing—not just finished products.',
+        'services.design.title': 'Blueprint Studio (Design Support)',
+        'services.design.body': 'We listen to on-site issues and structure them using SVA / VLP, then deliver a “software blueprint” that defines what is standard module and what is custom.',
+        'services.prototype.title': 'Prototype Line (Prototyping)',
+        'services.prototype.body': 'Based on the blueprint, we manufacture a small working prototype first: screens, reports, AI model combinations, etc., that can be validated in weeks.',
+        'services.production.title': 'Production Line (Manufacturing)',
+        'services.production.body': 'Using the validated prototype as a base, we manufacture production-ready software, including testing, automated deployment, and monitoring.',
+
+        'contact.title': 'Contact / Inquiry',
+        'contact.subtitle': 'If you want to try the factory model, or start from a small prototype, feel free to reach out.',
+        'contact.kv1': 'On-site pains (e.g. planning, supply, inspection)',
+        'contact.kv2': 'Desired go-live timing',
+        'contact.kv3': 'Target line (①–③ / others)',
+        'contact.kv4': 'Existing systems',
+        'contact.note': 'Please place your actual form or contact email link here.',
+        'contact.btn.mail': 'Contact via Email',
+        'contact.btn.top': 'Back to Top',
+
+        'footer': '© AIBOD Inc. – AIBOD Factory / Software Manufacturing Platform'
+      }
+    };
+
+    // Rotating text animation
+    let rotatingInterval = null;
+    let rotatingIndex = 0;
+
+    function getRotatingMessages(lang) {
+      const dict = I18N[lang] || I18N.ja;
+      const messages = [];
+      let i = 0;
+      while (dict[`hero-visual.rotating.${i}`]) {
+        messages.push(dict[`hero-visual.rotating.${i}`]);
+        i++;
+      }
+      return messages.length > 0 ? messages : ['Your Software, Manufactured.'];
+    }
+
+    function startRotatingText(lang) {
+      const rotatingText = document.getElementById("rotatingText");
+      if (!rotatingText) return;
+
+      // Clear existing interval
+      if (rotatingInterval) {
+        clearInterval(rotatingInterval);
+        rotatingInterval = null;
+      }
+
+      const messages = getRotatingMessages(lang);
+      if (messages.length === 0) return;
+
+      rotatingIndex = 0;
+      rotatingText.textContent = messages[0];
+      rotatingText.style.opacity = 1;
+
+      rotatingInterval = setInterval(() => {
+        rotatingText.style.opacity = 0;
+
+        setTimeout(() => {
+          rotatingIndex = (rotatingIndex + 1) % messages.length;
+          rotatingText.textContent = messages[rotatingIndex];
+          rotatingText.style.opacity = 1;
+        }, 600); // フェードアウト後に差し替え
+      }, 3200); // 3.2秒ごとに切り替え
+    }
+
+    function applyLang(lang) {
+      const dict = I18N[lang] || I18N.ja;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!dict[key]) return;
+        // innerHTMLにHTMLが含まれるものもあるので innerHTML 更新
+        el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url.toString());
+
+      // Update rotating text messages when language changes
+      startRotatingText(lang);
+    }
+
+    // イベント
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.lang-btn');
+      if (!btn) return;
+      applyLang(btn.dataset.lang);
+    });
+
+    // 初期化: URL ?lang= かブラウザ設定から
+    (function initLang() {
+      const url = new URL(window.location.href);
+      const q = url.searchParams.get('lang');
+      let lang = q || 'ja';
+      if (!q) {
+        const navLang = (navigator.language || '').toLowerCase();
+        if (navLang.startsWith('en')) lang = 'en';
+      }
+      applyLang(lang);
+    })();
+  </script>
 </body>
 </html>
 
