@@ -216,7 +216,7 @@ color: var(--muted);
 /* Production lines (products) */
 .cards {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 gap: 1.1rem;
 justify-content: start;
 }
@@ -294,7 +294,7 @@ border-radius: 1rem;
 border: 1px solid var(--card-bd);
 background: rgba(5,8,18,.9);
 padding: 1rem;
-font-size: 1.2rem;
+font-size: 1rem;
 }
 .service-tag {
 font-size: .7rem;
@@ -553,7 +553,7 @@ flex-wrap: wrap;
   position: relative;
   width: 100%;
   flex: 1;
-  min-height: 320px;
+  min-height: 400px;
   transform-style: preserve-3d;
   transition: transform 0.8s ease-in-out;
   cursor: pointer;
