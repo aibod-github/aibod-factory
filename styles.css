@@ -629,7 +629,7 @@ flex-wrap: wrap;
 }
     
 .tile-character {
-  width: 100px;
+  width: 80px;
   height: auto;
   margin: 0.5rem 0;
   opacity: 0.9;
@@ -637,7 +637,7 @@ flex-wrap: wrap;
 }
 
 .tile-character-back {
-    width: 120px;
+    width: 100px;
     height: auto;
     margin: 0.5rem 0;
     opacity: 0.9;
