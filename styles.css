@@ -89,6 +89,43 @@ color: #04101f;
 font-weight: 600;
 }
 
+/* --- View Mode Switch (Advanced / SME) --- */
+.mode-switch {
+  max-width: 280px;
+  margin: 1.5rem auto 0.5rem;
+  padding: 0 1rem;
+  display: flex;
+  width: auto;
+  gap: 0.2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(4,7,15,.9);
+}
+.mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+.mode-btn.active {
+  background: linear-gradient(90deg,var(--cyan),var(--blue));
+  color: #04101f;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+/* Green active button for SME mode */
+.mode-btn[data-mode="sme"].active {
+  background: linear-gradient(90deg, var(--accent), #16a34a);
+  color: #04101f;
+}
+
 main { max-width: 1120px; margin: 0 auto 4rem; padding: 0 1rem; }
 
 /* Hero */
@@ -131,6 +168,11 @@ font-size: 1.1rem;
 max-width: none;
 margin: 0;
 }
+
+/* Subtle greeny grey hero-lead for SME mode */
+[data-mode="sme"] .hero-lead {
+color: #9fb1a8;
+}
 .hero-cta {
 display: flex;
 flex-wrap: wrap;
@@ -156,6 +198,12 @@ border-color: transparent;
 background: linear-gradient(90deg,var(--cyan),var(--blue));
 color: #04101f;
 font-weight: 700;
+}
+
+/* Green buttons for SME mode */
+[data-mode="sme"] .btn.primary {
+background: linear-gradient(90deg, var(--accent), #16a34a);
+color: #04101f;
 }
 
 .hero-factory {
@@ -334,6 +382,11 @@ margin-bottom: .5rem;
 .process .tile-content {
 font-size: .85rem;
 color: var(--muted);
+}
+
+/* Subtle greeny grey process tile-content for SME mode */
+[data-mode="sme"] .process .tile-content {
+color: #9fb1a8;
 }
 
 .process-image {
@@ -586,6 +639,15 @@ flex-wrap: wrap;
   border: 1px solid var(--card-bd);
   color: var(--ink);
 }
+
+/* Greeny grey tile-front for SME mode */
+[data-mode="sme"] .tile-front {
+  background:
+    radial-gradient(circle at top, rgba(122,154,138,.06), transparent 60%),
+    linear-gradient(145deg, rgba(122,154,138,.04), rgba(107,142,125,.06)),
+    var(--card);
+  border: 1px solid var(--card-bd);
+}
 .tile-front-org {
     background:
       radial-gradient(circle at top, rgba(255,255,255,.06), transparent 60%),
@@ -611,6 +673,15 @@ flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 0.6rem;
+}
+
+/* Keep tile-title h3 and card-badge white in SME mode (same as Advanced mode) */
+[data-mode="sme"] .tile-title h3 {
+  color: var(--ink);
+}
+
+[data-mode="sme"] .tile-title .card-badge {
+  color: inherit;
 }
 
 .tile-title-line {
@@ -649,6 +720,16 @@ font-size: 1.2rem;
 line-height: 1.5;
 color: rgba(226, 232, 240, 0.68);
 flex-grow: 1;
+}
+
+/* Subtle greeny grey tile-content for SME mode */
+[data-mode="sme"] .tile-content {
+color: rgba(159, 177, 168, 0.85);
+}
+
+/* Subtle greeny grey first row (step label) in tile-front for SME mode */
+[data-mode="sme"] .tile-front > div:first-child {
+color: #9fb1a8 !important;
 }
 
 .tile-meta {

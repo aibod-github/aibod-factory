@@ -62,9 +62,21 @@
   </section>
 
   <main>
+    <!-- ▼ ビューモード切替（追加） ▼ -->
+    <div class="mode-switch" aria-label="表示モード切り替え">
+      <button class="mode-btn active" data-mode="advanced">
+        専門業界ビュー
+      </button>
+      <button class="mode-btn" data-mode="sme">
+        中小企業DXビュー
+      </button>
+    </div>
+
     <!-- HERO -->
     <section class="hero" id="top">
-      <div>
+
+      <!-- ▼ 製造業・半導体向け（既存メッセージ） ▼ -->
+      <div data-mode="advanced">
         <div class="tagline">
           <span class="icon"></span>
           <span data-i18n="hero.tagline">Software Manufacturing Factory</span>
@@ -78,15 +90,34 @@
           </p>
         </div>
       </div>
+
+      <!-- ▼ 中小企業DX向け（新メッセージ） ▼ -->
+      <div data-mode="sme">
+        <div class="tagline">
+          <span class="icon"></span>
+          <span>Small DX Tools for SMEs</span>
+        </div>
+
+        <div class="hero-title-lead">
+          <h1>中小企業DXの「ちょっと困った」すぐ作ります。</h1>
+          <div>
+            <p class="hero-lead">
+              エクセルの手作業、mdbからのデータ取り出し、毎月のCSV集計など、<br>
+              現場の「ちょっと面倒」「誰もやりたくない」作業を、<br>
+              そのまま <strong>専用ツール</strong> にしてお渡しします。
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Factory process -->
     <section class="section" id="factory">
-      <div class="section-header">
+      <div class="section-header" data-mode="advanced">
         <h2 class="section-title" data-i18n="factory.subtitle">設計 → 試作 → 製造 → 改善 の「製造ライン」でソフトウェアを作る</h2>
         <div class="section-sub" data-i18n="factory.caption">Software Factory Model</div>
       </div>
-      <div class="process">
+      <div class="process" data-mode="advanced">
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
@@ -160,21 +191,94 @@
           </div>
         </div>
       </div>
-      <!div class="process-image">
-        <!img src="img/processsteps.svg" alt="Process steps diagram" />
-      <!/div>
+
+      <div class="section-header" data-mode="sme">
+        <h2 class="section-title">設計 → 製造 の短縮「製造ライン」で提供！</h2>
+        <div class="section-sub">Software Factory Model</div>
+      </div>
+      <div class="process" data-mode="sme">
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Blueprint</div>
+              <div class="process-step-title" data-i18n="factory.step1.title">設計図を作る</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">素早く設計</small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step1.title">1. Blueprint Studio（設計室）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span>AIBODのテンプレートを使用して設計。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+        </div>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Prototype</div>
+              <div class="process-step-title" data-i18n="factory.step2.title">試作する</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">試作は軽く</small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step2.title">2. Prototype Line（試作ライン）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span>シンプルなアプリなのでいきなり量産も。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+        </div>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Production</div>
+              <div class="process-step-title" data-i18n="factory.step3.title">量産する</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">製造・展開。</small>
+              <div class="tile-hint">詳細 →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step3.title">3. Production Line（量産ライン）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span data-i18n="process.step3.body">お使い下さい。</span>
+              </p>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+        </div>
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Kaizen</div>
+              <div class="process-step-title" data-i18n="factory.step4.title">改善する</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">現場の声から改善できます</small>
+              <div class="tile-hint">More →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title" data-i18n="process.step4.title">4. Kaizen Loop（改善ライン）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;"
+                <span>現場の声やちょっとの改良をアップデートします。</span>
+              </p>
+              <div class="tile-hint">← Return</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- Production Lines (products) -->
     <section class="section" id="lines">
-      <div class="section-header">
+      <div class="section-header" data-mode="advanced">
         <h2 class="section-title" data-i18n="lines.title">Production Lines｜量産ソフトウェア</h2>
         <div class="section-sub" data-i18n="lines.subtitle">
           すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。
         </div>
       </div>
       <!-- Filter Buttons -->
-      <div class="filter-section">
+      <div class="filter-section" data-mode="advanced">
         <div class="filter-group">
           <span class="filter-label" data-i18n="filter.industry.label">業界:</span>
           <button class="filter-btn" data-filter-type="industry" data-filter-value="自動車" data-i18n="filter.industry.automotive">自動車</button>
@@ -190,7 +294,7 @@
         </div>
       </div>
 
-      <div class="cards">
+      <div class="cards" data-mode="advanced">
         <!-- ① Planner -->
         <div class="tile-container" data-industry="自動車" data-keyword="受注">
           <div class="tile">
@@ -332,6 +436,133 @@
           </div>
         </div>
       </div>
+
+      <!-- ▼ 中小企業DX向け Small DX Tools 一覧（追加） ▼ -->
+      <div class="section-header" data-mode="sme">
+        <h2 class="section-title">Small DX Tools｜中小企業向けミニDXツール</h2>
+        <div class="section-sub">
+          人がエクセルやAccessでがんばっている作業を、<br>
+          そのまま専用ツールにして「毎月の手間」をごっそり削減します。
+        </div>
+      </div>
+
+      <div class="cards" data-mode="sme">
+        <!-- ① エクセル → 機械が読みやすい形式に変換 -->
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character" />
+                <div>
+                  <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8001-L</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8001.title">エクセルを変換</h3>
+                </div>
+                <span class="card-badge" data-i18n="lines.pn8001.badge">Win/Mac</span>
+              </div>              
+              <p class="tile-content">
+                人間がみやすいエクセルは、空白行・結合セルなど、機械には読みづらい。<br>
+                エクセルを、<strong>機械が読みやすいCSV / JSON形式</strong>に自動整形します。
+              </p>
+              <div class="tile-meta">
+                <span>対象：一般中小企業</span>
+                <span>入力：エクセル帳票</span>
+                <span>出力：きれいなCSV/JSON</span>
+              </div>
+              <div class="tile-hint">More →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title">こんなときに</div>
+              <p class="tile-content">
+                ・設備やクラウドサービスにエクセルを読ませたいがうまく入らない<br>
+                ・毎回「貼り付け用の整形シート」を手作業で作っている<br>
+                ・将来のDXを見据えて、まずは「データをきれいにしたい」
+              </p>
+              <div class="tile-hint">← Return</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">このツールを相談</a>
+          </div>
+        </div>
+
+        <!-- ② MDB → 各テーブルCSV分解 -->
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character" />
+                <div>
+                  <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8002-L</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8002.title">mdbファイルをテーブル別CSVへ</h3>
+                </div>
+                <span class="card-badge" data-i18n="lines.pn8002.badge">Win</span>
+              </div>              
+              <p class="tile-content">
+                <strong>Microsoft Access形式（.mdb）</strong>は、データを取り出しにくい。<br>
+                mdbファイルを、<strong>各テーブルごとのCSVファイル</strong>に一括変換します。
+              </p>
+              <div class="tile-meta">
+                <span>対象：計測器・装置を使っている企業</span>
+                <span>入力：mdbファイル</span>
+                <span>出力：テーブル別CSV</span>
+              </div>
+              <div class="tile-hint">More →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title">こんなときに</div>
+              <p class="tile-content">
+                ・mdbから毎回手作業でコピペしている<br>
+                ・Accessが社内PCに入っておらず、中身が見られない<br>
+                ・品質データやログを、他システムやクラウドで活用したい
+              </p>
+              <div class="tile-hint">← Return</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">このツールを相談</a>
+          </div>
+        </div>
+
+        <!-- ③ 毎月CSV → 特定項目だけ集計 -->
+        <div class="tile-container">
+          <div class="tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character" />
+                <div>
+                  <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8003-L</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8003.title">毎月のCSVから項目ごとの集計</h3>
+                </div>
+                <span class="card-badge" data-i18n="lines.pn8003.badge">Win/Mac</span>
+              </div>              
+              <p class="tile-content">
+                売上CSV・検査結果CSVなど、毎月エクセルで開いて
+                <strong>項目毎の集計作業</strong>を自動化。<br>
+                CSVから集計結果を生成します。
+              </p>
+              <div class="tile-meta">
+                <span>対象：管理部門・品質管理・営業企画</span>
+                <span>入力：月次CSVファイル一式</span>
+                <span>出力：集計CSV、グラフ画像</span>
+              </div>
+              <div class="tile-hint">More →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="process-step-title">こんなときに</div>
+              <p class="tile-content">
+                ・毎月同じ集計を3時間かけて行っている<br>
+                ・属人的で、担当者しかやり方がわからない<br>
+                ・DXツールを入れるほどではないが、時間だけは削減したい
+              </p>
+              <div class="tile-hint">← Return</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">このツールを相談</a>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- Factory Services -->
@@ -342,7 +573,7 @@
           量産済みソフトだけでなく、「設計」「試作」「製造」の工程ごとにサポートします。
         </div>
       </div>
-      <div class="service-grid">
+      <div class="service-grid" data-mode="advanced">
         <article class="service-card">
           <div class="service-tag">Design as a Service</div>
           <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;" data-i18n="services.design.title">
@@ -376,6 +607,46 @@
           </p>
         </article>
       </div>
+
+      <!-- ▼ 中小企業DX向けの噛み砕き説明（追加） ▼ -->
+      <div class="service-grid" data-mode="sme">
+        <article class="service-card">
+          <div class="service-tag">Step 1</div>
+          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;">
+            困りごとヒアリング＆ツール設計
+          </h3>
+          <p>
+            「このエクセルを毎月手で直している」「mdbからデータを出したい」など、
+            今やっている作業をそのまま見せてください。<br>
+            それをもとに、<strong>どんなツールにすると一番ラクか</strong>を一緒に整理します。
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Step 2</div>
+          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;">
+            まずは小さく動く試作ツール
+          </h3>
+          <p>
+            いきなり大きなシステムにはせず、<strong>まずは1つの作業が楽になる小さなツール</strong>
+            をお出しします。<br>
+            現場で試していただき、「もう少しここをこうしたい」を反映していきます。
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Step 3</div>
+          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;">
+            安定版ツールとして納品・改善
+          </h3>
+          <p>
+            試作で使い方が固まったら、<strong>現場で長く使える安定版</strong>として作り込みます。<br>
+            Windows用exe化や社内サーバーへの設置など、
+            お客様のIT環境に合わせてご提供します。
+          </p>
+        </article>
+      </div>
+
     </section>
 
     <!-- Contact -->
@@ -846,7 +1117,42 @@
       // Check on hash change
       window.addEventListener('hashchange', checkHashFilters);
     });
-  </script>
+
+    // --- View Mode Switch: Advanced <-> SME ---
+    document.addEventListener('DOMContentLoaded', function() {
+      const modeButtons = document.querySelectorAll('.mode-btn');
+      // Exclude buttons from mode elements - only select content sections
+      const modeElements = document.querySelectorAll('[data-mode]:not(.mode-btn)');
+
+      function setMode(mode) {
+        modeElements.forEach(el => {
+          const m = el.getAttribute('data-mode');
+          // advanced / sme / both などを想定
+          if (!m || m === 'both' || m === mode) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+
+        modeButtons.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+
+        // Add class to body for global styling
+        document.body.classList.remove('mode-advanced', 'mode-sme');
+        document.body.classList.add('mode-' + mode);
+      }
+
+      modeButtons.forEach(btn => {
+        btn.addEventListener('click', () => setMode(btn.dataset.mode));
+      });
+
+      // 初期表示は Advanced
+      setMode('advanced');
+    });
+
+</script>
 </body>
 </html>
 
