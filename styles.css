@@ -409,6 +409,31 @@ font-size: .72rem;
 color: var(--muted);
 }
 
+.contact-line-qr {
+  margin-top: 1rem;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  min-height: 160px;
+  width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.contact-line-qr img {
+  display: block !important;
+  max-width: 100%;
+  height: auto;
+  width: 160px;
+  height: 160px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  border-radius: 4px;
+}
+
 footer {
 max-width: 1120px;
 margin: 2rem auto 2.5rem;
@@ -855,4 +880,3 @@ color: #9fb1a8 !important;
   border-color: rgba(0, 179, 236, 0.4);
   /* cyan寄り */
 }
-  
