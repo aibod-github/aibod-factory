@@ -645,7 +645,7 @@
           </div>
           <div class="tile-footer">
             <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
-            <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
+            <a class="btn" href="#" href="#" data-line-id="wafermap" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
         </div>
 
@@ -1428,6 +1428,29 @@
       // Check on hash change
       window.addEventListener('hashchange', checkHashFilters);
     });
+
+    (function() {
+      // ここを実際のベーシックIDに変更してください（例: @aibodfactory）
+      const LINE_BASIC_ID = '@367bvydv';
+
+      // @ を URL エンコードした ID
+      const encodedLineId = encodeURIComponent(LINE_BASIC_ID);
+      const baseUrl = 'https://line.me/R/oaMessage/' + encodedLineId + '/?';
+
+      document.querySelectorAll('.btn.primary').forEach(function(btn) {
+        const lineId = btn.dataset.data_line_id; // 例: "wafermap"
+        if (!lineId) return;
+
+        // ボタンごとのメッセージ文面
+        const message = `【AIBOD Factory】${lineId} ラインについて相談したいです。`;
+
+        // URL エンコードして href にセット
+        const url = baseUrl + encodeURIComponent(message);
+        btn.href = url;
+        btn.target = '_blank';
+        btn.rel = 'noopener';
+      });
+    })();
 
     // --- View Mode Switch: Advanced <-> SME ---
     document.addEventListener('DOMContentLoaded', function() {
