@@ -169,10 +169,6 @@ max-width: none;
 margin: 0;
 }
 
-/* Subtle greeny grey hero-lead for SME mode */
-[data-mode="sme"] .hero-lead {
-color: #9fb1a8;
-}
 .hero-cta {
 display: flex;
 flex-wrap: wrap;
@@ -262,32 +258,30 @@ color: var(--muted);
 }
 
 /* Production lines (products) */
-.cards {
+.tiles {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 gap: 1.1rem;
 justify-content: start;
 }
-.card {
-border-radius: 1rem;
-border: 1px solid var(--card-bd);
-background:
-    radial-gradient(circle at top, rgba(255,255,255,.06), transparent 60%),
-    var(--card);
-padding: 1rem;
-font-size: 1rem;
-display: flex;
-flex-direction: column;
-gap: .4rem;
-transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+#sme-usecases .tiles {
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
 }
-.card-header {
-display: flex;
-justify-content: space-between;
-gap: .6rem;
-align-items: center;
+
+/* Make tiles responsive for mobile devices */
+@media (max-width: 768px) {
+  #sme-usecases .tiles {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }
-.card-badge {
+
+@media (max-width: 480px) {
+  #sme-usecases .tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tile-badge {
 font-size: .85rem;
 padding: .2rem .5rem;
 border-radius: 9999px;
@@ -311,25 +305,15 @@ border: 1px solid rgba(0, 179, 236, 0.3);
 color: var(--cyan);
 font-weight: 500;
 }
-.card-meta {
-display: flex;
-flex-wrap: wrap;
-gap: .35rem;
-margin-top: .2rem;
-}
-.card-meta span {
-padding: .15rem .45rem;
-border-radius: .5rem;
-border: 1px dashed rgba(255,255,255,.2);
-font-size: .85rem;
-opacity: .9;
-}
-.card-footer {
-margin-top: .5rem;
-display: flex;
-flex-wrap: wrap;
-gap: .5rem;
-}
+#sme-usecases .filter-badge {
+  font-size: 0.85rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.4rem;
+  background: rgba(140, 180, 160, 0.15);
+  border: 1px solid rgba(140, 180, 160, 0.3);
+  color: rgb(140, 180, 160);
+  font-weight: 500;
+  }
 
 /* Factory services */
 .service-grid {
@@ -613,6 +597,9 @@ flex-wrap: wrap;
   transform: rotateY(0deg);
   z-index: 0;
 }
+#sme-usecases .tile {
+  min-height: 260px;
+}
 
 .tile.flipped {
   transform: rotateY(180deg) !important;
@@ -629,6 +616,11 @@ flex-wrap: wrap;
   flex-direction: column;
   gap: 0.4rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom tile shape for sme-usecases section */
+#sme-usecases .tile-face {
+  border-radius: 1rem; /* Change this value to modify the tile shape */
 }
 
 .tile-front {
@@ -648,13 +640,15 @@ flex-wrap: wrap;
     var(--card);
   border: 1px solid var(--card-bd);
 }
-.tile-front-org {
-    background:
-      radial-gradient(circle at top, rgba(255,255,255,.06), transparent 60%),
-      var(--card);
-    border: 1px solid var(--card-bd);
-    color: var(--ink);
-  }
+
+/* Blacky grey tile-front for sme-usecases section */
+#sme-usecases .tile-front {
+  background:
+    radial-gradient(circle at top, rgba(60,60,60,.08), transparent 60%),
+    linear-gradient(145deg, rgba(50,50,50,.06), rgba(40,40,40,.08)),
+    var(--card);
+  border: 1px solid var(--card-bd);
+}
   
 .tile-back {
   background:
@@ -674,13 +668,16 @@ flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
 }
-
-/* Keep tile-title h3 and card-badge white in SME mode (same as Advanced mode) */
+#sme-usecases .tile-title {
+  font-size: 0.85rem;
+}
+#sme-usecases .tile-title h3 {
+  font-size: 1rem !important;
+}
 [data-mode="sme"] .tile-title h3 {
   color: var(--ink);
 }
-
-[data-mode="sme"] .tile-title .card-badge {
+[data-mode="sme"] .tile-title .tile-badge {
   color: inherit;
 }
 
@@ -725,6 +722,9 @@ flex-grow: 1;
 /* Subtle greeny grey tile-content for SME mode */
 [data-mode="sme"] .tile-content {
 color: rgba(159, 177, 168, 0.85);
+}
+#sme-usecases .tile-content {
+  font-size: 0.95rem;
 }
 
 /* Subtle greeny grey first row (step label) in tile-front for SME mode */
@@ -809,33 +809,32 @@ color: #9fb1a8 !important;
 }
   
 /* サービスセクションを目立たせる */
-
 #services {
-    background: rgba(3, 8, 18, 0.4);
-    /* ダークテーマに合わせた背景 */
-    border-top: 3px solid var(--cyan);
-    /* 上部にアクセントライン */
-    padding-top: 4rem;
-    /* 少し余白を増やす */
-    padding-bottom: 4rem;
-    border-radius: 1rem;
-    margin-top: 3rem;
-  }
+  background: rgba(3, 8, 18, 0.4);
+  /* ダークテーマに合わせた背景 */
+  border-top: 3px solid var(--cyan);
+  /* 上部にアクセントライン */
+  padding-top: 4rem;
+  /* 少し余白を増やす */
+  padding-bottom: 4rem;
+  border-radius: 1rem;
+  margin-top: 3rem;
+}
     
-  /* 見出しを少しだけ強調 */
-  #services .section-header h2 {
-    font-size: 1.7rem;
-    letter-spacing: 0.04em;
-  }
+/* 見出しを少しだけ強調 */
+#services .section-header h2 {
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+}
     
-  /* セクション下のハイライトボックスの境界を消して一体化 */
-  #services .highlight-box {
-    border-color: transparent;
-    background: rgba(0, 179, 236, 0.1);
-    /* ダークテーマに合わせた背景 */
-  }
+/* セクション下のハイライトボックスの境界を消して一体化 */
+#services .highlight-box {
+  border-color: transparent;
+  background: rgba(0, 179, 236, 0.1);
+  /* ダークテーマに合わせた背景 */
+}
     
-  /* カードのホバー演出を強める */
+/* カードのホバー演出を強める */
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 22px rgba(0, 179, 236, 0.2);

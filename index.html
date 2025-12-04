@@ -269,6 +269,313 @@
 
     </section>
 
+    <section class="section" id="sme-usecases">
+      <div class="section-header" data-mode="sme">
+        <h2 class="section-title">現場DXの「あるある課題」サンプル</h2>
+        <div class="section-sub">
+          Excel や Access、CSV、紙帳票などで回している「ちょっと困った」「誰もやりたくない」作業の例です。<br>
+          AIBOD Factory は、これらをそのまま専用ツールにしてお渡しします。
+        </div>
+      </div>
+    
+      <div class="tiles" data-mode="sme">
+        <!-- 1. Excel整形：機械が読めない帳票 -->
+        <div class="tile-container">
+          <div class="tile small-dx-tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <div>
+                  <div class="tile-title-line">SME-001</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                    結合セルだらけのExcelが、システムに取り込めない
+                  </h3>
+                  <div class="tile-filter-badges">
+                    <span class="filter-badge">Excel</span>
+                    <span class="filter-badge">帳票整形</span>
+                  </div>
+                </div>
+              </div>
+              <p class="tile-content">
+                見やすくするために結合セル・色付け・空白行を多用したExcel帳票。<br>
+                人は読めるが、設備やクラウドサービスには「列がずれている」「形式が合わない」と怒られる…。
+              </p>
+              <div class="tile-meta">
+                <span>現状：目視で確認してコピペで調整</span>
+                <span>対象：製造・品質・営業管理</span>
+              </div>
+              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="tile-title-back">
+                <div>
+                  <div class="tile-title-line">Solution</div>
+                  <div class="process-step-title">Excel → 機械が読みやすいCSV/JSONに自動整形</div>
+                </div>
+              </div>
+              <p class="tile-content">
+                既存のExcel帳票のルールを読み取り、<strong>結合セル解除・列揃え・不要行削除</strong> を自動で実行。<br>
+                設備やクラウドにそのまま投入できるCSV/JSONを出力します。
+              </p>
+              <div class="tile-meta">
+                <span>効果：インポート前の手作業をほぼゼロに</span>
+                <span>形態：Windows用ツール / スクリプト</span>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">この課題で相談する</a>
+          </div>
+        </div>
+    
+        <!-- 2. 月次Excelのコピペ地獄 -->
+        <div class="tile-container">
+          <div class="tile small-dx-tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <div>
+                  <div class="tile-title-line">SME-002</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                    毎月10個以上のExcelを「貼り替え」して集計している
+                  </h3>
+                  <div class="tile-filter-badges">
+                    <span class="filter-badge">Excel</span>
+                    <span class="filter-badge">月次集計</span>
+                  </div>
+                </div>
+              </div>
+              <p class="tile-content">
+                売上・仕入・稼働など、部門ごとにバラバラなExcel。<br>
+                月末になると担当者が「今年分.xlsx」にコピー＆ペーストし続ける作業が発生している。
+              </p>
+              <div class="tile-meta">
+                <span>現状：担当者しかやり方がわからない</span>
+                <span>対象：管理部門 / 経営企画</span>
+              </div>
+              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="tile-title-back">
+                <div>
+                  <div class="tile-title-line">Solution</div>
+                  <div class="process-step-title">複数Excel → 自動集計レポート生成</div>
+                </div>
+              </div>
+              <p class="tile-content">
+                指定フォルダにExcelを入れるだけで、<strong>決まった形の集計表・グラフ</strong> を自動生成。<br>
+                シート名や列位置の揺れにも対応し、担当者のノウハウをツールに固定します。
+              </p>
+              <div class="tile-meta">
+                <span>効果：月3〜5時間 → 数分</span>
+                <span>形態：デスクトップアプリ or Webアプリ</span>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">この課題で相談する</a>
+          </div>
+        </div>
+    
+        <!-- 3. mdb分解：計測器データが取り出せない -->
+        <div class="tile-container">
+          <div class="tile small-dx-tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <div>
+                  <div class="tile-title-line">SME-003</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                    キーエンスなどの装置が mdb で出すが、中身が見られない
+                  </h3>
+                  <div class="tile-filter-badges">
+                    <span class="filter-badge">Access / mdb</span>
+                    <span class="filter-badge">計測器</span>
+                  </div>
+                </div>
+              </div>
+              <p class="tile-content">
+                測定結果が <strong>Microsoft Access形式（.mdb）</strong>で保存されるが、<br>
+                現場PCにはAccessが入っておらず、担当者のPCだけでしか中身を見られない。
+              </p>
+              <div class="tile-meta">
+                <span>現状：担当者PCで開いてCSVに書き出し → 共有</span>
+                <span>対象：品質管理・技術</span>
+              </div>
+              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="tile-title-back">
+                <div>
+                  <div class="tile-title-line">Solution</div>
+                  <div class="process-step-title">mdb → テーブル別CSV自動分解ツール</div>
+                </div>
+              </div>
+              <p class="tile-content">
+                mdbファイルを読み込み、<strong>テーブルごとのCSV</strong>に一括変換。<br>
+                そのままExcelや他システムに読み込める形で出力します。
+              </p>
+              <div class="tile-meta">
+                <span>効果：担当者依存の解消・自動化</span>
+                <span>形態：Windowsツール（ダブルクリックで実行）</span>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">この課題で相談する</a>
+          </div>
+        </div>
+    
+        <!-- 4. Accessマクロが壊れて誰も直せない -->
+        <div class="tile-container">
+          <div class="tile small-dx-tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <div>
+                  <div class="tile-title-line">SME-004</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                    Accessマクロで動く仕組みが、壊れても直せない
+                  </h3>
+                  <div class="tile-filter-badges">
+                    <span class="filter-badge">Access</span>
+                    <span class="filter-badge">既存資産</span>
+                  </div>
+                </div>
+              </div>
+              <p class="tile-content">
+                以前作ってもらったAccessマクロが、PC更新やOfficeバージョンアップで動かなくなった。<br>
+                作った人も退職しており、誰も直せない。
+              </p>
+              <div class="tile-meta">
+                <span>現状：危険を承知で「だましだまし」運用</span>
+                <span>対象：管理部門・生産管理</span>
+              </div>
+              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="tile-title-back">
+                <div>
+                  <div class="tile-title-line">Solution</div>
+                  <div class="process-step-title">ロジックを読み解き、Python / Web にリプレイス</div>
+                </div>
+              </div>
+              <p class="tile-content">
+                Accessマクロの動きを分析し、<strong>PythonスクリプトやWebアプリ</strong>として作り直します。<br>
+                将来の改修・拡張も行いやすい構成にリファクタリング。
+              </p>
+              <div class="tile-meta">
+                <span>効果：ブラックボックスの解消</span>
+                <span>形態：オンプレ / クラウド両対応</span>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">この課題で相談する</a>
+          </div>
+        </div>
+    
+        <!-- 5. CSV集計：特定項目だけ毎月集計 -->
+        <div class="tile-container">
+          <div class="tile small-dx-tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <div>
+                  <div class="tile-title-line">SME-005</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                    毎月のCSVから「特定項目だけ」手で集計している
+                  </h3>
+                  <div class="tile-filter-badges">
+                    <span class="filter-badge">CSV</span>
+                    <span class="filter-badge">自動集計</span>
+                  </div>
+                </div>
+              </div>
+              <p class="tile-content">
+                取引先やシステムから毎月送られてくるCSV。<br>
+                その中の「特定列だけ」をフィルタ・集計して、グラフや報告資料を作っている。
+              </p>
+              <div class="tile-meta">
+                <span>現状：担当者の「手順メモ」頼み</span>
+                <span>対象：営業企画・管理部門</span>
+              </div>
+              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="tile-title-back">
+                <div>
+                  <div class="tile-title-line">Solution</div>
+                  <div class="process-step-title">CSV → 条件抽出 ＋ 集計 ＋ グラフを自動化</div>
+                </div>
+              </div>
+              <p class="tile-content">
+                条件（例：特定仕入先・特定品目など）をツールに登録し、<br>
+                フォルダにCSVを入れてボタンを押すだけで、必要な集計表とグラフを作成します。
+              </p>
+              <div class="tile-meta">
+                <span>効果：属人化の解消・スピードアップ</span>
+                <span>形態：デスクトップ or Web</span>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">この課題で相談する</a>
+          </div>
+        </div>
+    
+        <!-- 6. ファイル整理・バックアップ -->
+        <div class="tile-container">
+          <div class="tile small-dx-tile">
+            <div class="tile-face tile-front">
+              <div class="tile-title">
+                <div>
+                  <div class="tile-title-line">SME-006</div>
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                    画像・CSVファイルがフォルダに山積みで、整理できない
+                  </h3>
+                  <div class="tile-filter-badges">
+                    <span class="filter-badge">ファイル整理</span>
+                    <span class="filter-badge">バックアップ</span>
+                  </div>
+                </div>
+              </div>
+              <p class="tile-content">
+                検査画像やログCSVが、共有フォルダに延々と溜まり続けている。<br>
+                誰も消せない・整理できないので、探すだけで時間がかかる。
+              </p>
+              <div class="tile-meta">
+                <span>現状：ファイル名_最新版(本物).xlsx などが乱立</span>
+                <span>対象：全社</span>
+              </div>
+              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+            </div>
+            <div class="tile-face tile-back">
+              <div class="tile-title-back">
+                <div>
+                  <div class="tile-title-line">Solution</div>
+                  <div class="process-step-title">自動フォルダ分け＋命名ルール＋バックアップ</div>
+                </div>
+              </div>
+              <p class="tile-content">
+                日付・ロット・設備などのルールにもとづき、<strong>自動でフォルダ分け＆ファイル名付与</strong>。<br>
+                世代バックアップや古いファイルのアーカイブも自動化します。
+              </p>
+              <div class="tile-meta">
+                <span>効果：探す時間と事故の大幅削減</span>
+                <span>形態：常駐スクリプト or 定期実行バッチ</span>
+              </div>
+              <div class="tile-hint">← 戻る</div>
+            </div>
+          </div>
+          <div class="tile-footer">
+            <a class="btn primary" href="#contact">この課題で相談する</a>
+          </div>
+        </div>
+    
+      </div>
+    </section>
+    
     <!-- Production Lines (products) -->
     <section class="section" id="lines">
       <div class="section-header" data-mode="advanced">
@@ -294,7 +601,7 @@
         </div>
       </div>
 
-      <div class="cards" data-mode="advanced">
+      <div class="tiles" data-mode="advanced">
         <!-- ① Planner -->
         <div class="tile-container" data-industry="自動車" data-keyword="受注">
           <div class="tile">
@@ -309,7 +616,7 @@
                     <span class="filter-badge" data-i18n="filter.keyword.order">受注</span>
                   </div>
                 </div>
-                <span class="card-badge" data-i18n="lines.pn0001.badge">クラウド</span>
+                <span class="tile-badge" data-i18n="lines.pn0001.badge">クラウド</span>
               </div>
               <p class="tile-content" data-i18n="lines.pn0001.body">
                 OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて
@@ -356,7 +663,7 @@
                     <span class="filter-badge" data-i18n="filter.keyword.logistics">部品物流</span>
                   </div>
                 </div>
-                <span class="card-badge" data-i18n="lines.pn0002.badge">ローカルサーバー</span>
+                <span class="tile-badge" data-i18n="lines.pn0002.badge">ローカルサーバー</span>
               </div>
               <p class="tile-content" data-i18n="lines.pn0002.body">
                 部品を製造ラインへタイムリーに搬送するための WMS サブシステム。
@@ -403,7 +710,7 @@
                     <span class="filter-badge" data-i18n="filter.keyword.testing">テスト分析</span>
                   </div>
                 </div>
-                <span class="card-badge" data-i18n="lines.pn0003.badge">デスクトップ</span>
+                <span class="tile-badge" data-i18n="lines.pn0003.badge">デスクトップ</span>
               </div>
               <p class="tile-content" data-i18n="lines.pn0003.body">
                 半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。
@@ -446,7 +753,7 @@
         </div>
       </div>
 
-      <div class="cards" data-mode="sme">
+      <div class="tiles" data-mode="sme">
         <!-- ① エクセル → 機械が読みやすい形式に変換 -->
         <div class="tile-container">
           <div class="tile">
@@ -457,7 +764,7 @@
                   <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8001-L</div>
                   <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8001.title">エクセルを変換</h3>
                 </div>
-                <span class="card-badge" data-i18n="lines.pn8001.badge">Win/Mac</span>
+                <span class="tile-badge" data-i18n="lines.pn8001.badge">Win/Mac</span>
               </div>              
               <p class="tile-content">
                 人間がみやすいエクセルは、空白行・結合セルなど、機械には読みづらい。<br>
@@ -495,7 +802,7 @@
                   <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8002-L</div>
                   <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8002.title">mdbファイルをテーブル別CSVへ</h3>
                 </div>
-                <span class="card-badge" data-i18n="lines.pn8002.badge">Win</span>
+                <span class="tile-badge" data-i18n="lines.pn8002.badge">Win</span>
               </div>              
               <p class="tile-content">
                 <strong>Microsoft Access形式（.mdb）</strong>は、データを取り出しにくい。<br>
@@ -533,7 +840,7 @@
                   <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8003-L</div>
                   <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8003.title">毎月のCSVから項目ごとの集計</h3>
                 </div>
-                <span class="card-badge" data-i18n="lines.pn8003.badge">Win/Mac</span>
+                <span class="tile-badge" data-i18n="lines.pn8003.badge">Win/Mac</span>
               </div>              
               <p class="tile-content">
                 売上CSV・検査結果CSVなど、毎月エクセルで開いて
