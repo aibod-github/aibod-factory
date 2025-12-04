@@ -201,6 +201,10 @@ font-weight: 700;
 background: linear-gradient(90deg, var(--accent), #16a34a);
 color: #04101f;
 }
+#sme-usecases .btn.primary {
+  background: linear-gradient(90deg, var(--accent), #14532d);
+  color: #04101f;  
+}
 
 .hero-factory {
 border-radius: 1.3rem;
@@ -602,12 +606,12 @@ flex-wrap: wrap;
 /* Make tiles responsive for mobile devices */
 @media (max-width: 768px) {
   #sme-usecases .tile {
-    min-height: 280px;
+    min-height: 320px;
   }
 }
 @media (max-width: 480px) {
   #sme-usecases .tiles {
-    min-height: 360px;
+    min-height: 480px;
   }
 }
 
