@@ -274,7 +274,6 @@ justify-content: start;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
-
 @media (max-width: 480px) {
   #sme-usecases .tiles {
     grid-template-columns: 1fr;
@@ -599,6 +598,17 @@ flex-wrap: wrap;
 }
 #sme-usecases .tile {
   min-height: 260px;
+}
+/* Make tiles responsive for mobile devices */
+@media (max-width: 768px) {
+  #sme-usecases .tile {
+    min-height: 280px;
+  }
+}
+@media (max-width: 480px) {
+  #sme-usecases .tiles {
+    min-height: 360px;
+  }
 }
 
 .tile.flipped {
