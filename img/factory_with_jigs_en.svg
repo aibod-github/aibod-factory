@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="AIBOD Factory Software Manufacturing Factory with Jigs and Lines">
+  <defs>
+    <style>
+      .bg{fill:#0b1220;}
+      .panel{fill:#0f1b33;stroke:#233456;stroke-width:2;}
+      .panel2{fill:#0e1830;stroke:#233456;stroke-width:2;}
+      .title{fill:#e8f0ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; font-weight:700;}
+      .label{fill:#d7e3ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; font-weight:650;}
+      .text{fill:#b9c9ee;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; font-weight:520;}
+      .muted{fill:#9fb0d9;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; font-weight:520;}
+      .chip{fill:#101e3a;stroke:#2b4270;stroke-width:1.5;}
+      .jig{fill:#142a4e;stroke:#3a67c0;stroke-width:2;}
+      .jigTag{fill:#5aa7ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; font-weight:800;}
+      .arrow{stroke:#7aa7ff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.95;}
+      .arrow2{stroke:#4fd6a1;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.95;}
+      .badge{fill:#0b1a33;stroke:#2b4270;stroke-width:1.5;}
+      .badgeText{fill:#cfe0ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;font-weight:750;}
+      .slogan{fill:#eaf2ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;font-weight:800;}
+      .slogan2{fill:#cfe0ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;font-weight:600;}
+    </style>
+
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7aa7ff"/>
+    </marker>
+    <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4fd6a1"/>
+    </marker>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+
+    <clipPath id="r20">
+      <rect x="0" y="0" width="1200" height="675" rx="24" ry="24"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#r20)">
+    <rect class="bg" x="0" y="0" width="1200" height="675"/>
+
+    <!-- Header -->
+    <text class="title" x="48" y="70" font-size="34">
+      AIBOD Factory | Software Manufacturing Factory (with Jigs & Lines)
+    </text>
+    <rect class="badge" x="48" y="92" rx="14" ry="14" width="620" height="42"/>
+    <text class="badgeText" x="66" y="120" font-size="18">
+      Design = Manufacturing Instruction / Parts + Jigs / Lines + Jigs / QA + Jigs / Delivery
+    </text>
+
+    <!-- Slogan -->
+    <g filter="url(#shadow)">
+      <rect class="panel" x="650" y="92" rx="18" ry="18" width="502" height="88"/>
+      <text class="slogan" x="676" y="130" font-size="18">
+        With factories, jigs, and lines, anyone can build fast with the same quality
+      </text>
+      <text class="slogan2" x="676" y="156" font-size="14">
+        Eliminating dependency on individual skills through manufacturing
+      </text>
+    </g>
+
+    <!-- 1. Product Design -->
+    <g filter="url(#shadow)">
+      <rect class="panel" x="48" y="210" rx="20" ry="20" width="270" height="350"/>
+      <text class="label" x="76" y="252" font-size="20">1. Product Design</text>
+      <text class="muted" x="76" y="278" font-size="14">(Requirements → Manufacturing Spec)</text>
+
+      <rect class="chip" x="76" y="302" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="92" y="328" font-size="14">Architecture Design</text>
+      <text class="muted" x="92" y="350" font-size="12">I/O / Processing / UI</text>
+
+      <rect class="chip" x="76" y="372" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="92" y="398" font-size="14">Design Templates</text>
+      <text class="muted" x="92" y="420" font-size="12">Use-case oriented templates</text>
+
+      <rect class="chip" x="76" y="442" rx="14" ry="14" width="214" height="80"/>
+      <text class="text" x="92" y="468" font-size="14">Design Output</text>
+      <text class="muted" x="92" y="490" font-size="12">Manufacturable structured data</text>
+      <text class="muted" x="92" y="510" font-size="12">(Direct manufacturing input)</text>
+    </g>
+
+    <!-- 2. Parts Shelf + Jig -->
+    <g filter="url(#shadow)">
+      <rect class="panel" x="348" y="210" rx="20" ry="20" width="270" height="350"/>
+      <text class="label" x="376" y="252" font-size="20">2. Parts Shelf</text>
+      <text class="muted" x="376" y="278" font-size="14">(Software Components)</text>
+
+      <rect class="chip" x="376" y="302" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="392" y="328" font-size="14">UI Components</text>
+      <text class="muted" x="392" y="350" font-size="12">Next / HTML / Grafana / Tkinter</text>
+
+      <rect class="chip" x="376" y="372" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="392" y="398" font-size="14">Backend Components</text>
+      <text class="muted" x="392" y="420" font-size="12">Django / API / Data Models</text>
+
+      <rect class="chip" x="376" y="442" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="392" y="468" font-size="14">AI & Analytics</text>
+      <text class="muted" x="392" y="490" font-size="12">Vision / Statistics / Inference</text>
+
+      <rect class="jig" x="360" y="516" rx="16" ry="16" width="246" height="36"/>
+      <text class="jigTag" x="376" y="541" font-size="14">
+        Jig: Visualized I/O, dependencies, usable lines
+      </text>
+    </g>
+
+    <!-- 3. Manufacturing Line + Jig -->
+    <g filter="url(#shadow)">
+      <rect class="panel" x="648" y="210" rx="20" ry="20" width="270" height="350"/>
+      <text class="label" x="676" y="252" font-size="20">3. Manufacturing Line</text>
+      <text class="muted" x="676" y="278" font-size="14">(Assembly Pipeline)</text>
+
+      <rect class="chip" x="676" y="302" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="692" y="328" font-size="14">Compose</text>
+      <text class="muted" x="692" y="350" font-size="12">Assemble components</text>
+
+      <rect class="chip" x="676" y="372" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="692" y="398" font-size="14">Apply Config</text>
+      <text class="muted" x="692" y="420" font-size="12">Environment / customer differences</text>
+
+      <rect class="chip" x="676" y="442" rx="14" ry="14" width="214" height="56"/>
+      <text class="text" x="692" y="468" font-size="14">Build & Package</text>
+      <text class="muted" x="692" y="490" font-size="12">Web / EXE / App / API</text>
+
+      <rect class="jig" x="660" y="516" rx="16" ry="16" width="246" height="36"/>
+      <text class="jigTag" x="676" y="541" font-size="14">
+        Jig: Fixed order & connection constraints
+      </text>
+    </g>
+
+    <!-- 4. QA + Jig -->
+    <g filter="url(#shadow)">
+      <rect class="panel" x="948" y="210" rx="20" ry="20" width="204" height="350"/>
+      <text class="label" x="972" y="252" font-size="20">4. Quality Check</text>
+      <text class="muted" x="972" y="278" font-size="14">(Automated Tests)</text>
+
+      <rect class="chip" x="972" y="302" rx="14" ry="14" width="156" height="56"/>
+      <text class="text" x="986" y="328" font-size="14">Unit Test</text>
+      <text class="muted" x="986" y="350" font-size="12">Component level</text>
+
+      <rect class="chip" x="972" y="372" rx="14" ry="14" width="156" height="56"/>
+      <text class="text" x="986" y="398" font-size="14">Integration</text>
+      <text class="muted" x="986" y="420" font-size="12">Interface consistency</text>
+
+      <rect class="chip" x="972" y="442" rx="14" ry="14" width="156" height="56"/>
+      <text class="text" x="986" y="468" font-size="14">System Test</text>
+      <text class="muted" x="986" y="490" font-size="12">Requirement coverage</text>
+
+      <rect class="jig" x="964" y="516" rx="16" ry="16" width="172" height="36"/>
+      <text class="jigTag" x="980" y="541" font-size="14">
+        Jig: Pass/Fail criteria & cause visibility
+      </text>
+    </g>
+
+    <!-- Arrows -->
+    <path class="arrow" marker-end="url(#ah)" d="M 318 385 C 330 385, 334 385, 346 385"/>
+    <path class="arrow" marker-end="url(#ah)" d="M 618 385 C 630 385, 634 385, 646 385"/>
+    <path class="arrow" marker-end="url(#ah)" d="M 918 385 C 930 385, 936 385, 946 385"/>
+
+    <!-- Delivery -->
+    <g filter="url(#shadow)">
+      <rect class="panel2" x="48" y="586" rx="18" ry="18" width="1104" height="64"/>
+      <text class="label" x="76" y="624" font-size="18">5. Delivery</text>
+      <text class="text" x="200" y="624" font-size="14">
+        Web / Desktop EXE / Tablet / Mobile / API / Container
+      </text>
+      <rect class="badge" x="838" y="602" rx="14" ry="14" width="290" height="34"/>
+      <text class="badgeText" x="854" y="625" font-size="14">
+        Manufacturing = Config + QA → Ship
+      </text>
+    </g>
+
+    <text class="muted" x="48" y="670" font-size="12">
+      AIBOD Factory concept: Not development, but manufacturing. Jigs make software visible, constrained, and repeatable.
+    </text>
+  </g>
+</svg>
+

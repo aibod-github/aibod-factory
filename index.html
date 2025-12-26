@@ -981,6 +981,22 @@
         <div class="contact-line-qr">
           <img src="img/S_gainfriends_2dbarcodes_GW.png" alt="LINE友だち追加QRコード" width="160" height="160" style="display: block;">
         </div>
+
+        <div class="contact-block">
+          <h3>メールで問い合わせる</h3>
+          <p>メールをご希望の場合はこちらからご連絡ください。</p>
+          <p id="email-contact" style="font-size:1.2em; font-weight:600;"></p>
+        </div>
+        <script>
+          (function () {
+            const user = "customer";
+            const domain = "aibod.com";
+            const addr = `${user}@${domain}`;
+            document.getElementById("email-contact").innerHTML =
+              `<a href="mailto:${addr}">${addr}</a>`;
+          })();
+        </script>
+        
       </div>
     </section>
   </main>

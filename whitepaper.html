@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIBOD Factory Whitepaper | 治具込みソフトウェア製造工場</title>
+  <meta name="description" content="AIBOD Factory：治具（Jigs）を中核に据えたソフトウェア製造工場モデルのホワイトペーパー（概念中心）" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1b33;
+      --panel2:#0e1830;
+      --line:#233456;
+      --text:#e8f0ff;
+      --muted:#b9c9ee;
+      --muted2:#9fb0d9;
+      --accent:#7aa7ff;
+      --good:#4fd6a1;
+      --chip:#101e3a;
+      --shadow: 0 18px 30px rgba(0,0,0,.35);
+      --r:18px;
+      --max:980px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial;
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:
+        radial-gradient(1000px 700px at 25% 0%, rgba(122,167,255,.12), transparent 60%),
+        radial-gradient(900px 600px at 95% 10%, rgba(79,214,161,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.75;
+    }
+    a{color:var(--accent); text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.72);
+      border-bottom:1px solid rgba(35,52,86,.65);
+    }
+    .nav{
+      height:64px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900; letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:12px; height:12px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--good));
+      box-shadow:0 0 0 6px rgba(122,167,255,.12);
+    }
+    .navlinks{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:13px;
+    }
+    .pill{
+      padding:7px 10px;
+      border:1px solid rgba(35,52,86,.85);
+      background: rgba(15,27,51,.55);
+      border-radius:999px;
+      color:var(--muted);
+    }
+    .pill:hover{border-color:rgba(122,167,255,.7); color:var(--text);}
+
+    .hero{padding:54px 0 18px;}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border:1px solid rgba(35,52,86,.9);
+      background: rgba(15,27,51,.55);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    h1{
+      margin:16px 0 10px;
+      font-size:40px; line-height:1.18; letter-spacing:-.35px;
+    }
+    .sub{margin:0; color:var(--muted); font-size:16px; max-width:920px;}
+    .meta{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      color:var(--muted2); font-size:13px;
+    }
+    .badge{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(35,52,86,.85);
+      background: rgba(16,30,58,.65);
+    }
+    .card{
+      border:1px solid rgba(35,52,86,.9);
+      background: rgba(15,27,51,.55);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+    .diagram{margin-top:20px; padding:14px;}
+    .diagram iframe{
+      width:100%;
+      height:560px;
+      border:0;
+      border-radius:14px;
+      background:#0b1220;
+    }
+
+    .toc{margin:22px 0; padding:18px;}
+    .toc h2{margin:0 0 8px; font-size:18px;}
+    .toc ul{margin:0; padding-left:18px; color:var(--muted);}
+    .toc li{margin:6px 0;}
+    .toc a{color:var(--muted);}
+    .toc a:hover{color:var(--text);}
+
+    section.paper{padding:14px 0 48px;}
+    .sec{margin-top:18px; padding:18px; scroll-margin-top:78px;}
+    .sec h2{margin:0 0 8px; font-size:22px; letter-spacing:.1px;}
+    .sec h3{margin:18px 0 8px; font-size:18px; color:#d7e3ff;}
+    .lead{color:var(--muted); margin:0;}
+    .quote{
+      margin:14px 0 0;
+      padding:14px 16px;
+      border-left:3px solid rgba(122,167,255,.75);
+      background: rgba(15,27,51,.45);
+      border-radius: 12px;
+      color:#eaf2ff;
+      font-weight:900;
+    }
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 920px){
+      h1{font-size:34px;}
+      .diagram iframe{height:520px;}
+      .grid2{grid-template-columns:1fr;}
+      .brand{font-size:14px;}
+    }
+    .mini{
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(35,52,86,.85);
+      background: rgba(16,30,58,.55);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .mini strong{color:var(--text);}
+    .callout{
+      margin-top:14px;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px dashed rgba(122,167,255,.55);
+      background: rgba(20,42,78,.35);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .pilltag{
+      display:inline-flex;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(20,42,78,.75);
+      border:1px solid rgba(122,167,255,.35);
+      color:#cfe0ff;
+      font-weight:900;
+      font-size:12px;
+    }
+    .list{
+      margin:12px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .list li{margin:6px 0;}
+    code{
+      background: rgba(16,30,58,.8);
+      border:1px solid rgba(35,52,86,.8);
+      padding:2px 6px;
+      border-radius:8px;
+      color:#cfe0ff;
+    }
+    footer{
+      padding:26px 0 44px;
+      color:var(--muted2);
+      border-top:1px solid rgba(35,52,86,.65);
+      background: rgba(11,18,32,.55);
+    }
+    .small{font-size:13px; color:var(--muted2);}
+    .hr{height:1px; background:rgba(35,52,86,.65); margin:14px 0 0;}
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span> AIBOD Factory Whitepaper</div>
+    <nav class="navlinks" aria-label="whitepaper navigation">
+      <a class="pill" href="#abstract">概要</a>
+      <a class="pill" href="#problem">課題</a>
+      <a class="pill" href="#definition">定義</a>
+      <a class="pill" href="#jigs">治具</a>
+      <a class="pill" href="#factory">工場モデル</a>
+      <a class="pill" href="#whywin">差別化</a>
+      <a class="pill" href="#roadmap">ロードマップ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">📄 Whitepaper / 治具込み「ソフトウェア製造工場」モデル（概念中心）</div>
+      <h1>開発ではなく、製造へ。</h1>
+      <p class="sub">
+        AIBOD Factoryは、ソフトウェアを「工場」で作るためのモデルです。鍵となるのは <strong>治具（Jigs）</strong>。
+        治具が、目に見えないソフトウェアの構造・制約・合否基準を可視化し、<strong>誰が作っても同じ品質で速い</strong>製造を可能にします。
+      </p>
+
+      <div class="meta">
+        <span class="badge">Version: v0.1</span>
+        <span class="badge">Focus: Concept / Definition / Differentiation</span>
+        <span class="badge">Target: Manufacturing-oriented SMEs & Partners</span>
+      </div>
+
+      <div class="card diagram" aria-label="factory diagram section">
+        <!-- Place factory_toggle.svg in the same folder -->
+        <iframe src="./img/factory_toggle.svg" title="AIBOD Factory diagram (JP/EN toggle)"></iframe>
+        <div class="small" style="padding:10px 4px 0;">
+          ※ Notion/PDF変換環境でSVG内JavaScriptが無効な場合は、固定JP/EN版に差し替えてください。
+        </div>
+      </div>
+
+      <div class="card toc" id="toc">
+        <h2>目次</h2>
+        <ul>
+          <li><a href="#abstract">1. アブストラクト（要約）</a></li>
+          <li><a href="#problem">2. 背景課題：ソフトウェア開発が“製造”になり切れていない理由</a></li>
+          <li><a href="#definition">3. AIBOD Factoryの定義：ソフトウェア製造工場とは何か</a></li>
+          <li><a href="#jigs">4. 治具（Jigs）：見える化＋制約＋再現性の装置</a></li>
+          <li><a href="#factory">5. 工場モデル：設計→部品→ライン→検査→出荷</a></li>
+          <li><a href="#whywin">6. 差別化：なぜ「同品質で速い」が成立するのか</a></li>
+          <li><a href="#roadmap">7. ロードマップ：Factoryの実装レベル定義</a></li>
+          <li><a href="#case-csv">Appendix A. 事例：CSV加工ライン</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper">
+    <div class="wrap">
+
+      <!-- 1 Abstract -->
+      <div class="card sec" id="abstract">
+        <h2>1. アブストラクト（要約）</h2>
+        <p class="lead">
+          生成AIの普及で「コードを書く速度」は上がりました。しかし現場のボトルネックは依然として、
+          <strong>設計の曖昧さ</strong>、<strong>属人化</strong>、<strong>品質保証</strong>、<strong>運用差分</strong>に残ります。
+          AIBOD Factoryは、これらを “製造業モデル” で解決します。
+        </p>
+        <div class="quote">
+          工場・治具・ラインがあるので、誰が作っても同じ品質で速い。
+        </div>
+        <div class="callout">
+          本ホワイトペーパーは「概念中心」です。実装手段（テンプレ、CI/CD、テスト設計等）はロードマップとして整理し、後続版で拡張します。
+        </div>
+      </div>
+
+      <!-- 2 Problem -->
+      <div class="card sec" id="problem">
+        <h2>2. 背景課題：ソフトウェア開発が“製造”になり切れていない理由</h2>
+        <p class="lead">
+          従来のソフトウェア開発は「プロジェクト」になりやすく、製造業のような<strong>再現性ある生産</strong>になりづらい構造があります。
+        </p>
+
+        <div class="grid2">
+          <div class="mini">
+            <strong>課題A：設計が曖昧なまま流れる</strong><br/>
+            要件が文章中心になり、実装段階で解釈が分岐しやすい。
+          </div>
+          <div class="mini">
+            <strong>課題B：属人化（人が“治具”になる）</strong><br/>
+            熟練者の頭の中で整合が取られ、再現性が落ちる。
+          </div>
+          <div class="mini">
+            <strong>課題C：品質保証が後追い</strong><br/>
+            テストが最後に寄り、仕様とテストがズレやすい。
+          </div>
+          <div class="mini">
+            <strong>課題D：運用差分が増殖する</strong><br/>
+            顧客・環境差分がコードに混ざり、保守負債になる。
+          </div>
+        </div>
+
+        <div class="callout">
+          生成AIは「書く」を速くしますが、上記の多くは「書く以前／以後」の問題です。よって、<strong>工場化（標準工程化）</strong>が必要です。
+        </div>
+      </div>
+
+      <!-- 3 Definition -->
+      <div class="card sec" id="definition">
+        <h2>3. AIBOD Factoryの定義：ソフトウェア製造工場とは何か</h2>
+        <p class="lead">
+          AIBOD Factoryは、ソフトウェアを「開発」ではなく「製造」として扱います。製造業における
+          <strong>設計（図面）</strong>、<strong>部品</strong>、<strong>装置</strong>、<strong>検査</strong>、<strong>出荷</strong> を明確に対応づけます。
+        </p>
+
+        <div class="grid2">
+          <div class="mini">
+            <strong>製造品設計（＝設計図面）</strong><br/>
+            要件定義を「製造指示」に落とす。曖昧さを排除し、I/O・処理・UIを構造化する。
+          </div>
+          <div class="mini">
+            <strong>部品（＝コンポーネント）</strong><br/>
+            UI（Next/HTML/Grafana/Tkinter/Streamlit/FlutterFlow/Swift等）やBackend（Django/API/DB）を部品化する。
+          </div>
+          <div class="mini">
+            <strong>製造装置（＝組立パイプライン）</strong><br/>
+            部品を組み合わせ、Configを適用し、成果物（Web/EXE/App/API/Container）に仕上げる。
+          </div>
+          <div class="mini">
+            <strong>検査装置（＝テスト）</strong><br/>
+            Unit/Integration/Systemの合否を工程に組み込み、品質を“仕組み”として保証する。
+          </div>
+        </div>
+
+        <div class="callout">
+          重要：実際の「製造」は、理想的には <code>Config設定</code> と <code>検査</code> の実行だけで完結します。<br/>
+          （工程が整備されている＝工場であることの証明）
+        </div>
+      </div>
+
+      <!-- 4 Jigs -->
+      <div class="card sec" id="jigs">
+        <h2>4. 治具（Jigs）：見える化＋制約＋再現性の装置</h2>
+        <p class="lead">
+          ソフトウェアは目に見えません。よって、製造業でいう「治具」に相当する仕組みが不可欠です。
+          AIBOD Factoryでは治具を、単なる可視化ツールではなく、<strong>“間違った作業を不可能にする装置”</strong>として定義します。
+        </p>
+
+        <div class="grid2">
+          <div class="mini">
+            <strong>部品治具</strong><br/>
+            部品の入力/出力、依存、利用可能ラインを固定表示し、正しい選択を支援（または強制）する。
+            <div class="pilltag">「正しい部品しか選べない」</div>
+          </div>
+          <div class="mini">
+            <strong>ライン治具</strong><br/>
+            組立順序と接続制約を固定し、工程スキップや誤接続を不可にする。
+            <div class="pilltag">「正しい工程しか通れない」</div>
+          </div>
+          <div class="mini">
+            <strong>検査治具</strong><br/>
+            テスト項目・合格基準・NG原因を可視化し、品質判断を人から工程へ移す。
+            <div class="pilltag">「合否がブレない」</div>
+          </div>
+          <div class="mini">
+            <strong>治具の効果（3点セット）</strong><br/>
+            <ul class="list">
+              <li><strong>Visualization</strong>：見える</li>
+              <li><strong>Constraints</strong>：間違えられない</li>
+              <li><strong>Repeatability</strong>：同じ結果が出る</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Factory model -->
+      <div class="card sec" id="factory">
+        <h2>5. 工場モデル：設計→部品→ライン→検査→出荷</h2>
+        <p class="lead">
+          工場全体は、以下の一次元フローとして定義します（複雑さは治具が吸収し、工程はシンプルに保つ）。
+        </p>
+        <div class="quote">Design → Parts Shelf → Manufacturing Line → Quality Check → Delivery</div>
+
+        <h3>工程の意図</h3>
+        <ul class="list">
+          <li><strong>設計</strong>：製造指示を構造化（曖昧さ排除）</li>
+          <li><strong>部品</strong>：再利用可能な資産を増やし続ける（工場が賢くなる）</li>
+          <li><strong>ライン</strong>：組立順序と制約を固定（作業者スキル依存を下げる）</li>
+          <li><strong>検査</strong>：品質を工程に内蔵（出荷基準の一貫性）</li>
+          <li><strong>出荷</strong>：複数形態へ展開（Web/EXE/App/API/Container）</li>
+        </ul>
+
+        <div class="callout">
+          ここでの“進化”は、従来開発の自由度を否定するものではありません。<br/>
+          <strong>自由度を必要な場所に限定し、残りは工場の制約（治具）で高速化</strong>する、という設計思想です。
+        </div>
+      </div>
+
+      <!-- 6 Why win -->
+      <div class="card sec" id="whywin">
+        <h2>6. 差別化：なぜ「同品質で速い」が成立するのか</h2>
+        <p class="lead">
+          AIBOD Factoryの価値は「AIで速い」ではありません。<strong>工場化</strong>によって速さと品質を両立させる点です。
+        </p>
+
+        <div class="grid2">
+          <div class="mini">
+            <strong>差別化1：属人性の排除</strong><br/>
+            “人が治具になる”状態をやめ、治具が工程を固定する。
+          </div>
+          <div class="mini">
+            <strong>差別化2：再利用の指数関数化</strong><br/>
+            部品が増えるほど、新規製造コストが下がる（製造業のBOM/規格部品と同じ）。
+          </div>
+          <div class="mini">
+            <strong>差別化3：品質の仕組み化</strong><br/>
+            検査が最初から工程にあるため、品質が後追いにならない。
+          </div>
+          <div class="mini">
+            <strong>差別化4：Config中心の出荷</strong><br/>
+            顧客差分をコードではなく設定で吸収し、保守負債を抑える。
+          </div>
+        </div>
+
+        <div class="quote">
+          工場・治具・ラインがあるので、誰が作っても同じ品質で速い。
+        </div>
+      </div>
+
+      <!-- 7 Roadmap -->
+      <div class="card sec" id="roadmap">
+        <h2>7. ロードマップ：Factoryの実装レベル定義</h2>
+        <p class="lead">
+          「工場」を段階的に成熟させます。最初は“概念を壊さない最小実装”から入り、部品・治具・検査の密度を上げていきます。
+        </p>
+
+        <h3>Level 0 — Concept</h3>
+        <ul class="list">
+          <li>用語定義（部品／製造装置／検査装置／治具）</li>
+          <li>工場フロー（5工程）を固定</li>
+        </ul>
+
+        <h3>Level 1 — Template Manufacturing</h3>
+        <ul class="list">
+          <li>用途別テンプレ（Django/Next/Tkinter等）</li>
+          <li>Config化のルール（差分がコードに混ざらない）</li>
+        </ul>
+
+        <h3>Level 2 — Jig-Driven Manufacturing</h3>
+        <ul class="list">
+          <li>部品治具：I/O・依存・利用ラインの表示</li>
+          <li>ライン治具：工程順・接続制約の強制</li>
+          <li>検査治具：合否基準・NG原因の可視化</li>
+        </ul>
+
+        <h3>Level 3 — Automated QA & Delivery</h3>
+        <ul class="list">
+          <li>テスト自動生成／回帰テスト自動化</li>
+          <li>出荷形態の自動切替（Web/EXE/App/API/Container）</li>
+        </ul>
+
+        <div class="callout">
+          次の版（v0.2）では、<strong>治具のUIモック</strong>と、<strong>製造指示データ（JSON Schema）</strong>の雛形まで落とし込むと「実装に直結」します。
+        </div>
+      </div>
+      <!-- Appendix: CSV加工ライン（事例） -->
+      <div class="card sec" id="case-csv">
+        <h2>Appendix A. 事例：CSV加工ライン（最も分かりやすい“ソフトウェア製造”）</h2>
+        <p class="lead">
+          ここでは、AIBOD Factoryの工場モデルを「CSV加工ライン」に落とし込みます。
+          目標は、<strong>入力CSV → いくつかの工程 → 出力CSV</strong>を、設計図（製造指示）と治具で“製造”することです。
+        </p>
+
+        <div class="quote">Manufacturing = Config + QA → Ship（CSV加工でも同じ）</div>
+
+        <h3>1) 製造品設計（設計＝製造指示）</h3>
+        <div class="grid2">
+          <div class="mini">
+            <strong>目的（例）</strong><br/>
+            ・顧客CSV（商品マスタ）を、社内の共通フォーマットに変換する<br/>
+            ・欠損値を埋める／文字種を正規化する／カテゴリを付与する<br/>
+            ・最終的に、別システムへ取り込み可能なCSVに整形する
+          </div>
+          <div class="mini">
+            <strong>設計で決めること（最小）</strong><br/>
+            ・入力列定義（列名・型・必須・許容値）<br/>
+            ・出力列定義（列名・型・生成ルール）<br/>
+            ・工程の順序（例：正規化→マッピング→集計→出力）<br/>
+            ・UIに表示する内容（例：検査結果、差分、統計）
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>ポイント：</strong>「CSVのColumn定義」が、製造業でいう“図面”です。<br/>
+          AIBOD Factoryでは、要件定義を文章で終わらせず、<strong>列定義＝製造可能な構造データ</strong>として固定します。
+        </div>
+
+        <h3>2) 部品棚（コンポーネント）</h3>
+        <div class="grid2">
+          <div class="mini">
+            <strong>代表的な部品（工程部品）</strong><br/>
+            ・列名マッピング（A列→B列）<br/>
+            ・型変換（string→int/float/date）<br/>
+            ・正規化（空白/全半角/文字種）<br/>
+            ・欠損補完（default/前値/ルール補完）<br/>
+            ・コード変換（カテゴリID付与など）<br/>
+            ・集計・検算（数量/金額/重複チェック）
+          </div>
+          <div class="mini">
+            <strong>UI部品</strong><br/>
+            ・入力プレビュー（先頭N行）<br/>
+            ・検査結果一覧（NG行/列/理由）<br/>
+            ・差分ビュー（変換前後の比較）<br/>
+            ・出力ダウンロード<br/>
+            <br/>
+            <strong>Backend雛形</strong><br/>
+            ・Django API / バッチ処理 / ログ
+          </div>
+        </div>
+
+        <h3>3) 治具（CSV加工ラインで最も効く要素）</h3>
+        <div class="grid2">
+          <div class="mini">
+            <strong>部品治具：列定義の可視化</strong><br/>
+            ・入力スキーマ（列名・型・必須・例）<br/>
+            ・出力スキーマ（生成ルール）<br/>
+            ・工程ごとのI/O（この工程が触る列）<br/>
+            <div class="pilltag">「何が入って、何が出るか」</div>
+          </div>
+          <div class="mini">
+            <strong>ライン治具：工程順と接続制約</strong><br/>
+            ・型が揃っていないと次工程へ進めない<br/>
+            ・必須列が欠けていると組立不可<br/>
+            ・工程の順序を固定（正規化→型変換→…）<br/>
+            <div class="pilltag">「間違った接続を不可に」</div>
+          </div>
+          <div class="mini">
+            <strong>検査治具：合否基準の固定</strong><br/>
+            ・必須列欠損：NG<br/>
+            ・値域外：NG（例：0〜100）<br/>
+            ・文字種違反：NG<br/>
+            ・重複キー：NG<br/>
+            <div class="pilltag">「合否がブレない」</div>
+          </div>
+          <div class="mini">
+            <strong>“見える化”のゴール</strong><br/>
+            ・現場担当者でも理解できる<br/>
+            ・どの工程で、どの列が、どう変わったか追える<br/>
+            ・NGが出たら“なぜ”が一目で分かる
+          </div>
+        </div>
+
+        <h3>4) 製造ライン（実際の製造＝Config設定＋検査＋出力）</h3>
+        <div class="mini">
+          <strong>製造フロー（例）</strong><br/>
+          1. 入力CSVアップロード（またはAPI投入）<br/>
+          2. Config選択（顧客A用 / 顧客B用 など）<br/>
+          3. 組立（部品の組合せが確定）<br/>
+          4. 検査（NGがあれば出荷停止、原因を表示）<br/>
+          5. 出力CSVを出荷（ダウンロード／S3／次システムへ投入）
+        </div>
+
+        <h3>5) 何が“工場化”なのか（従来のCSVツールとの差）</h3>
+        <div class="grid2">
+          <div class="mini">
+            <strong>従来</strong><br/>
+            ・手作業でExcel/スクリプトが乱立<br/>
+            ・担当者の暗黙知で回る（属人化）<br/>
+            ・検査が弱く、後工程で発覚<br/>
+            ・顧客ごとの差分が増殖
+          </div>
+          <div class="mini">
+            <strong>AIBOD Factory</strong><br/>
+            ・列定義（図面）を固定し、治具で可視化<br/>
+            ・工程の接続制約で“間違えない”<br/>
+            ・検査治具で“合否がブレない”<br/>
+            ・差分はConfigで吸収（製造として量産）
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>この事例の一文まとめ：</strong><br/>
+          CSV加工ラインは、ソフトウェア製造工場の最小単位として最適です。<br/>
+          <strong>列定義＝図面、工程部品＝部品棚、フロー＝製造ライン、検査ルール＝検査治具</strong>が明確で、
+          “治具が効く”ことを最短距離で伝えられます。
+        </div>
+      </div>
+
+      <div class="hr"></div>
+      <div class="small" style="margin-top:14px;">
+        © AIBOD Factory — Whitepaper v0.1 (Concept-first).<br/>
+        ※本ページはドラフトです。用途（顧客向け/採用向け/パートナー向け）に応じて、語彙・熱量・事例の入れ方を最適化できます。
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:900; color:#eaf2ff; margin-bottom:8px;">Appendix (optional)</div>
+    <div class="small">
+      もし「概念だけでは弱い」と感じる場合は、最小の具体例（例：CSV加工ライン、Django一覧ビューライン、WaferMap Analyzerの分析ライン等）を
+      1ページだけ入れると説得力が上がります。必要なら、その“例題ページ”も同じトーンで追記します。
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
