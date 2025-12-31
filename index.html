@@ -114,22 +114,22 @@
     <!-- Factory process -->
     <section class="section" id="factory">
       <div class="section-header" data-mode="advanced">
-        <h2 class="section-title" data-i18n="factory.subtitle">設計 → 試作 → 製造 → 改善 の「製造ライン」でソフトウェアを作る</h2>
+        <h2 class="section-title" data-i18n="factory.subtitle">製造品設計 → 部品棚 → 製造ライン → 検査 の「製造工場」でソフトウェアを作る</h2>
         <div class="section-sub" data-i18n="factory.caption">Software Factory Model</div>
       </div>
       <div class="process" data-mode="advanced">
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Blueprint</div>
-              <div class="process-step-title" data-i18n="factory.step1.title">設計図を作る</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step1.body"></small>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Product Design</div>
+              <div class="process-step-title" data-i18n="factory.step1.title">製造品設計</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step1.body">要件から製造可能な設計へ</small>
               <div class="tile-hint">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step1.title">1. Blueprint Studio（設計室）</div>
+              <div class="process-step-title" data-i18n="process.step1.title">1. 製造品設計（Product Design）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span data-i18n="process.step1.body">現場の課題を分解し、最適なツール・システムを設計。</span>
+                <span data-i18n="process.step1.body">アーキテクチャ設計（入出力/処理/UI）、設計テンプレート、製造可能な構造データへ変換。</span>
               </p>
               <div class="tile-hint">← 戻る</div>
             </div>
@@ -138,15 +138,15 @@
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Prototype</div>
-              <div class="process-step-title" data-i18n="factory.step2.title">試作する</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step2.body">小さく動くものを短期間で提供。</small>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Parts Shelf</div>
+              <div class="process-step-title" data-i18n="factory.step2.title">部品棚</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step2.body">再利用可能なコンポーネント</small>
               <div class="tile-hint">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step2.title">2. Prototype Line（試作ライン）</div>
+              <div class="process-step-title" data-i18n="process.step2.title">2. 部品棚（Parts Shelf）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span data-i18n="process.step2.body">設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に"効くポイント"を探ります。</span>
+                <span data-i18n="process.step2.body">UI部品（Next/HTML/Grafana/Tkinter）、Backend部品（Django/API/DB）、AI・分析部品を標準化。</span>
               </p>
               <div class="tile-hint">← 戻る</div>
             </div>
@@ -155,17 +155,17 @@
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Production</div>
-              <div class="process-step-title" data-i18n="factory.step3.title">量産する</div>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Manufacturing Line</div>
+              <div class="process-step-title" data-i18n="factory.step3.title">製造ライン</div>
               <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step3.body">
-                安定版として製造・展開。
+                部品を組み立てて製品化
               </small>
               <div class="tile-hint">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step3.title">3. Production Line（量産ライン）</div>
+              <div class="process-step-title" data-i18n="process.step3.title">3. 製造ライン（Manufacturing Line）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span data-i18n="process.step3.body">試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた"製品"に仕上げます。</span>
+                <span data-i18n="process.step3.body">組立（Compose）で部品を組合せ、Config適用で環境差分を吸収、ビルド・パッケージ化（Web/EXE/App/API）。</span>
               </p>
               <div class="tile-hint">← 戻る</div>
             </div>
@@ -174,17 +174,17 @@
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Kaizen</div>
-              <div class="process-step-title" data-i18n="factory.step4.title">改善する</div>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Quality Check</div>
+              <div class="process-step-title" data-i18n="factory.step4.title">検査</div>
               <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.step4.body">
-                ログ・現場の声から継続改善。
+                品質を自動テストで保証
               </small>
               <div class="tile-hint">More →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step4.title">4. Kaizen Loop（改善ライン）</div>
+              <div class="process-step-title" data-i18n="process.step4.title">4. 検査（Quality Check）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span data-i18n="process.step4.body">ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。</span>
+                <span data-i18n="process.step4.body">ユニットテスト（部品単体）、統合テスト（接続の整合）、システムテスト（要件の充足）で品質を確保。</span>
               </p>
               <div class="tile-hint">← Return</div>
             </div>
@@ -193,20 +193,20 @@
       </div>
 
       <div class="section-header" data-mode="sme">
-        <h2 class="section-title">設計 → 製造 の短縮「製造ライン」で提供！</h2>
+        <h2 class="section-title">製造品設計 → 部品棚 → 製造ライン → 検査 で提供！</h2>
         <div class="section-sub">Software Factory Model</div>
       </div>
       <div class="process" data-mode="sme">
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Blueprint</div>
-              <div class="process-step-title" data-i18n="factory.step1.title">設計図を作る</div>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Product Design</div>
+              <div class="process-step-title" data-i18n="factory.step1.title">製造品設計</div>
               <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">素早く設計</small>
               <div class="tile-hint">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step1.title">1. Blueprint Studio（設計室）</div>
+              <div class="process-step-title" data-i18n="process.step1.title">1. 製造品設計（Product Design）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
                 <span>AIBODのテンプレートを使用して設計。</span>
               </p>
@@ -217,15 +217,15 @@
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Prototype</div>
-              <div class="process-step-title" data-i18n="factory.step2.title">試作する</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">試作は軽く</small>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Parts Shelf</div>
+              <div class="process-step-title" data-i18n="factory.step2.title">部品棚</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">標準部品を活用</small>
               <div class="tile-hint">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step2.title">2. Prototype Line（試作ライン）</div>
+              <div class="process-step-title" data-i18n="process.step2.title">2. 部品棚（Parts Shelf）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span>シンプルなアプリなのでいきなり量産も。</span>
+                <span>標準化された部品を使用。</span>
               </p>
               <div class="tile-hint">← 戻る</div>
             </div>
@@ -234,13 +234,13 @@
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Production</div>
-              <div class="process-step-title" data-i18n="factory.step3.title">量産する</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">製造・展開。</small>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Manufacturing Line</div>
+              <div class="process-step-title" data-i18n="factory.step3.title">製造ライン</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">組立・製造。</small>
               <div class="tile-hint">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step3.title">3. Production Line（量産ライン）</div>
+              <div class="process-step-title" data-i18n="process.step3.title">3. 製造ライン（Manufacturing Line）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
                 <span data-i18n="process.step3.body">お使い下さい。</span>
               </p>
@@ -251,15 +251,15 @@
         <div class="tile-container">
           <div class="tile">
             <div class="tile-face tile-front">
-              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Kaizen</div>
-              <div class="process-step-title" data-i18n="factory.step4.title">改善する</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">現場の声から改善できます</small>
+              <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Quality Check</div>
+              <div class="process-step-title" data-i18n="factory.step4.title">検査</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">品質確認</small>
               <div class="tile-hint">More →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title" data-i18n="process.step4.title">4. Kaizen Loop（改善ライン）</div>
-              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;"
-                <span>現場の声やちょっとの改良をアップデートします。</span>
+              <div class="process-step-title" data-i18n="process.step4.title">4. 検査（Quality Check）</div>
+              <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                <span>テストで品質を確保します。</span>
               </p>
               <div class="tile-hint">← Return</div>
             </div>
@@ -645,6 +645,7 @@
           </div>
           <div class="tile-footer">
             <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
+            <a class="btn" href="./demo/031-0001-C_planner.html" data-i18n="lines.btn.demo">デモを見る</a>
             <a class="btn" href="#contact" data-line-id="planner" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
         </div>
@@ -692,6 +693,7 @@
           </div>
           <div class="tile-footer">
             <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
+            <a class="btn" href="./demo/031-0002-L_organizer.html" data-i18n="lines.btn.demo">デモを見る</a>
             <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
         </div>
@@ -739,6 +741,7 @@
           </div>
           <div class="tile-footer">
             <a class="btn primary" href="product.html?p=planner" data-i18n="lines.btn.detail">詳細ページへ</a>
+            <a class="btn" href="./demo/028-0003-L_wafermap.html" data-i18n="lines.btn.demo">デモを見る</a>
             <a class="btn" href="#contact" data-i18n="lines.btn.consult">このラインで相談</a>
           </div>
         </div>
@@ -983,8 +986,8 @@
         </div>
 
         <div class="contact-block">
-          <h3>メールで問い合わせる</h3>
-          <p>メールをご希望の場合はこちらからご連絡ください。</p>
+          <h3 data-i18n="contact.email.title">メールで問い合わせる</h3>
+          <p data-i18n="contact.email.desc">メールをご希望の場合はこちらからご連絡ください。</p>
           <p id="email-contact" style="font-size:1.2em; font-weight:600;"></p>
         </div>
         <script>
@@ -1032,38 +1035,38 @@
         'hero-visual.btn.lines028': '半導体業界のサービスを見る',
 
         'factory.caption': 'Software Factory Model',
-        'factory.subtitle': '設計 → 試作 → 製造 → 改善 の“製造ライン”でソフトウェアを作る',
-        'factory.step1.label': '01 Blueprint',
-        'factory.step1.title': '設計図を作る',
-        'factory.step1.body': 'AIBODの得意分野です。すばやく設計！',
-        'factory.step2.label': '02 Prototype',
-        'factory.step2.title': '試作する',
-        'factory.step2.body': '小さく動くものを短期間で提供！',
-        'factory.step3.label': '03 Production',
-        'factory.step3.title': '量産する',
-        'factory.step3.body': '安定版として製造・展開！',
-        'factory.step4.label': '04 Kaizen',
-        'factory.step4.title': '改善する',
-        'factory.step4.body': 'ログ・現場の声から継続改善！',
+        'factory.subtitle': '製造品設計 → 部品棚 → 製造ライン → 検査 の"製造工場"でソフトウェアを作る',
+        'factory.step1.label': '01 Product Design',
+        'factory.step1.title': '製造品設計',
+        'factory.step1.body': '要件から製造可能な設計へ',
+        'factory.step2.label': '02 Parts Shelf',
+        'factory.step2.title': '部品棚',
+        'factory.step2.body': '再利用可能なコンポーネント',
+        'factory.step3.label': '03 Manufacturing Line',
+        'factory.step3.title': '製造ライン',
+        'factory.step3.body': '部品を組み立てて製品化',
+        'factory.step4.label': '04 Quality Check',
+        'factory.step4.title': '検査',
+        'factory.step4.body': '品質を自動テストで保証',
 
         'process.title': 'Factory Process｜ソフトウェア製造プロセス',
-        'process.subtitle': '設計図を起点とした4つの工程',
-        'process.step1.title': '1. Blueprint Studio（設計室）',
-        'process.step1.body': '現場の課題を分解し、最適なツール・システムを設計。',
-        'process.step1.detail.title': '設計図の作成プロセス',
-        'process.step1.detail.body': 'SVA/VLP手法を用いて、現場の課題を構造化し、標準化可能な部分とカスタマイズが必要な部分を明確に定義します。',
-        'process.step2.title': '2. Prototype Line（試作ライン）',
-        'process.step2.body': '設計図に沿って小さな動く試作品を短期間で製造。お客様と一緒に"効くポイント"を探ります。',
-        'process.step2.detail.title': '試作の目的',
-        'process.step2.detail.body': '設計図に基づき、数週間で動作する試作品を提供。実際の使用環境で検証し、改善点を特定します。',
-        'process.step3.title': '3. Production Line（量産ライン）',
-        'process.step3.body': '試作で確かめた構成をベースに、堅牢なソフトウェアとして量産。テスト・監視・運用を含めた"製品"に仕上げます。',
-        'process.step3.detail.title': '本番環境への展開',
-        'process.step3.detail.body': '試作で検証した機能を、本番運用に耐える堅牢なソフトウェアとして製造。テスト、監視、運用体制まで整備します。',
-        'process.step4.title': '4. Kaizen Loop（改善ライン）',
-        'process.step4.body': 'ログや現場フィードバックを分析し、設計へフィードバック。工場の Kaizen と同じ発想で継続的にアップデートします。',
-        'process.step4.detail.title': '継続的改善',
-        'process.step4.detail.body': '運用ログや現場からのフィードバックを分析し、設計図に反映。製造業の改善活動（Kaizen）と同様に、継続的に品質を向上させます。',
+        'process.subtitle': '製造品設計を起点とした4つの工程',
+        'process.step1.title': '1. 製造品設計（Product Design）',
+        'process.step1.body': 'アーキテクチャ設計（入出力/処理/UI）、設計テンプレート、製造可能な構造データへ変換。',
+        'process.step1.detail.title': '製造品設計プロセス',
+        'process.step1.detail.body': 'アーキテクチャ設計で入出力/処理/UIを定義し、設計テンプレートを活用して、製造可能な構造データとして出力します。',
+        'process.step2.title': '2. 部品棚（Parts Shelf）',
+        'process.step2.body': 'UI部品（Next/HTML/Grafana/Tkinter）、Backend部品（Django/API/DB）、AI・分析部品を標準化。',
+        'process.step2.detail.title': '部品棚の構成',
+        'process.step2.detail.body': 'UI部品、Backend部品、AI・分析部品など、再利用可能なコンポーネントを標準化して提供。治具により部品のI/O・依存・利用可能ラインを可視化。',
+        'process.step3.title': '3. 製造ライン（Manufacturing Line）',
+        'process.step3.body': '組立（Compose）で部品を組合せ、Config適用で環境差分を吸収、ビルド・パッケージ化（Web/EXE/App/API）。',
+        'process.step3.detail.title': '製造ラインでの組立',
+        'process.step3.detail.body': '部品を組み合わせて組立、環境や顧客差分はConfigで吸収し、Web/EXE/App/APIなど各形態にビルド・パッケージ化します。',
+        'process.step4.title': '4. 検査（Quality Check）',
+        'process.step4.body': 'ユニットテスト（部品単体）、統合テスト（接続の整合）、システムテスト（要件の充足）で品質を確保。',
+        'process.step4.detail.title': '品質検査',
+        'process.step4.detail.body': 'ユニットテスト、統合テスト、システムテストの3段階で品質を確保。治具により合否基準を固定し、原因を可視化します。',
 
         'lines.title': 'Production Lines｜量産ソフトウェア',
         'lines.subtitle': 'すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。',
@@ -1095,6 +1098,7 @@
         'lines.pn0003.meta2': '入力：ウエーハ画像',
         'lines.pn0003.meta3': '出力：解析結果画面',
         'lines.btn.detail': '詳細ページへ',
+        'lines.btn.demo': 'デモを見る',
         'lines.btn.consult': 'このラインで相談',
 
         'filter.industry.label': '業界:',
@@ -1125,6 +1129,8 @@
         'contact.lineqrnote': 'PCからご覧の方は、こちらのQRコードをスマホで読み取ってください。',
         'contact.btn.mail': 'メールで問い合わせる',
         'contact.btn.top': 'トップに戻る',
+        'contact.email.title': 'メールで問い合わせる',
+        'contact.email.desc': 'メールをご希望の場合はこちらからご連絡ください。',
 
         'footer': '© AIBOD Inc. – AIBOD Factory / Software Manufacturing Platform'
       },
@@ -1140,8 +1146,6 @@
         'hero.btn.products': 'View Products',
         'hero.btn.services': 'View Factory Services',
         'hero.btn.contact': 'Talk to Us',
-        'hero.btn.services031': 'View Factory Services for Auto',
-        'hero.btn.services028': 'View Factory Services for semicon',
 
         'hero-visual.rotating.0': 'Your Software, Manufactured.',
         'hero-visual.rotating.1': 'From "building" software to "manufacturing" it.',
@@ -1151,40 +1155,42 @@
         'hero-visual.btn.factory': 'View Factory',
         'hero-visual.btn.lines': 'View Our Services',
         'hero-visual.btn.contact': 'Talk to Us',
+        'hero-visual.btn.lines031': 'View Services for Automotive',
+        'hero-visual.btn.lines028': 'View Services for Semiconductor',
 
         'factory.caption': 'Software Factory Model',
-        'factory.subtitle': 'Build software on a manufacturing line: Design → Prototype → Production → Kaizen.',
-        'factory.step1.label': '01 Blueprint',
-        'factory.step1.title': 'Create the blueprint',
-        'factory.step1.body': 'Decompose with SVA / VLP and define the architecture.',
-        'factory.step2.label': '02 Prototype',
-        'factory.step2.title': 'Prototype',
-        'factory.step2.body': 'Provide a small working version in a short time.',
-        'factory.step3.label': '03 Production',
-        'factory.step3.title': 'Produce',
-        'factory.step3.body': 'Harden and deploy as a production system.',
-        'factory.step4.label': '04 Kaizen',
-        'factory.step4.title': 'Improve',
-        'factory.step4.body': 'Continuously improve based on logs and user feedback.',
+        'factory.subtitle': 'Build software on a manufacturing line: Product Design → Parts Shelf → Manufacturing Line → Quality Check.',
+        'factory.step1.label': '01 Product Design',
+        'factory.step1.title': 'Product Design',
+        'factory.step1.body': 'From requirements to manufacturable design.',
+        'factory.step2.label': '02 Parts Shelf',
+        'factory.step2.title': 'Parts Shelf',
+        'factory.step2.body': 'Reusable software components.',
+        'factory.step3.label': '03 Manufacturing Line',
+        'factory.step3.title': 'Manufacturing Line',
+        'factory.step3.body': 'Assemble parts into products.',
+        'factory.step4.label': '04 Quality Check',
+        'factory.step4.title': 'Quality Check',
+        'factory.step4.body': 'Guarantee quality with automated tests.',
 
         'process.title': 'Factory Process｜Software Manufacturing Flow',
-        'process.subtitle': 'Four stages starting from the blueprint',
-        'process.step1.title': '1. Blueprint Studio',
-        'process.step1.body': 'Break down on-site problems and create a blueprint based on SVA/VLP. Decide what to standardize and what to customize.',
-        'process.step1.detail.title': 'Blueprint Creation Process',
-        'process.step1.detail.body': 'Using SVA/VLP methodology, we structure on-site challenges and clearly define what can be standardized and what requires customization.',
-        'process.step2.title': '2. Prototype Line',
-        'process.step2.body': 'Manufacture small prototypes according to the blueprint and explore what really works together with your team.',
-        'process.step2.detail.title': 'Purpose of Prototyping',
-        'process.step2.detail.body': 'Based on the blueprint, we deliver working prototypes in weeks. We validate in real usage environments and identify improvement points.',
-        'process.step3.title': '3. Production Line',
-        'process.step3.body': 'Based on the validated prototype, manufacture robust production software including tests, monitoring, and operations.',
-        'process.step3.detail.title': 'Production Deployment',
-        'process.step3.detail.body': 'We manufacture robust production software from validated prototypes. We set up testing, monitoring, and operational systems.',
-        'process.step4.title': '4. Kaizen Loop',
-        'process.step4.body': 'Analyze logs and feedback, feed them back into design, and keep updating just like Kaizen in physical factories.',
-        'process.step4.detail.title': 'Continuous Improvement',
-        'process.step4.detail.body': 'We analyze operational logs and on-site feedback, reflect them in the blueprint, and continuously improve quality, just like Kaizen in manufacturing.',
+        'process.subtitle': 'Four stages starting from product design',
+        'process.step1.title': '1. Product Design',
+        'process.step1.body': 'Architecture design (I/O/processing/UI), design templates, convert to manufacturable structured data.',
+        'process.step1.detail.title': 'Product Design Process',
+        'process.step1.detail.body': 'Define I/O/processing/UI through architecture design, utilize design templates, and output as manufacturable structured data.',
+        'process.step2.title': '2. Parts Shelf',
+        'process.step2.body': 'Standardized UI components (Next/HTML/Grafana/Tkinter), Backend components (Django/API/DB), and AI/Analytics components.',
+        'process.step2.detail.title': 'Parts Shelf Structure',
+        'process.step2.detail.body': 'Standardized and reusable components including UI, Backend, and AI/Analytics parts. Jigs visualize component I/O, dependencies, and usable lines.',
+        'process.step3.title': '3. Manufacturing Line',
+        'process.step3.body': 'Compose parts together, apply Config to absorb environment differences, and build/package (Web/EXE/App/API).',
+        'process.step3.detail.title': 'Assembly on Manufacturing Line',
+        'process.step3.detail.body': 'Assemble components together, absorb environment and customer differences with Config, and build/package into Web/EXE/App/API formats.',
+        'process.step4.title': '4. Quality Check',
+        'process.step4.body': 'Ensure quality through unit tests (component level), integration tests (interface consistency), and system tests (requirement coverage).',
+        'process.step4.detail.title': 'Quality Inspection',
+        'process.step4.detail.body': 'Ensure quality through three-stage testing: unit, integration, and system tests. Jigs fix pass/fail criteria and visualize causes.',
 
         'lines.title': 'Production Lines｜Ready-made Software',
         'lines.subtitle': 'Pre-built product lines that can be used immediately and customized in the Factory when needed.',
@@ -1216,7 +1222,17 @@
         'lines.pn0003.meta2': 'Input: Wafer map images',
         'lines.pn0003.meta3': 'Output: Analysis results on screen',
         'lines.btn.detail': 'View details',
+        'lines.btn.demo': 'View Demo',
         'lines.btn.consult': 'Consult on this line',
+        'lines.pn8001.partnumber': '9050-000-8001-L',
+        'lines.pn8001.title': 'Excel Converter',
+        'lines.pn8001.badge': 'Win/Mac',
+        'lines.pn8002.partnumber': '9050-000-8002-L',
+        'lines.pn8002.title': 'MDB to CSV Converter',
+        'lines.pn8002.badge': 'Win',
+        'lines.pn8003.partnumber': '9050-000-8003-L',
+        'lines.pn8003.title': 'Monthly CSV Aggregator',
+        'lines.pn8003.badge': 'Win/Mac',
 
         'filter.industry.label': 'Industry:',
         'filter.industry.automotive': 'Automotive',
@@ -1242,10 +1258,12 @@
         'contact.kv2': 'Desired go-live timing',
         'contact.kv3': 'Target line (①–③ / others)',
         'contact.kv4': 'Existing systems',
-        'contact.note': 'Please place your actual form or contact email link here.',
-        'contact.lineqrnote': 'PC',
+        'contact.note': 'If you want to have a casual chat or hear more about our services, please add our AIBOD Factory LINE official account by clicking the button below.',
+        'contact.lineqrnote': 'If you are viewing from a PC, please scan this QR code with your smartphone.',
         'contact.btn.mail': 'Contact via Email',
         'contact.btn.top': 'Back to Top',
+        'contact.email.title': 'Contact via Email',
+        'contact.email.desc': 'If you prefer email, please contact us here.',
 
         'footer': '© AIBOD Inc. – AIBOD Factory / Software Manufacturing Platform'
       }

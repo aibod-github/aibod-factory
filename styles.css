@@ -371,9 +371,9 @@ font-size: .85rem;
 color: var(--muted);
 }
 
-/* Subtle greeny grey process tile-content for SME mode */
+/* White process tile-content for SME mode */
 [data-mode="sme"] .process .tile-content {
-color: #9fb1a8;
+color: white; /*was color: #9fb1a8;*/
 }
 
 .process-image {
@@ -758,17 +758,17 @@ color: rgba(226, 232, 240, 0.68);
 flex-grow: 1;
 }
 
-/* Subtle greeny grey tile-content for SME mode */
+/* White tile-content for SME mode */
 [data-mode="sme"] .tile-content {
-color: rgba(159, 177, 168, 0.85);
+color: white; /*color: rgba(159, 177, 168, 0.85);*/
 }
 #sme-usecases .tile-content {
   font-size: 0.95rem;
 }
 
-/* Subtle greeny grey first row (step label) in tile-front for SME mode */
+/* White first row (step label) in tile-front for SME mode */
 [data-mode="sme"] .tile-front > div:first-child {
-color: #9fb1a8 !important;
+color: white !important;
 }
 
 .tile-meta {
