@@ -1,0 +1,1501 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>自動倉庫デモ</title>
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --text:#111a33;
+      --muted:#5a6786;
+      --good:#1dbf6a;
+      --warn:#d79a00;
+      --bad:#d43a3a;
+      --accent:#2b6dff;
+      --shadow: 0 8px 24px rgba(17,26,51,.1);
+      --radius: 12px;
+
+      --pallet-loaded: rgba(29,191,106,.22);
+      --pallet-empty: rgba(125,140,170,.22);
+      --crane: rgba(255,195,0,.22);
+      /* --agv: rgba(43,109,255,.18); */
+      --agv: rgba(255, 128, 0, 0.22);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      background: radial-gradient(1200px 800px at 25% 10%, #ffffff 0%, #eef3ff 50%, #f7f9ff 100%);
+      color: var(--text);
+      font-size: 13px;
+      min-width: 1000px;
+      min-height: 640px;
+    }
+
+    header{
+      padding: 10px 12px 6px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 8px;
+    }
+    header h1{
+      margin:0;
+      font-size: 15px;
+      font-weight: 950;
+      letter-spacing: .03em;
+    }
+    header .sub{
+      margin-top:4px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .03em;
+      line-height: 1.4;
+    }
+    .topActions{
+      display:flex;
+      gap: 6px;
+      align-items:center;
+    }
+    .version{
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-left: 12px;
+    }
+    button{
+      appearance:none;
+      border:1px solid rgba(17,26,51,.18);
+      background: rgba(43,109,255,.06);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 6px 8px;
+      font-weight: 850;
+      font-size: 11px;
+      cursor:pointer;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+      user-select:none;
+    }
+    button:hover{ transform: translateY(-1px); border-color: rgba(43,109,255,.45); background: rgba(43,109,255,.10); }
+    button:active{ transform: translateY(0px); }
+    button.primary{
+      border-color: rgba(29,191,106,.45);
+      background: rgba(29,191,106,.18);
+      color:#083019;
+    }
+    button.primary:hover{ background: rgba(82,255,160,.22); }
+    button.warn{
+      border-color: rgba(215,154,0,.40);
+      background: rgba(215,154,0,.16);
+      color:#4a3200;
+    }
+    button.lightblue{
+      border-color: rgba(100,200,255,.40);
+      background: rgba(100,200,255,.16);
+      color:#003d5c;
+    }
+    button.lightblue:hover{ background: rgba(100,200,255,.24); }
+    button.ghost{
+      border-style:dashed;
+      background: transparent;
+    }
+    button:disabled{
+      opacity: .45;
+      cursor: not-allowed;
+      transform:none !important;
+    }
+
+    /* ===== Compact Layout ===== */
+    .layout{
+      padding: 0 12px 12px;
+      display:grid;
+      grid-template-columns: 2.0fr 0.8fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "warehouse line"
+        "tablet tablet";
+      gap: 10px;
+      min-height: calc(100vh - 60px);
+      align-items: stretch;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(250,252,255,1));
+      border: 1px solid rgba(17,26,51,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height: 200px; /* was 300px: shrink Warehouse/Line ~50px */
+    }
+    .card.warehouse{ grid-area: warehouse; min-height: 330px; height: 330px; }
+    .card.line{ grid-area: line; }
+    .card.tablet{ grid-area: tablet; min-height: 140px; } /* -100px */
+
+    .sectionHead{
+      padding: 8px 10px 6px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:8px;
+      border-bottom: 1px solid rgba(17,26,51,.10);
+      background: linear-gradient(180deg, rgba(43,109,255,.06), rgba(255,255,255,1));
+    }
+    .sectionHead .title{
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing: .02em;
+    }
+    .sectionHead .hint{
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.4;
+      text-align:right;
+      white-space: nowrap;
+    }
+
+    .scene{
+      position:relative;
+      padding: 10px;
+      flex: 1;
+      min-height: 250px;
+    }
+
+    .zoneRowWarehouse{
+      position:absolute;
+      inset: 10px;
+      display:grid;
+      grid-template-columns: 1.0fr 2.3fr 1.0fr;
+      gap: 8px;
+    }
+    .zoneRowLine{
+      position:absolute;
+      inset: 10px;
+      display:grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 8px;
+    }
+
+    .zone{
+      border-radius: 12px;
+      border: 1px solid rgba(17,26,51,.14);
+      background: rgba(255,255,255,.78);
+      position:relative;
+      overflow:hidden;
+      min-height: 160px;
+    }
+    .zone .zhead{
+      position:absolute; left:8px; top:6px;
+      font-size:10px; color:var(--muted);
+      font-weight:950; letter-spacing:.06em;
+      text-transform: uppercase;
+      display:flex; gap:6px; align-items:center;
+      z-index: 2;
+    }
+    .zone .zhead .dot{
+      width:6px; height:6px; border-radius:999px; background: rgba(122,167,255,.8);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.15);
+    }
+    .zone .zbody{
+      position:absolute;
+      inset: 28px 8px 8px;
+      z-index: 1;
+    }
+    .stack{ display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start; }
+
+    .shelves{
+      height:100%;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap:6px;
+      padding-top: 4px;
+    }
+    .cell{
+      border-radius: 10px;
+      border:1px solid rgba(17,26,51,.14);
+      background: rgba(43,109,255,.06);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      padding:6px;
+      min-height: 60px;
+    }
+    .cell .label{
+      position:absolute; left:6px; top:4px;
+      font-size:9px; color:var(--muted);
+      font-weight:950;
+      letter-spacing:.03em;
+    }
+    .cell.empty{ background: rgba(17,26,51,.02); border-style:dashed; }
+    .cell .slot{ display:flex; gap:6px; flex-wrap:wrap; align-items:flex-end; }
+
+    .token{
+      width: 60px;
+      height: 40px;
+      border-radius: 8px;
+      border:1px solid rgba(255,255,255,.14);
+      background: var(--pallet-loaded);
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      padding-top:6px;
+      padding-bottom:6px;
+      align-items:center;
+      justify-content:center;
+      font-weight: 1000;
+      font-size:10px;
+      color:#083019;
+      position:relative;
+      user-select:none;
+      cursor:pointer;
+      transition: transform .10s ease, outline-color .10s ease, box-shadow .10s ease;
+    }
+    .token.empty{
+      background: var(--pallet-empty);
+      color:#111a33;
+    }
+    .token .mini{
+      position:static;
+      font-size:9px;
+      opacity:.78;
+      font-weight:950;
+      line-height:1;
+    }
+    .token .status{
+      font-size:11px;
+      line-height:1;
+    }
+    .token.selected{
+      outline: 2px solid rgba(43,109,255,.90);
+      box-shadow: 0 0 0 4px rgba(43,109,255,.14);
+      transform: translateY(-1px);
+    }
+
+    .portSlots{
+      display:grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 6px;
+      height: 100%;
+    }
+
+    /* inbound port: make slots more compact */
+    #zInbound{
+      height: auto;                 /* don't fill full zbody height */
+      grid-template-rows: repeat(4, auto);
+      gap: 4px;
+      align-content: start;
+      justify-items: stretch;
+    }
+    #zInbound .slotBox{
+      min-height: 52px;
+      height: 52px;                 /* ensure compact */
+      padding: 4px;
+    }
+.slotBox{
+      border-radius: 10px;
+      border:1px dashed rgba(17,26,51,.22);
+      background: rgba(17,26,51,.03);
+      min-height: 70px;
+      padding: 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .slotBox .slabel{
+      position:absolute;
+      left:6px; top:4px;
+      font-size:9px;
+      color:var(--muted);
+      font-weight:950;
+      letter-spacing:.03em;
+    }
+
+    .tablet{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      padding: 8px;
+      gap: 8px;
+    }
+    .tabletRow{
+      display:flex;
+      gap: 8px;
+      flex:1;
+    }
+    .tabletBox{
+      flex:1;
+      border-radius: 10px;
+      border:1px solid rgba(17,26,51,.14);
+      background: rgba(255,255,255,.88);
+      padding: 8px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      overflow:hidden;
+      height: 260px;
+      max-height: 260px;
+    }
+    .tabletBox.control-panel{
+      border: 2px solid #ff9966;
+      border-color: #ff9966;
+    }
+    .tabletBox.hidden{
+      display: none;
+    }
+    .tabletBox .tHead{
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.03em;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(17,26,51,.30);
+      padding-bottom: 4px;
+    }
+    .tabletBox .tBody{
+      flex:1;
+      overflow-y: auto;
+      padding-top: 4px;
+    }
+    .tabletBox .tActions{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(17,26,51,.10);
+    }
+    .tabletBox button{
+      width:100%;
+      padding: 6px 4px;
+      font-size: 10px;
+    }
+
+    .logBox{
+      max-height: 180px;
+      overflow-y: auto;
+      font-size: 11px;
+      line-height: 1.5;
+      padding-right: 4px;
+    }
+    .logBox::-webkit-scrollbar {
+      width: 6px;
+    }
+    .logBox::-webkit-scrollbar-track {
+      background: rgba(17,26,51,.05);
+      border-radius: 3px;
+    }
+    .logBox::-webkit-scrollbar-thumb {
+      background: rgba(43,109,255,.3);
+      border-radius: 3px;
+    }
+    .logBox::-webkit-scrollbar-thumb:hover {
+      background: rgba(43,109,255,.5);
+    }
+    }
+    .logEntry{
+      margin-bottom: 6px;
+      padding: 6px;
+      border-left: 3px solid rgba(17,26,51,.20);
+      background: #ffffff;
+      border-radius: 6px;
+    }
+    .logEntry.good{ border-left-color: var(--good); background: #ffffff; }
+    .logEntry.warn{ border-left-color: var(--warn); background: #ffffff; }
+    .logEntry.bad{ border-left-color: var(--bad); background: #ffffff; }
+
+    .moverLayer{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:100;
+    }
+
+    /* ===== Global overlay for AGV (across cards) ===== */
+    #globalLayer{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+    }
+
+    .mover{
+      position:absolute;
+      width: 60px;
+      height: 40px;
+      border-radius: 8px;
+      border:1px solid rgba(255,255,255,.14);
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      padding-top:6px;
+      padding-bottom:6px;
+      align-items:center;
+      justify-content:center;
+      font-weight: 1000;
+      font-size:10px;
+      transition: left .30s ease-out, top .30s ease-out;
+      opacity:0;
+      pointer-events:none;
+    }
+    .mover .mini{
+      position:static;
+      font-size:9px;
+      opacity:.78;
+      font-weight:950;
+      line-height:1;
+    }
+    .mover .status{
+      font-size:11px;
+      line-height:1;
+    }
+
+    .crane, .agv{
+      position:absolute;
+      border-radius: 8px;
+      transition: left .30s ease-out, top .30s ease-out;
+      pointer-events:none;
+      z-index: 50;
+    }
+    .crane{
+      width: 60px; height: 27px;
+      background: var(--crane);
+      border:2px solid rgba(255,195,0,.6);
+    }
+    .agv{
+      width: 60px; height: 27px;
+      background: var(--agv);
+      /* border:2px solid rgba(43,109,255,.6); */
+      border:2px solid rgba(255,195,0,.6);
+    }
+
+    /* ===== Labels for movers ===== */
+    .crane, .agv{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 1000;
+      font-size: 10px;
+      letter-spacing: .04em;
+      user-select:none;
+    }
+    .crane::after{
+      content: "crane";
+      color:#4a3200;
+    }
+    .agv::after{
+      content: "AGV🚚";
+      color:#0a1a44;
+    }
+
+    .fifoList{
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .fifoList li{
+      padding: 4px 6px;
+      margin-bottom: 4px;
+      background: rgba(43,109,255,.08);
+      border-radius: 6px;
+      font-size:10px;
+      font-weight:950;
+      letter-spacing:.02em;
+    }
+
+    @media (max-width: 900px){
+      .layout{
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "warehouse"
+          "line"
+          "tablet";
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>自動倉庫デモ<span class="version" id="versionDisplay"></span></h1>
+      <div class="sub">操作手順：入庫ポートのパレット選択 → (入庫指示)ボタン → 自動倉庫のパレット選択 → (搬送指示)ボタン → (積荷下ろし)ボタン → (空パレット回収)</div>
+    </div>
+    <div class="topActions">
+      <button id="btnAuto" class="warn">自動デモ</button>
+      <button id="btnReset" class="ghost">リセット</button>
+      <button onclick="window.location.href='../index.html'">戻る</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Warehouse -->
+    <div class="card warehouse">
+      <div class="sectionHead">
+        <div class="title">📦 倉庫エリア</div>
+        <div class="hint">クレーン稼働中</div>
+      </div>
+      <div class="scene">
+        <div class="zoneRowWarehouse">
+          <div class="zone">
+            <div class="zhead"><div class="dot"></div>入庫ポート</div>
+            <div class="zbody">
+              <div class="portSlots" id="zInbound">
+                <div class="slotBox"><div class="slabel">IN-01</div></div>
+                <div class="slotBox"><div class="slabel">IN-02</div></div>
+                <div class="slotBox"><div class="slabel">IN-03</div></div>
+                <div class="slotBox"><div class="slabel">IN-04</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone">
+            <div class="zhead"><div class="dot"></div>自動倉庫 棚（4列×3段）</div>
+            <div class="zbody">
+              <div class="shelves" id="zShelves">
+                <div class="cell" data-shelf="A1"><div class="label">A1</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="B1"><div class="label">B1</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="C1"><div class="label">C1</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="D1"><div class="label">D1</div><div class="slot"></div></div>
+
+                <div class="cell" data-shelf="A2"><div class="label">A2</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="B2"><div class="label">B2</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="C2"><div class="label">C2</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="D2"><div class="label">D2</div><div class="slot"></div></div>
+
+                <div class="cell" data-shelf="A3"><div class="label">A3</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="B3"><div class="label">B3</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="C3"><div class="label">C3</div><div class="slot"></div></div>
+                <div class="cell" data-shelf="D3"><div class="label">D3</div><div class="slot"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone">
+            <div class="zhead"><div class="dot"></div>出庫ポート</div>
+            <div class="zbody">
+              <div class="slotBox" id="outboundSlot" style="height:100%;min-height:auto;">
+                <div class="slabel">OUT-01</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="crane" id="crane"></div>
+        <div class="moverLayer" id="warehouseMoverLayer">
+          <div class="mover" id="craneMover"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Line -->
+    <div class="card line">
+      <div class="sectionHead">
+        <div class="title">🏭 製造エリア</div>
+        <div class="hint">AGV稼働中</div>
+      </div>
+      <div class="scene">
+        <div class="zoneRowLine">
+          <div class="zone" id="zLine">
+            <div class="zhead"><div class="dot"></div>製造ライン</div>
+            <div class="zbody">
+              <div class="stack" id="lineStack"></div>
+            </div>
+          </div>
+          <div class="zone" id="zYard">
+            <div class="zhead"><div class="dot"></div>空パレット置き場</div>
+            <div class="zbody">
+              <div class="stack" id="yardStack"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tablet -->
+    <div class="card tablet">
+      <div class="tablet">
+        <div class="tabletRow">
+          <div class="tabletBox control-panel">
+            <div class="tHead">💻 タブレット端末（操作画面）📱</div>
+            <div class="tBody">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
+                <button id="btnInbound" class="primary">入庫指示</button>
+                <button id="btnOutbound" class="primary">搬送指示</button>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px;">
+                <button id="btnReturnEmpty" class="lightblue">空パレット回収指示</button>
+                <button id="btnBringEmptyToInbound" class="lightblue">空パレット出庫指示</button>
+              </div>
+              <div style="border-top:1px solid rgba(17,26,51,.30); padding-top:8px; margin-bottom:6px;">
+                <div style="font-size:10px; color:var(--muted); font-weight:950; margin-bottom:4px;">🏭 製造ラインでの担当者作業 👷‍♀️👷</div>
+                <button id="btnUseDone" style="width:100%;">パレットの荷降ろし（製造ライン到着順）</button>
+              </div>
+              <div style="border-top:1px solid rgba(17,26,51,.30); padding-top:8px;">
+                <div style="font-size:10px; color:var(--muted); font-weight:950; margin-bottom:4px;">📦 入庫ポートでの担当者作業 👷‍♀️👷</div>
+                <button id="btnFillInbound" class="ghost" style="width:100%;">入庫ポートのパレット補充</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabletBox hidden">
+            <div class="tHead">📦 出庫待ちキュー</div>
+            <div class="tBody">
+              <ul class="fifoList" id="fifoList"></ul>
+            </div>
+          </div>
+
+          <div class="tabletBox">
+            <div class="tHead">📝 操作ログ</div>
+            <div class="tBody">
+              <div class="logBox" id="logBox"></div>
+            </div>
+            <div class="tActions">
+              <button id="btnClearLog" style="grid-column:1/-1;">ログ消去</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Global overlay (AGV across cards) -->
+  <div class="moverLayer" id="globalLayer">
+    <div class="agv" id="agv"></div>
+    <div class="mover" id="agvMover"></div>
+  </div>
+
+
+
+<script>
+(()=>{
+  'use strict';
+
+  // バージョン情報
+  const VERSION = '0.9.1';
+
+  // ============================================================
+  // アニメーションスピード設定（ミリ秒）
+  // 数値を小さくすると速く、大きくすると遅くなります
+  // ============================================================
+  const CRANE_SPEED = 2000;   // クレーン移動速度（デフォルト: 2000ms）
+  const AGV_SPEED   = 6000;   // AGV移動速度（デフォルト: 5000ms）
+  // ============================================================
+
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+  let seq = 0;
+  const pallets = new Map();
+  const shelves = [];
+  const inboundSlots = [null, null, null, null];
+  let outboundSlot = null;
+  const fifo = [];
+  let selectedId = null;
+  let busy = false;
+
+  const inboundSlotEls = $$('.portSlots .slotBox');
+
+  $$('.cell').forEach(el => {
+    const id = el.getAttribute('data-shelf');
+    shelves.push({ id, el, palletId: null });
+  });
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  const createLoadedPallet = () => {
+    seq++;
+    const id = `P${String(seq).padStart(3,'0')}`;
+    pallets.set(id, { id, loaded: true, location: null });
+    return id;
+  };
+
+  const placeToInboundSlot = (pid, idx) => {
+    inboundSlots[idx] = pid;
+    const p = pallets.get(pid);
+    if (p) p.location = 'inbound';
+  };
+  const placeToShelf = (pid, shelf) => {
+    shelf.palletId = pid;
+    const p = pallets.get(pid);
+    if (p) p.location = 'shelf';
+  };
+  const removeFromShelf = shelf => { shelf.palletId = null; };
+  const placeToOutbound = pid => {
+    outboundSlot = pid;
+    const p = pallets.get(pid);
+    if (p) p.location = 'outbound';
+  };
+  const clearOutbound = () => { outboundSlot = null; };
+  const placeToLine = pid => {
+    const p = pallets.get(pid);
+    if (p) p.location = 'line';
+  };
+  const placeToYard = pid => {
+    const p = pallets.get(pid);
+    if (p) p.location = 'yard';
+  };
+
+  const findEmptyShelf = () => shelves.find(s => !s.palletId);
+
+  const select = pid => {
+    selectedId = pid;
+    refreshAll();
+  };
+
+  const refreshAll = () => {
+    inboundSlotEls.forEach((el, i) => {
+      const pid = inboundSlots[i];
+      const slot = el;
+      slot.innerHTML = `<div class="slabel">IN-${String(i+1).padStart(2,'0')}</div>`;
+      if (pid){
+        const p = pallets.get(pid);
+        const div = document.createElement('div');
+        div.className = 'token' + (p.loaded ? '' : ' empty') + (pid === selectedId ? ' selected' : '');
+        div.innerHTML = '<span class="status">' + (p.loaded ? '📦' : '🈳') + '</span>';
+        const mini = document.createElement('div');
+        mini.className = 'mini';
+        mini.textContent = pid;
+        div.appendChild(mini);
+        div.addEventListener('click', () => select(pid));
+        slot.appendChild(div);
+      }
+    });
+
+    shelves.forEach(s => {
+      const slot = s.el.querySelector('.slot');
+      slot.innerHTML = '';
+      if (s.palletId){
+        const p = pallets.get(s.palletId);
+        const div = document.createElement('div');
+        div.className = 'token' + (p.loaded ? '' : ' empty') + (s.palletId === selectedId ? ' selected' : '');
+        div.innerHTML = '<span class="status">' + (p.loaded ? '📦' : '🈳') + '</span>';
+        const mini = document.createElement('div');
+        mini.className = 'mini';
+        mini.textContent = s.palletId;
+        div.appendChild(mini);
+        div.addEventListener('click', () => select(s.palletId));
+        slot.appendChild(div);
+      }
+      s.el.classList.toggle('empty', !s.palletId);
+    });
+
+    const outEl = $('#outboundSlot');
+    outEl.innerHTML = '<div class="slabel">OUT-01</div>';
+    if (outboundSlot){
+      const p = pallets.get(outboundSlot);
+      const div = document.createElement('div');
+      div.className = 'token' + (p.loaded ? '' : ' empty') + (outboundSlot === selectedId ? ' selected' : '');
+      div.innerHTML = '<span class="status">' + (p.loaded ? '📦' : '🈳') + '</span>';
+      const mini = document.createElement('div');
+      mini.className = 'mini';
+      mini.textContent = outboundSlot;
+      div.appendChild(mini);
+      div.addEventListener('click', () => select(outboundSlot));
+      outEl.appendChild(div);
+    }
+
+    const lineStack = $('#lineStack');
+    lineStack.innerHTML = '';
+    Array.from(pallets.values()).filter(p => p.location === 'line').forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'token' + (p.loaded ? '' : ' empty') + (p.id === selectedId ? ' selected' : '');
+      div.innerHTML = '<span class="status">' + (p.loaded ? '📦' : '🈳') + '</span>';
+      const mini = document.createElement('div');
+      mini.className = 'mini';
+      mini.textContent = p.id;
+      div.appendChild(mini);
+      div.addEventListener('click', () => select(p.id));
+      lineStack.appendChild(div);
+    });
+
+    const yardStack = $('#yardStack');
+    yardStack.innerHTML = '';
+    Array.from(pallets.values()).filter(p => p.location === 'yard').forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'token empty' + (p.id === selectedId ? ' selected' : '');
+      div.innerHTML = '<span class="status">🈳</span>';
+      const mini = document.createElement('div');
+      mini.className = 'mini';
+      mini.textContent = p.id;
+      div.appendChild(mini);
+      div.addEventListener('click', () => select(p.id));
+      yardStack.appendChild(div);
+    });
+
+    const fifoList = $('#fifoList');
+    fifoList.innerHTML = '';
+    fifo.forEach(pid => {
+      const li = document.createElement('li');
+      li.textContent = pid;
+      fifoList.appendChild(li);
+    });
+
+    updateButtons();
+  };
+
+  const updateButtons = () => {
+    const canInbound = !busy && selectedId && inboundSlots.includes(selectedId) && pallets.get(selectedId)?.loaded;
+    const canOutbound = !busy && fifo.length > 0 && outboundSlot === null;
+    const canUseDone = !busy && Array.from(pallets.values()).some(p => p.location === 'line' && p.loaded);
+    const canReturnEmpty = !busy && Array.from(pallets.values()).some(p => p.location === 'yard' && !p.loaded) && outboundSlot === null;
+    const canBringEmpty = !busy && shelves.some(s => s.palletId && !pallets.get(s.palletId)?.loaded) && inboundSlots.includes(null);
+
+    $('#btnInbound').disabled = !canInbound;
+    $('#btnOutbound').disabled = !canOutbound;
+    $('#btnUseDone').disabled = !canUseDone;
+    $('#btnReturnEmpty').disabled = !canReturnEmpty;
+    $('#btnBringEmptyToInbound').disabled = !canBringEmpty;
+    $('#btnReset').disabled = busy;
+    $('#btnAuto').disabled = busy;
+  };
+
+  const log = (msg, type = '') => {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const hh = String(now.getHours()).padStart(2, '0');
+    const min = String(now.getMinutes()).padStart(2, '0');
+    const ss = String(now.getSeconds()).padStart(2, '0');
+    const timestamp = `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+
+    // メッセージタイプに応じた絵文字を自動追加（先頭に配置）
+    let emoji = '';
+    if (type === 'error') {
+      emoji = '❌ ';
+    } else if (type === 'warn') {
+      emoji = '⚠️ ';
+    } else if (type === 'done') {
+      emoji = '✅ ';
+    } else if (type === 'info') {
+      emoji = 'ℹ️ ';
+    }
+
+    const div = document.createElement('div');
+    div.className = 'logEntry ' + type;
+    div.innerHTML = `<span style="color:var(--muted);font-size:10px;margin-right:8px;">${timestamp}</span>${emoji}${msg}`;
+    $('#logBox').insertBefore(div, $('#logBox').firstChild);
+  };
+
+  const rectOf = el => el.getBoundingClientRect();
+
+  const centerOn = (targetEl, containerEl, w, h) => {
+    const tRect = rectOf(targetEl);
+    const cRect = rectOf(containerEl);
+    return {
+      x: tRect.left - cRect.left + tRect.width / 2 - w / 2,
+      y: tRect.top - cRect.top + tRect.height / 2 - h / 2
+    };
+  };
+  const topRightOn = (targetEl, containerEl, w, h, pad = 6) => {
+    const tRect = rectOf(targetEl);
+    const cRect = rectOf(containerEl);
+    return {
+      x: tRect.right - cRect.left - w - pad,
+      y: tRect.top - cRect.top + pad
+    };
+  };
+
+
+  const moveEl = (el, x, y, duration) => {
+    return new Promise(res => {
+      const id = (el && el.id) ? el.id : '';
+      let d = duration;
+
+      // クレーンまたはAGVの場合、設定された速度を使用
+      if (id === 'crane' || id === 'craneMover') {
+        d = CRANE_SPEED;
+      } else if (id === 'agv' || id === 'agvMover') {
+        d = AGV_SPEED;
+      }
+
+      d = Math.max(0, Math.round(d));
+
+      // transition と待ち時間を合わせる（体感速度を確実に変更）
+      el.style.transition = `left ${d}ms ease-out, top ${d}ms ease-out`;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      setTimeout(res, d);
+    });
+  };
+
+  const showMover = (mover, p) => {
+    mover.innerHTML = `<span class="status">${p.loaded ? '📦' : '🈳'}</span><div class="mini">${p.id}</div>`;
+    mover.className = 'mover' + (p.loaded ? '' : ' empty');
+    mover.style.background = p.loaded ? 'var(--pallet-loaded)' : 'var(--pallet-empty)';
+    mover.style.color = p.loaded ? '#083019' : '#111a33';
+  };
+
+  const hideMover = mover => {
+    mover.style.opacity = '0';
+    setTimeout(() => { mover.innerHTML = ''; }, 320);
+  };
+
+  const crane = $('#crane');
+  const agv = $('#agv');
+  const craneMover = $('#craneMover');
+  const agvMover = $('#agvMover');
+
+  const craneHome = () => {
+    const layer = $('#warehouseMoverLayer');
+    const shelvesGrid = $('#zShelves');
+    return topRightOn(shelvesGrid, layer, 60, 27, 6);
+  };
+  const agvHome = () => {
+    const layer = $('#globalLayer');
+    const outPort = $('#outboundSlot');
+    // OUT-01 の中央に待機させる
+    return centerOn(outPort, layer, 60, 27);
+  };
+
+  const setCraneHomeInstant = () => {
+    const pos = craneHome();
+    crane.style.left = `${pos.x}px`;
+    crane.style.top = `${pos.y}px`;
+  };
+  const setAgvHomeInstant = () => {
+    const pos = agvHome();
+    agv.style.left = `${pos.x}px`;
+    agv.style.top = `${pos.y}px`;
+  };
+
+  const opInbound = async () => {
+    if (!selectedId){
+      log('パレットが選択されていません', 'warn');
+      return;
+    }
+    const idx = inboundSlots.indexOf(selectedId);
+    if (idx < 0){
+      log('選択されたパレットは入庫ポートにありません', 'warn');
+      return;
+    }
+    const p = pallets.get(selectedId);
+    if (!p.loaded){
+      log('空パレットは入庫できません（積載パレットを選択してください）', 'warn');
+      return;
+    }
+    const shelf = findEmptyShelf();
+    if (!shelf){
+      log('棚が満杯です（空き棚がありません）', 'error');
+      return;
+    }
+
+    // 入庫するパレットIDを保存（処理中にselectedIdが変更される可能性があるため）
+    const movingPalletId = selectedId;
+
+    busy = true; updateButtons();
+    try{
+      log(`入庫開始: <b>${movingPalletId}</b> を入庫ポート IN-${String(idx+1).padStart(2,'0')} から棚 <b>${shelf.id}</b> へ`, 'done');
+
+      p.location = 'transitCrane';
+
+      const warehouseLayer = $('#warehouseMoverLayer');
+      const fromEl = inboundSlotEls[idx];
+      const toEl = shelf.el;
+
+      const c1_pos = centerOn(fromEl, warehouseLayer, 60, 27);
+      const p1 = { x: c1_pos.x, y: c1_pos.y - 35 };
+      showMover(craneMover, p);
+      craneMover.style.transition = 'none';
+      craneMover.style.left = `${p1.x}px`;
+      craneMover.style.top = `${p1.y}px`;
+
+      await moveEl(crane, c1_pos.x, c1_pos.y, 550);
+
+      // クレーンがパレットを取得した時点で入庫ポートから削除
+      inboundSlots[idx] = null;
+
+      // 移動中のパレットが選択されていた場合のみ選択を解除
+      if (selectedId === movingPalletId) {
+        selectedId = null;
+      }
+      refreshAll();
+
+      craneMover.style.opacity = '1';
+      await sleep(60);
+
+      const c2_pos = centerOn(toEl, warehouseLayer, 60, 27);
+      const p2 = { x: c2_pos.x, y: c2_pos.y - 35 };
+      await Promise.all([
+        moveEl(crane, c2_pos.x, c2_pos.y, 750),
+        moveEl(craneMover, p2.x, p2.y, 750)
+      ]);
+
+      placeToShelf(movingPalletId, shelf);
+      fifo.push(movingPalletId);
+
+      hideMover(craneMover);
+      refreshAll();
+      log(`格納完了: <b>${movingPalletId}</b> を棚 <b>${shelf.id}</b> に格納`, 'done');
+      const ch = craneHome();
+      await moveEl(crane, ch.x, ch.y, 550);
+    } finally {
+      busy = false; updateButtons();
+    }
+  };
+
+  const opOutbound = async () => {
+    if (!selectedId){
+      log('パレットが選択されていません（出庫するパレットを選択してください）', 'warn');
+      return;
+    }
+    const p = pallets.get(selectedId);
+    if (!p){
+      log('選択されたパレットが見つかりません', 'warn');
+      return;
+    }
+    if (p.location !== 'shelf'){
+      log('選択されたパレットは棚にありません', 'warn');
+      return;
+    }
+    if (!p.loaded){
+      log('選択されたパレットは空パレットです（積載パレットを選択してください）', 'warn');
+      return;
+    }
+    if (outboundSlot !== null){
+      log('出庫ポートが埋まっています（空にしてから）', 'warn');
+      return;
+    }
+    const pid = selectedId;
+    const shelf = shelves.find(s => s.palletId === pid);
+    if (!shelf){
+      log(`エラー: 選択された ${pid} が棚に見つかりません`, 'error');
+      return;
+    }
+
+    // 出庫するパレットIDを保存（処理中にselectedIdが変更される可能性があるため）
+    const movingPalletId = selectedId;
+
+    busy = true; updateButtons();
+    try{
+      log(`出庫開始: 棚 <b>${shelf.id}</b> の <b>${movingPalletId}</b> → 出庫ポート OUT-01（クレーン）`, 'done');
+
+      // FIFOから削除
+      const fifoIdx = fifo.indexOf(movingPalletId);
+      if (fifoIdx >= 0){
+        fifo.splice(fifoIdx, 1);
+      }
+
+      p.location = 'transitCrane';
+
+      const warehouseLayer = $('#warehouseMoverLayer');
+      const fromEl = shelf.el;
+      const toEl = $('#outboundSlot');
+
+      const c1_pos = centerOn(fromEl, warehouseLayer, 60, 27);
+      const p1 = { x: c1_pos.x, y: c1_pos.y - 35 };
+      showMover(craneMover, p);
+      craneMover.style.transition = 'none';
+      craneMover.style.left = `${p1.x}px`;
+      craneMover.style.top = `${p1.y}px`;
+
+      await moveEl(crane, c1_pos.x, c1_pos.y, 550);
+
+      // クレーンがパレットを取得した時点で棚から削除
+      removeFromShelf(shelf);
+
+      // 移動中のパレットが選択されていた場合のみ選択を解除
+      if (selectedId === movingPalletId) {
+        selectedId = null;
+      }
+      refreshAll();
+
+      craneMover.style.opacity = '1';
+      await sleep(60);
+
+      const c2_pos = centerOn(toEl, warehouseLayer, 60, 27);
+      const p2 = { x: c2_pos.x, y: c2_pos.y - 35 };
+      await Promise.all([
+        moveEl(crane, c2_pos.x, c2_pos.y, 750),
+        moveEl(craneMover, p2.x, p2.y, 750)
+      ]);
+
+      placeToOutbound(movingPalletId);
+
+      hideMover(craneMover);
+      refreshAll();
+      log(`引き渡し: <b>${movingPalletId}</b> を出庫ポート OUT-01 にセット（AGVが取得）`, 'done');
+
+      const layer = $('#globalLayer');
+      const outPortEl = $('#outboundSlot');
+      const lineEl = $('#zLine');
+
+      p.location = 'transitAGV';
+
+      // AGVは既に出庫ポート（OUT-01）中央に待機しているので移動不要
+      const ah0 = agvHome();
+      agv.style.left = `${ah0.x}px`;
+      agv.style.top = `${ah0.y}px`;
+
+      const agv_pos = centerOn(outPortEl, layer, 60, 27);
+      const outCenter = { x: agv_pos.x, y: agv_pos.y - 35 };
+
+      // パレットをAGVの位置に表示
+      showMover(agvMover, p);
+      // transitionを無効化して瞬時に位置を設定
+      agvMover.style.transition = 'none';
+      agvMover.style.left = `${outCenter.x}px`;
+      agvMover.style.top = `${outCenter.y}px`;
+      agvMover.style.opacity = '1';
+
+      // AGVがパレットを取得した時点で出庫ポートから削除
+      clearOutbound();
+      refreshAll();
+
+      await sleep(200);
+
+      // AGVとパレットを一緒にラインへ移動
+      const a2_pos = centerOn(lineEl, layer, 60, 27);
+      const p3 = { x: a2_pos.x, y: a2_pos.y - 35 };
+      await Promise.all([
+        moveEl(agv, a2_pos.x, a2_pos.y, 950),
+        moveEl(agvMover, p3.x, p3.y, 950),
+      ]);
+
+      placeToLine(pid);
+
+      hideMover(agvMover);
+      refreshAll();
+      log(`到着: <b>${pid}</b> が製造ラインに到着`, 'done');
+      const ch = craneHome();
+      const ah = agvHome();
+      await Promise.all([
+        moveEl(crane, ch.x, ch.y, 550),
+        moveEl(agv, ah.x, ah.y, 750)
+      ]);
+    } finally {
+      busy = false; updateButtons();
+    }
+  };
+
+  const opUseDone = async () => {
+    const p = Array.from(pallets.values()).find(x => x.location === 'line' && x.loaded);
+    if (!p){
+      log('製造ライン上に「積載パレット」がありません', 'warn');
+      return;
+    }
+    busy = true; updateButtons();
+    try{
+      log(`パレットの荷下ろし完了: <b>${p.id}</b> → 空パレット化 → 空パレット置き場へ`, 'done');
+      p.loaded = false;
+      placeToYard(p.id);
+      refreshAll();
+    } finally {
+      busy = false; updateButtons();
+    }
+  };
+
+  const opReturnEmpty = async () => {
+    const p = Array.from(pallets.values()).find(x => x.location === 'yard' && !x.loaded);
+    if (!p){
+      log('空パレット置き場に空パレットがありません', 'warn');
+      return;
+    }
+    if (outboundSlot !== null){
+      log('出庫ポートが埋まっています（空にしてから）', 'warn');
+      return;
+    }
+    const shelf = findEmptyShelf();
+    if (!shelf){
+      log('棚が満杯です（空パレットを戻す空き棚がありません）', 'error');
+      return;
+    }
+
+    // 移動するパレットIDを保存（処理中にselectedIdが変更される可能性があるため）
+    const movingPalletId = p.id;
+
+    busy = true; updateButtons();
+    try{
+      log(`空パレット回収: 空パレット置き場の <b>${movingPalletId}</b> → 出庫ポート（AGV）→ 棚 <b>${shelf.id}</b>（クレーン）`, 'done');
+
+      const layer = $('#globalLayer');
+      const yardEl = $('#zYard');
+      const outEl = $('#outboundSlot');
+
+      // AGVを待機位置から空パレット置き場へ移動（この時点ではまだパレットは置き場に表示されている）
+      const ah0 = agvHome();
+      agv.style.left = `${ah0.x}px`;
+      agv.style.top = `${ah0.y}px`;
+
+      const a1_pos = centerOn(yardEl, layer, 60, 27);
+      await moveEl(agv, a1_pos.x, a1_pos.y, 750);
+      await sleep(100);
+
+      // AGVが空パレット置き場に到着したので、パレットを取得してAGVと一緒に移動する準備
+      // パレットの位置を計算してからlocationを変更
+      const p1 = { x: a1_pos.x, y: a1_pos.y - 35 };
+
+      // パレットの状態を変更（これで置き場から消える）
+      p.location = 'transitAGV';
+
+      // 移動中のパレットが選択されていた場合のみ選択を解除
+      if (selectedId === movingPalletId) {
+        selectedId = null;
+      }
+      refreshAll();
+
+      // パレットをAGVの位置（空パレット置き場の中央）に表示
+      showMover(agvMover, p);
+      // transitionを無効化して瞬時に位置を設定
+      agvMover.style.transition = 'none';
+      agvMover.style.opacity = '0';
+      agvMover.style.left = `${p1.x}px`;
+      agvMover.style.top = `${p1.y}px`;
+      await sleep(10); // 位置が反映されるのを待つ
+      agvMover.style.opacity = '1';
+      await sleep(60);
+
+      // AGVとパレットを一緒に出庫ポートへ移動
+      const outPos = agvHome(); // OUT-01 中央
+      const outCenter = { x: outPos.x, y: outPos.y - 35 };
+      await Promise.all([
+        moveEl(agv, outPos.x, outPos.y, 950),
+        moveEl(agvMover, outCenter.x, outCenter.y, 950),
+      ]);
+
+      placeToOutbound(movingPalletId);
+      hideMover(agvMover);
+      refreshAll();
+      log(`引き渡し: <b>${movingPalletId}</b> が出庫ポート OUT-01 に到着（クレーンが取得）`, 'done');
+
+      p.location = 'transitCrane';
+
+      const warehouseLayer = $('#warehouseMoverLayer');
+      const portEl = $('#outboundSlot');
+      const shelfEl = shelf.el;
+
+      const c1_pos = centerOn(portEl, warehouseLayer, 60, 27);
+      const pp = { x: c1_pos.x, y: c1_pos.y - 35 };
+      showMover(craneMover, p);
+      craneMover.style.transition = 'none';
+      craneMover.style.left = `${pp.x}px`;
+      craneMover.style.top = `${pp.y}px`;
+
+      await moveEl(crane, c1_pos.x, c1_pos.y, 550);
+
+      // クレーンがパレットを取得した時点で出庫ポートから削除
+      clearOutbound();
+      refreshAll();
+
+      craneMover.style.opacity = '1';
+      await sleep(60);
+
+      const c2_pos = centerOn(shelfEl, warehouseLayer, 60, 27);
+      const p2 = { x: c2_pos.x, y: c2_pos.y - 35 };
+      await Promise.all([
+        moveEl(crane, c2_pos.x, c2_pos.y, 750),
+        moveEl(craneMover, p2.x, p2.y, 750),
+      ]);
+
+      placeToShelf(movingPalletId, shelf);
+
+      hideMover(craneMover);
+      refreshAll();
+      log(`空パレット格納完了: <b>${movingPalletId}</b> を棚 <b>${shelf.id}</b> に格納`, 'done');
+      const ch = craneHome();
+      await moveEl(crane, ch.x, ch.y, 550);
+    } finally {
+      busy = false; updateButtons();
+    }
+  };
+
+  const opBringEmptyToInbound = async () => {
+    const shelf = shelves.find(s => s.palletId && pallets.get(s.palletId)?.loaded === false);
+    if (!shelf){
+      log('棚に空パレットがありません', 'warn');
+      return;
+    }
+    const freeIdx = inboundSlots.findIndex(x => x === null);
+    if (freeIdx < 0){
+      log('入庫ポートが満杯です（空きがありません）', 'warn');
+      return;
+    }
+    const p = pallets.get(shelf.palletId);
+
+    // 移動するパレットIDを保存（処理中にselectedIdが変更される可能性があるため）
+    const movingPalletId = p.id;
+
+    busy = true; updateButtons();
+    try{
+      log(`空パレット移動: 棚 <b>${shelf.id}</b> の <b>${movingPalletId}</b> → 入庫ポート IN-${String(freeIdx+1).padStart(2,'0')}（クレーン）`, 'done');
+
+      p.location = 'transitCrane';
+
+      const warehouseLayer = $('#warehouseMoverLayer');
+      const fromEl = shelf.el;
+      const toEl = inboundSlotEls[freeIdx];
+
+      const c1_pos = centerOn(fromEl, warehouseLayer, 60, 27);
+      const p1 = { x: c1_pos.x, y: c1_pos.y - 35 };
+      showMover(craneMover, p);
+      craneMover.style.transition = 'none';
+      craneMover.style.left = `${p1.x}px`;
+      craneMover.style.top = `${p1.y}px`;
+
+      await moveEl(crane, c1_pos.x, c1_pos.y, 550);
+
+      // クレーンがパレットを取得した時点で棚から削除
+      removeFromShelf(shelf);
+
+      // 移動中のパレットが選択されていた場合のみ選択を解除
+      if (selectedId === movingPalletId) {
+        selectedId = null;
+      }
+      refreshAll();
+
+      craneMover.style.opacity = '1';
+      await sleep(60);
+
+      const c2_pos = centerOn(toEl, warehouseLayer, 60, 27);
+      const p2 = { x: c2_pos.x, y: c2_pos.y - 35 };
+      await Promise.all([
+        moveEl(crane, c2_pos.x, c2_pos.y, 750),
+        moveEl(craneMover, p2.x, p2.y, 750),
+      ]);
+
+      placeToInboundSlot(movingPalletId, freeIdx);
+
+      hideMover(craneMover);
+      refreshAll();
+      log(`到着: <b>${movingPalletId}</b> が入庫ポート IN-${String(freeIdx+1).padStart(2,'0')}（次の入庫準備）`, 'done');
+      const ch = craneHome();
+      await moveEl(crane, ch.x, ch.y, 550);
+    } finally {
+      busy = false; updateButtons();
+    }
+  };
+
+  const opFillInbound = () => {
+    // 入庫ポートの積載済みパレット数をカウント
+    let loadedCount = 0;
+    let emptyPallets = [];
+
+    for (let i = 0; i < inboundSlots.length; i++) {
+      const pid = inboundSlots[i];
+      if (pid) {
+        const p = pallets.get(pid);
+        if (p.loaded) {
+          loadedCount++;
+        } else {
+          emptyPallets.push({ pid, idx: i });
+        }
+      }
+    }
+
+    // 1. 空パレットが存在する場合、積載済みに変更
+    if (emptyPallets.length > 0) {
+      emptyPallets.forEach(({ pid }) => {
+        const p = pallets.get(pid);
+        p.loaded = true;
+      });
+      log(`入庫ポート補充: 空パレット <b>${emptyPallets.length}</b>個を積載済みに変更`, 'done');
+      refreshAll();
+      return;
+    }
+
+    // 2. 積載済みパレットが4つある場合は満杯
+    if (loadedCount >= 4) {
+      log('入庫ポートは満杯です（補充失敗）', 'error');
+      return;
+    }
+
+    // 3. 積載済みパレットが3つ以下で空きがある場合、空き数分追加
+    let filled = 0;
+    for (let i = 0; i < inboundSlots.length; i++) {
+      if (inboundSlots[i] === null) {
+        const pid = createLoadedPallet();
+        placeToInboundSlot(pid, i);
+        filled++;
+      }
+    }
+
+    if (filled > 0) {
+      log(`入庫ポート補充: 積載パレット <b>+${filled}</b>（空きを埋めました）`, 'done');
+    }
+    refreshAll();
+  };
+
+  const reset = () => {
+    seq = 0;
+    pallets.clear();
+    inboundSlots.fill(null);
+    outboundSlot = null;
+    fifo.length = 0;
+    selectedId = null;
+    busy = false;
+
+    shelves.forEach(s => s.palletId = null);
+
+    hideMover($('#craneMover'));
+    hideMover($('#agvMover'));
+    setCraneHomeInstant();
+    setAgvHomeInstant();
+
+    $('#logBox').innerHTML = '';
+
+    for (let i=0; i<4; i++){
+      const pid = createLoadedPallet();
+      placeToInboundSlot(pid, i);
+    }
+
+    log('リセット完了：入庫ポートに積載パレット4枚を配置しました。パレットを選択して「入庫指示」を押してください。', 'done');
+    refreshAll();
+  };
+
+  const autoDemo = async () => {
+    busy = true; updateButtons();
+    try{
+      log('自動デモ開始', 'warn');
+      for (let k=0; k<2; k++){
+        const pid = inboundSlots.find(x => x !== null);
+        if (!pid) break;
+        select(pid);
+        await sleep(200);
+        await opInbound();
+        await sleep(200);
+      }
+      // 出庫指示の前にFIFOの先頭パレットを選択
+      if (fifo.length > 0) {
+        const outPid = fifo[0];
+        const outShelf = shelves.find(s => s.palletId === outPid);
+        if (outShelf) {
+          select(outPid);
+          await sleep(200);
+        }
+      }
+      await opOutbound(); await sleep(200);
+      await opUseDone(); await sleep(200);
+      await opReturnEmpty(); await sleep(200);
+      await opBringEmptyToInbound(); await sleep(200);
+      log('自動デモ完了（必要なら続けて操作してください）', 'done');
+    } finally {
+      busy = false; updateButtons();
+    }
+  };
+
+  $('#btnInbound').addEventListener('click', opInbound);
+  $('#btnOutbound').addEventListener('click', opOutbound);
+  $('#btnUseDone').addEventListener('click', opUseDone);
+  $('#btnReturnEmpty').addEventListener('click', opReturnEmpty);
+  $('#btnBringEmptyToInbound').addEventListener('click', opBringEmptyToInbound);
+  $('#btnFillInbound').addEventListener('click', opFillInbound);
+
+  $('#btnReset').addEventListener('click', reset);
+  $('#btnAuto').addEventListener('click', autoDemo);
+  $('#btnClearLog').addEventListener('click', () => { $('#logBox').innerHTML=''; log('ログを消去しました'); });
+
+  // バージョン情報を表示
+  $('#versionDisplay').textContent = `Version ${VERSION}`;
+
+  reset();
+})();
+</script>
+</body>
+</html>

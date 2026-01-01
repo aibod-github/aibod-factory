@@ -65,10 +65,10 @@
     <!-- ▼ ビューモード切替（追加） ▼ -->
     <div class="mode-switch" aria-label="表示モード切り替え">
       <button class="mode-btn active" data-mode="advanced">
-        専門業界ビュー
+        <span data-i18n="mode.advanced">専門業界ビュー</span>
       </button>
       <button class="mode-btn" data-mode="sme">
-        中小企業DXビュー
+        <span data-i18n="mode.sme">中小企業DXビュー</span>
       </button>
     </div>
 
@@ -95,13 +95,13 @@
       <div data-mode="sme">
         <div class="tagline">
           <span class="icon"></span>
-          <span>Small DX Tools for SMEs</span>
+          <span data-i18n="hero.sme.tagline">Small DX Tools for SMEs</span>
         </div>
 
         <div class="hero-title-lead">
-          <h1>中小企業DXの「ちょっと困った」すぐ作ります。</h1>
+          <h1 data-i18n="hero.sme.title">中小企業DXの「ちょっと困った」すぐ作ります。</h1>
           <div>
-            <p class="hero-lead">
+            <p class="hero-lead" data-i18n="hero.sme.lead">
               エクセルの手作業、mdbからのデータ取り出し、毎月のCSV集計など、<br>
               現場の「ちょっと面倒」「誰もやりたくない」作業を、<br>
               そのまま <strong>専用ツール</strong> にしてお渡しします。
@@ -193,8 +193,8 @@
       </div>
 
       <div class="section-header" data-mode="sme">
-        <h2 class="section-title">製造品設計 → 部品棚 → 製造ライン → 検査 で提供！</h2>
-        <div class="section-sub">Software Factory Model</div>
+        <h2 class="section-title" data-i18n="factory.sme.title">製造品設計 → 部品棚 → 製造ライン → 検査 で提供！</h2>
+        <div class="section-sub" data-i18n="factory.sme.subtitle">Software Factory Model</div>
       </div>
       <div class="process" data-mode="sme">
         <div class="tile-container">
@@ -202,15 +202,15 @@
             <div class="tile-face tile-front">
               <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step1.label">01 Product Design</div>
               <div class="process-step-title" data-i18n="factory.step1.title">製造品設計</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">素早く設計</small>
-              <div class="tile-hint">詳細 →</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.sme.step1.body">素早く設計</small>
+              <div class="tile-hint" data-i18n="tile.hint.more">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="process-step-title" data-i18n="process.step1.title">1. 製造品設計（Product Design）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span>AIBODのテンプレートを使用して設計。</span>
+                <span data-i18n="factory.sme.step1.detail">AIBODのテンプレートを使用して設計。</span>
               </p>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
         </div>
@@ -219,15 +219,15 @@
             <div class="tile-face tile-front">
               <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step2.label">02 Parts Shelf</div>
               <div class="process-step-title" data-i18n="factory.step2.title">部品棚</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">標準部品を活用</small>
-              <div class="tile-hint">詳細 →</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.sme.step2.body">標準部品を活用</small>
+              <div class="tile-hint" data-i18n="tile.hint.more">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="process-step-title" data-i18n="process.step2.title">2. 部品棚（Parts Shelf）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span>標準化された部品を使用。</span>
+                <span data-i18n="factory.sme.step2.detail">標準化された部品を使用。</span>
               </p>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
         </div>
@@ -236,15 +236,15 @@
             <div class="tile-face tile-front">
               <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step3.label">03 Manufacturing Line</div>
               <div class="process-step-title" data-i18n="factory.step3.title">製造ライン</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">組立・製造。</small>
-              <div class="tile-hint">詳細 →</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.sme.step3.body">組立・製造。</small>
+              <div class="tile-hint" data-i18n="tile.hint.more">詳細 →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="process-step-title" data-i18n="process.step3.title">3. 製造ライン（Manufacturing Line）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span data-i18n="process.step3.body">お使い下さい。</span>
+                <span data-i18n="factory.sme.step3.detail">お使い下さい。</span>
               </p>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
         </div>
@@ -253,15 +253,15 @@
             <div class="tile-face tile-front">
               <div style="font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 0.3rem;" data-i18n="factory.step4.label">04 Quality Check</div>
               <div class="process-step-title" data-i18n="factory.step4.title">検査</div>
-              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;">品質確認</small>
-              <div class="tile-hint">More →</div>
+              <small class="tile-content" style="font-size: 1.15rem; margin-top: 0.3rem;" data-i18n="factory.sme.step4.body">品質確認</small>
+              <div class="tile-hint" data-i18n="tile.hint.more">More →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="process-step-title" data-i18n="process.step4.title">4. 検査（Quality Check）</div>
               <p class="tile-content" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                <span>テストで品質を確保します。</span>
+                <span data-i18n="factory.sme.step4.detail">テストで品質を確保します。</span>
               </p>
-              <div class="tile-hint">← Return</div>
+              <div class="tile-hint" data-i18n="tile.hint.return">← Return</div>
             </div>
           </div>
         </div>
@@ -271,8 +271,8 @@
 
     <section class="section" id="sme-usecases">
       <div class="section-header" data-mode="sme">
-        <h2 class="section-title">現場DXの「あるある課題」サンプル</h2>
-        <div class="section-sub">
+        <h2 class="section-title" data-i18n="sme.usecases.title">現場DXの「あるある課題」サンプル</h2>
+        <div class="section-sub" data-i18n="sme.usecases.subtitle">
           Excel や Access、CSV、紙帳票などで回している「ちょっと困った」「誰もやりたくない」作業の例です。<br>
           AIBOD Factory は、これらをそのまま専用ツールにしてお渡しします。
         </div>
@@ -286,45 +286,45 @@
               <div class="tile-title">
                 <div>
                   <div class="tile-title-line">SME-001</div>
-                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;" data-i18n="sme.case001.title">
                     結合セルだらけのExcelが、システムに取り込めない
                   </h3>
                   <div class="tile-filter-badges">
-                    <span class="filter-badge">Excel</span>
-                    <span class="filter-badge">帳票整形</span>
+                    <span class="filter-badge" data-i18n="sme.case001.badge1">Excel</span>
+                    <span class="filter-badge" data-i18n="sme.case001.badge2">帳票整形</span>
                   </div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case001.content">
                 見やすくするために結合セル・色付け・空白行を多用したExcel帳票。<br>
                 人は読めるが、設備やクラウドサービスには「列がずれている」「形式が合わない」と怒られる…。
               </p>
               <div class="tile-meta">
-                <span>現状：目視で確認してコピペで調整</span>
-                <span>対象：製造・品質・営業管理</span>
+                <span data-i18n="sme.case001.meta1">現状：目視で確認してコピペで調整</span>
+                <span data-i18n="sme.case001.meta2">対象：製造・品質・営業管理</span>
               </div>
-              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+              <div class="tile-hint" data-i18n="sme.case001.hint">AIBOD Factoryなら？ →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="tile-title-back">
                 <div>
-                  <div class="tile-title-line">Solution</div>
-                  <div class="process-step-title">Excel → 機械が読みやすいCSV/JSONに自動整形</div>
+                  <div class="tile-title-line" data-i18n="common.solution">Solution</div>
+                  <div class="process-step-title" data-i18n="sme.case001.solution">Excel → 機械が読みやすいCSV/JSONに自動整形</div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case001.detail">
                 既存のExcel帳票のルールを読み取り、<strong>結合セル解除・列揃え・不要行削除</strong> を自動で実行。<br>
                 設備やクラウドにそのまま投入できるCSV/JSONを出力します。
               </p>
               <div class="tile-meta">
-                <span>効果：インポート前の手作業をほぼゼロに</span>
-                <span>形態：Windows用ツール / スクリプト</span>
+                <span data-i18n="sme.case001.effect1">効果：インポート前の手作業をほぼゼロに</span>
+                <span data-i18n="sme.case001.effect2">形態：Windows用ツール / スクリプト</span>
               </div>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">この課題で相談する</a>
+            <a class="btn primary" href="#contact" data-i18n="sme.case001.btn">この課題で相談する</a>
           </div>
         </div>
     
@@ -335,45 +335,45 @@
               <div class="tile-title">
                 <div>
                   <div class="tile-title-line">SME-002</div>
-                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;" data-i18n="sme.case002.title">
                     毎月10個以上のExcelを「貼り替え」して集計している
                   </h3>
                   <div class="tile-filter-badges">
-                    <span class="filter-badge">Excel</span>
-                    <span class="filter-badge">月次集計</span>
+                    <span class="filter-badge" data-i18n="sme.case002.badge1">Excel</span>
+                    <span class="filter-badge" data-i18n="sme.case002.badge2">月次集計</span>
                   </div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case002.content">
                 売上・仕入・稼働など、部門ごとにバラバラなExcel。<br>
                 月末になると担当者が「今年分.xlsx」にコピー＆ペーストし続ける作業が発生している。
               </p>
               <div class="tile-meta">
-                <span>現状：担当者しかやり方がわからない</span>
-                <span>対象：管理部門 / 経営企画</span>
+                <span data-i18n="sme.case002.meta1">現状：担当者しかやり方がわからない</span>
+                <span data-i18n="sme.case002.meta2">対象：管理部門 / 経営企画</span>
               </div>
-              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+              <div class="tile-hint" data-i18n="sme.case002.hint">AIBOD Factoryなら？ →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="tile-title-back">
                 <div>
-                  <div class="tile-title-line">Solution</div>
-                  <div class="process-step-title">複数Excel → 自動集計レポート生成</div>
+                  <div class="tile-title-line" data-i18n="common.solution">Solution</div>
+                  <div class="process-step-title" data-i18n="sme.case002.solution">複数Excel → 自動集計レポート生成</div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case002.detail">
                 指定フォルダにExcelを入れるだけで、<strong>決まった形の集計表・グラフ</strong> を自動生成。<br>
                 シート名や列位置の揺れにも対応し、担当者のノウハウをツールに固定します。
               </p>
               <div class="tile-meta">
-                <span>効果：月3〜5時間 → 数分</span>
-                <span>形態：デスクトップアプリ or Webアプリ</span>
+                <span data-i18n="sme.case002.effect1">効果：月3〜5時間 → 数分</span>
+                <span data-i18n="sme.case002.effect2">形態：デスクトップアプリ or Webアプリ</span>
               </div>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">この課題で相談する</a>
+            <a class="btn primary" href="#contact" data-i18n="sme.case002.btn">この課題で相談する</a>
           </div>
         </div>
     
@@ -384,45 +384,45 @@
               <div class="tile-title">
                 <div>
                   <div class="tile-title-line">SME-003</div>
-                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;" data-i18n="sme.case003.title">
                     キーエンスなどの装置が mdb で出すが、中身が見られない
                   </h3>
                   <div class="tile-filter-badges">
-                    <span class="filter-badge">Access / mdb</span>
-                    <span class="filter-badge">計測器</span>
+                    <span class="filter-badge" data-i18n="sme.case003.badge1">Access / mdb</span>
+                    <span class="filter-badge" data-i18n="sme.case003.badge2">計測器</span>
                   </div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case003.content">
                 測定結果が <strong>Microsoft Access形式（.mdb）</strong>で保存されるが、<br>
                 現場PCにはAccessが入っておらず、担当者のPCだけでしか中身を見られない。
               </p>
               <div class="tile-meta">
-                <span>現状：担当者PCで開いてCSVに書き出し → 共有</span>
-                <span>対象：品質管理・技術</span>
+                <span data-i18n="sme.case003.meta1">現状：担当者PCで開いてCSVに書き出し → 共有</span>
+                <span data-i18n="sme.case003.meta2">対象：品質管理・技術</span>
               </div>
-              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+              <div class="tile-hint" data-i18n="sme.case003.hint">AIBOD Factoryなら？ →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="tile-title-back">
                 <div>
-                  <div class="tile-title-line">Solution</div>
-                  <div class="process-step-title">mdb → テーブル別CSV自動分解ツール</div>
+                  <div class="tile-title-line" data-i18n="common.solution">Solution</div>
+                  <div class="process-step-title" data-i18n="sme.case003.solution">mdb → テーブル別CSV自動分解ツール</div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case003.detail">
                 mdbファイルを読み込み、<strong>テーブルごとのCSV</strong>に一括変換。<br>
                 そのままExcelや他システムに読み込める形で出力します。
               </p>
               <div class="tile-meta">
-                <span>効果：担当者依存の解消・自動化</span>
-                <span>形態：Windowsツール（ダブルクリックで実行）</span>
+                <span data-i18n="sme.case003.effect1">効果：担当者依存の解消・自動化</span>
+                <span data-i18n="sme.case003.effect2">形態：Windowsツール（ダブルクリックで実行）</span>
               </div>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">この課題で相談する</a>
+            <a class="btn primary" href="#contact" data-i18n="sme.case003.btn">この課題で相談する</a>
           </div>
         </div>
     
@@ -433,45 +433,45 @@
               <div class="tile-title">
                 <div>
                   <div class="tile-title-line">SME-004</div>
-                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;" data-i18n="sme.case004.title">
                     Accessマクロで動く仕組みが、壊れても直せない
                   </h3>
                   <div class="tile-filter-badges">
-                    <span class="filter-badge">Access</span>
-                    <span class="filter-badge">既存資産</span>
+                    <span class="filter-badge" data-i18n="sme.case004.badge1">Access</span>
+                    <span class="filter-badge" data-i18n="sme.case004.badge2">既存資産</span>
                   </div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case004.content">
                 以前作ってもらったAccessマクロが、PC更新やOfficeバージョンアップで動かなくなった。<br>
                 作った人も退職しており、誰も直せない。
               </p>
               <div class="tile-meta">
-                <span>現状：危険を承知で「だましだまし」運用</span>
-                <span>対象：管理部門・生産管理</span>
+                <span data-i18n="sme.case004.meta1">現状：危険を承知で「だましだまし」運用</span>
+                <span data-i18n="sme.case004.meta2">対象：管理部門・生産管理</span>
               </div>
-              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+              <div class="tile-hint" data-i18n="sme.case004.hint">AIBOD Factoryなら？ →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="tile-title-back">
                 <div>
-                  <div class="tile-title-line">Solution</div>
-                  <div class="process-step-title">ロジックを読み解き、Python / Web にリプレイス</div>
+                  <div class="tile-title-line" data-i18n="common.solution">Solution</div>
+                  <div class="process-step-title" data-i18n="sme.case004.solution">ロジックを読み解き、Python / Web にリプレイス</div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case004.detail">
                 Accessマクロの動きを分析し、<strong>PythonスクリプトやWebアプリ</strong>として作り直します。<br>
                 将来の改修・拡張も行いやすい構成にリファクタリング。
               </p>
               <div class="tile-meta">
-                <span>効果：ブラックボックスの解消</span>
-                <span>形態：オンプレ / クラウド両対応</span>
+                <span data-i18n="sme.case004.effect1">効果：ブラックボックスの解消</span>
+                <span data-i18n="sme.case004.effect2">形態：オンプレ / クラウド両対応</span>
               </div>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">この課題で相談する</a>
+            <a class="btn primary" href="#contact" data-i18n="sme.case004.btn">この課題で相談する</a>
           </div>
         </div>
     
@@ -482,45 +482,45 @@
               <div class="tile-title">
                 <div>
                   <div class="tile-title-line">SME-005</div>
-                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;" data-i18n="sme.case005.title">
                     毎月のCSVから「特定項目だけ」手で集計している
                   </h3>
                   <div class="tile-filter-badges">
-                    <span class="filter-badge">CSV</span>
-                    <span class="filter-badge">自動集計</span>
+                    <span class="filter-badge" data-i18n="sme.case005.badge1">CSV</span>
+                    <span class="filter-badge" data-i18n="sme.case005.badge2">自動集計</span>
                   </div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case005.content">
                 取引先やシステムから毎月送られてくるCSV。<br>
                 その中の「特定列だけ」をフィルタ・集計して、グラフや報告資料を作っている。
               </p>
               <div class="tile-meta">
-                <span>現状：担当者の「手順メモ」頼み</span>
-                <span>対象：営業企画・管理部門</span>
+                <span data-i18n="sme.case005.meta1">現状：担当者の「手順メモ」頼み</span>
+                <span data-i18n="sme.case005.meta2">対象：営業企画・管理部門</span>
               </div>
-              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+              <div class="tile-hint" data-i18n="sme.case005.hint">AIBOD Factoryなら？ →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="tile-title-back">
                 <div>
-                  <div class="tile-title-line">Solution</div>
-                  <div class="process-step-title">CSV → 条件抽出 ＋ 集計 ＋ グラフを自動化</div>
+                  <div class="tile-title-line" data-i18n="common.solution">Solution</div>
+                  <div class="process-step-title" data-i18n="sme.case005.solution">CSV → 条件抽出 ＋ 集計 ＋ グラフを自動化</div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case005.detail">
                 条件（例：特定仕入先・特定品目など）をツールに登録し、<br>
                 フォルダにCSVを入れてボタンを押すだけで、必要な集計表とグラフを作成します。
               </p>
               <div class="tile-meta">
-                <span>効果：属人化の解消・スピードアップ</span>
-                <span>形態：デスクトップ or Web</span>
+                <span data-i18n="sme.case005.effect1">効果：属人化の解消・スピードアップ</span>
+                <span data-i18n="sme.case005.effect2">形態：デスクトップ or Web</span>
               </div>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">この課題で相談する</a>
+            <a class="btn primary" href="#contact" data-i18n="sme.case005.btn">この課題で相談する</a>
           </div>
         </div>
     
@@ -531,45 +531,45 @@
               <div class="tile-title">
                 <div>
                   <div class="tile-title-line">SME-006</div>
-                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;">
+                  <h3 style="margin:.1rem 0 .2rem; font-size:1.2rem;" data-i18n="sme.case006.title">
                     画像・CSVファイルがフォルダに山積みで、整理できない
                   </h3>
                   <div class="tile-filter-badges">
-                    <span class="filter-badge">ファイル整理</span>
-                    <span class="filter-badge">バックアップ</span>
+                    <span class="filter-badge" data-i18n="sme.case006.badge1">ファイル整理</span>
+                    <span class="filter-badge" data-i18n="sme.case006.badge2">バックアップ</span>
                   </div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case006.content">
                 検査画像やログCSVが、共有フォルダに延々と溜まり続けている。<br>
                 誰も消せない・整理できないので、探すだけで時間がかかる。
               </p>
               <div class="tile-meta">
-                <span>現状：ファイル名_最新版(本物).xlsx などが乱立</span>
-                <span>対象：全社</span>
+                <span data-i18n="sme.case006.meta1">現状：ファイル名_最新版(本物).xlsx などが乱立</span>
+                <span data-i18n="sme.case006.meta2">対象：全社</span>
               </div>
-              <div class="tile-hint">AIBOD Factoryなら？ →</div>
+              <div class="tile-hint" data-i18n="sme.case006.hint">AIBOD Factoryなら？ →</div>
             </div>
             <div class="tile-face tile-back">
               <div class="tile-title-back">
                 <div>
-                  <div class="tile-title-line">Solution</div>
-                  <div class="process-step-title">自動フォルダ分け＋命名ルール＋バックアップ</div>
+                  <div class="tile-title-line" data-i18n="common.solution">Solution</div>
+                  <div class="process-step-title" data-i18n="sme.case006.solution">自動フォルダ分け＋命名ルール＋バックアップ</div>
                 </div>
               </div>
-              <p class="tile-content">
+              <p class="tile-content" data-i18n="sme.case006.detail">
                 日付・ロット・設備などのルールにもとづき、<strong>自動でフォルダ分け＆ファイル名付与</strong>。<br>
                 世代バックアップや古いファイルのアーカイブも自動化します。
               </p>
               <div class="tile-meta">
-                <span>効果：探す時間と事故の大幅削減</span>
-                <span>形態：常駐スクリプト or 定期実行バッチ</span>
+                <span data-i18n="sme.case006.effect1">効果：探す時間と事故の大幅削減</span>
+                <span data-i18n="sme.case006.effect2">形態：常駐スクリプト or 定期実行バッチ</span>
               </div>
-              <div class="tile-hint">← 戻る</div>
+              <div class="tile-hint" data-i18n="tile.hint.back">← 戻る</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">この課題で相談する</a>
+            <a class="btn primary" href="#contact" data-i18n="sme.case006.btn">この課題で相談する</a>
           </div>
         </div>
     
@@ -749,8 +749,8 @@
 
       <!-- ▼ 中小企業DX向け Small DX Tools 一覧（追加） ▼ -->
       <div class="section-header" data-mode="sme">
-        <h2 class="section-title">Small DX Tools｜中小企業向けミニDXツール</h2>
-        <div class="section-sub">
+        <h2 class="section-title" data-i18n="lines.sme.title">Small DX Tools｜中小企業向けミニDXツール</h2>
+        <div class="section-sub" data-i18n="lines.sme.subtitle">
           人がエクセルやAccessでがんばっている作業を、<br>
           そのまま専用ツールにして「毎月の手間」をごっそり削減します。
         </div>
@@ -768,30 +768,30 @@
                   <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8001.title">エクセルを変換</h3>
                 </div>
                 <span class="tile-badge" data-i18n="lines.pn8001.badge">Win/Mac</span>
-              </div>              
-              <p class="tile-content">
+              </div>
+              <p class="tile-content" data-i18n="lines.pn8001.body">
                 人間がみやすいエクセルは、空白行・結合セルなど、機械には読みづらい。<br>
                 エクセルを、<strong>機械が読みやすいCSV / JSON形式</strong>に自動整形します。
               </p>
               <div class="tile-meta">
-                <span>対象：一般中小企業</span>
-                <span>入力：エクセル帳票</span>
-                <span>出力：きれいなCSV/JSON</span>
+                <span data-i18n="lines.pn8001.meta1">対象：一般中小企業</span>
+                <span data-i18n="lines.pn8001.meta2">入力：エクセル帳票</span>
+                <span data-i18n="lines.pn8001.meta3">出力：きれいなCSV/JSON</span>
               </div>
-              <div class="tile-hint">More →</div>
+              <div class="tile-hint" data-i18n="tile.hint.more">More →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title">こんなときに</div>
-              <p class="tile-content">
+              <div class="process-step-title" data-i18n="lines.pn8001.back.title">こんなときに</div>
+              <p class="tile-content" data-i18n="lines.pn8001.back.content">
                 ・設備やクラウドサービスにエクセルを読ませたいがうまく入らない<br>
                 ・毎回「貼り付け用の整形シート」を手作業で作っている<br>
                 ・将来のDXを見据えて、まずは「データをきれいにしたい」
               </p>
-              <div class="tile-hint">← Return</div>
+              <div class="tile-hint" data-i18n="tile.hint.return">← Return</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">このツールを相談</a>
+            <a class="btn primary" href="#contact" data-i18n="lines.pn8001.btn">このツールを相談</a>
           </div>
         </div>
 
@@ -802,34 +802,34 @@
               <div class="tile-title">
                 <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character" />
                 <div>
-                  <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8002-L</div>
+                  <div class="tile-title-line" data-i18n="lines.pn8002.partnumber">9050-000-8002-L</div>
                   <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8002.title">mdbファイルをテーブル別CSVへ</h3>
                 </div>
                 <span class="tile-badge" data-i18n="lines.pn8002.badge">Win</span>
-              </div>              
-              <p class="tile-content">
+              </div>
+              <p class="tile-content" data-i18n="lines.pn8002.body">
                 <strong>Microsoft Access形式（.mdb）</strong>は、データを取り出しにくい。<br>
                 mdbファイルを、<strong>各テーブルごとのCSVファイル</strong>に一括変換します。
               </p>
               <div class="tile-meta">
-                <span>対象：計測器・装置を使っている企業</span>
-                <span>入力：mdbファイル</span>
-                <span>出力：テーブル別CSV</span>
+                <span data-i18n="lines.pn8002.meta1">対象：計測器・装置を使っている企業</span>
+                <span data-i18n="lines.pn8002.meta2">入力：mdbファイル</span>
+                <span data-i18n="lines.pn8002.meta3">出力：テーブル別CSV</span>
               </div>
-              <div class="tile-hint">More →</div>
+              <div class="tile-hint" data-i18n="tile.hint.more">More →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title">こんなときに</div>
-              <p class="tile-content">
+              <div class="process-step-title" data-i18n="lines.pn8002.back.title">こんなときに</div>
+              <p class="tile-content" data-i18n="lines.pn8002.back.content">
                 ・mdbから毎回手作業でコピペしている<br>
                 ・Accessが社内PCに入っておらず、中身が見られない<br>
                 ・品質データやログを、他システムやクラウドで活用したい
               </p>
-              <div class="tile-hint">← Return</div>
+              <div class="tile-hint" data-i18n="tile.hint.return">← Return</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">このツールを相談</a>
+            <a class="btn primary" href="#contact" data-i18n="lines.pn8002.btn">このツールを相談</a>
           </div>
         </div>
 
@@ -840,35 +840,35 @@
               <div class="tile-title">
                 <img src="img/Factory_BIN.png" alt="Wafermap character" class="tile-character" />
                 <div>
-                  <div class="tile-title-line" data-i18n="lines.pn8001.partnumber">9050-000-8003-L</div>
+                  <div class="tile-title-line" data-i18n="lines.pn8003.partnumber">9050-000-8003-L</div>
                   <h3 style="margin:.1rem 0 .2rem; font-size:1.3rem;" data-i18n="lines.pn8003.title">毎月のCSVから項目ごとの集計</h3>
                 </div>
                 <span class="tile-badge" data-i18n="lines.pn8003.badge">Win/Mac</span>
-              </div>              
-              <p class="tile-content">
+              </div>
+              <p class="tile-content" data-i18n="lines.pn8003.body">
                 売上CSV・検査結果CSVなど、毎月エクセルで開いて
                 <strong>項目毎の集計作業</strong>を自動化。<br>
                 CSVから集計結果を生成します。
               </p>
               <div class="tile-meta">
-                <span>対象：管理部門・品質管理・営業企画</span>
-                <span>入力：月次CSVファイル一式</span>
-                <span>出力：集計CSV、グラフ画像</span>
+                <span data-i18n="lines.pn8003.meta1">対象：管理部門・品質管理・営業企画</span>
+                <span data-i18n="lines.pn8003.meta2">入力：月次CSVファイル一式</span>
+                <span data-i18n="lines.pn8003.meta3">出力：集計CSV、グラフ画像</span>
               </div>
-              <div class="tile-hint">More →</div>
+              <div class="tile-hint" data-i18n="tile.hint.more">More →</div>
             </div>
             <div class="tile-face tile-back">
-              <div class="process-step-title">こんなときに</div>
-              <p class="tile-content">
+              <div class="process-step-title" data-i18n="lines.pn8003.back.title">こんなときに</div>
+              <p class="tile-content" data-i18n="lines.pn8003.back.content">
                 ・毎月同じ集計を3時間かけて行っている<br>
                 ・属人的で、担当者しかやり方がわからない<br>
                 ・DXツールを入れるほどではないが、時間だけは削減したい
               </p>
-              <div class="tile-hint">← Return</div>
+              <div class="tile-hint" data-i18n="tile.hint.return">← Return</div>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="btn primary" href="#contact">このツールを相談</a>
+            <a class="btn primary" href="#contact" data-i18n="lines.pn8003.btn">このツールを相談</a>
           </div>
         </div>
       </div>
@@ -922,10 +922,10 @@
       <div class="service-grid" data-mode="sme">
         <article class="service-card">
           <div class="service-tag">Step 1</div>
-          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;">
+          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;" data-i18n="services.sme.step1.title">
             困りごとヒアリング＆ツール設計
           </h3>
-          <p>
+          <p data-i18n="services.sme.step1.body">
             「このエクセルを毎月手で直している」「mdbからデータを出したい」など、
             今やっている作業をそのまま見せてください。<br>
             それをもとに、<strong>どんなツールにすると一番ラクか</strong>を一緒に整理します。
@@ -934,10 +934,10 @@
 
         <article class="service-card">
           <div class="service-tag">Step 2</div>
-          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;">
+          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;" data-i18n="services.sme.step2.title">
             まずは小さく動く試作ツール
           </h3>
-          <p>
+          <p data-i18n="services.sme.step2.body">
             いきなり大きなシステムにはせず、<strong>まずは1つの作業が楽になる小さなツール</strong>
             をお出しします。<br>
             現場で試していただき、「もう少しここをこうしたい」を反映していきます。
@@ -946,10 +946,10 @@
 
         <article class="service-card">
           <div class="service-tag">Step 3</div>
-          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;">
+          <h3 style="margin:.1rem 0 .4rem; font-size:1.35rem;" data-i18n="services.sme.step3.title">
             安定版ツールとして納品・改善
           </h3>
-          <p>
+          <p data-i18n="services.sme.step3.body">
             試作で使い方が固まったら、<strong>現場で長く使える安定版</strong>として作り込みます。<br>
             Windows用exe化や社内サーバーへの設置など、
             お客様のIT環境に合わせてご提供します。
@@ -1016,12 +1016,18 @@
         'nav.services': 'Services',
         'nav.contact': 'Contact',
 
+        'mode.advanced': '専門業界ビュー',
+        'mode.sme': '中小企業DXビュー',
+
         'hero.tagline': 'Software Manufacturing System',
         'hero.title': 'Your Software, Manufactured.',
         'hero.lead': 'AIBOD Factory は、ほしいソフトウェアをすぐにご提供！<br>ラインアップにあれば即使用可。なければ即設計し製造します。',
         'hero.btn.products': 'プロダクトを見る',
         'hero.btn.services': '工場のサービスを見る',
         'hero.btn.contact': '相談してみる',
+        'hero.sme.tagline': 'Small DX Tools for SMEs',
+        'hero.sme.title': '中小企業DXの「ちょっと困った」すぐ作ります。',
+        'hero.sme.lead': 'エクセルの手作業、mdbからのデータ取り出し、毎月のCSV集計など、<br>現場の「ちょっと面倒」「誰もやりたくない」作業を、<br>そのまま <strong>専用ツール</strong> にしてお渡しします。',
 
         'hero-visual.rotating.0': 'Your Software, Manufactured.',
         'hero-visual.rotating.1': 'ソフトウェアは"作る"ものから、"製造する"ものへ。',
@@ -1048,6 +1054,16 @@
         'factory.step4.label': '04 Quality Check',
         'factory.step4.title': '検査',
         'factory.step4.body': '品質を自動テストで保証',
+        'factory.sme.title': '製造品設計 → 部品棚 → 製造ライン → 検査 で提供！',
+        'factory.sme.subtitle': 'Software Factory Model',
+        'factory.sme.step1.body': '素早く設計',
+        'factory.sme.step1.detail': 'AIBODのテンプレートを使用して設計。',
+        'factory.sme.step2.body': '標準部品を活用',
+        'factory.sme.step2.detail': '標準化された部品を使用。',
+        'factory.sme.step3.body': '組立・製造。',
+        'factory.sme.step3.detail': 'お使い下さい。',
+        'factory.sme.step4.body': '品質確認',
+        'factory.sme.step4.detail': 'テストで品質を確保します。',
 
         'process.title': 'Factory Process｜ソフトウェア製造プロセス',
         'process.subtitle': '製造品設計を起点とした4つの工程',
@@ -1100,6 +1116,119 @@
         'lines.btn.detail': '詳細ページへ',
         'lines.btn.demo': 'デモを見る',
         'lines.btn.consult': 'このラインで相談',
+        'lines.sme.title': 'Small DX Tools｜中小企業向けミニDXツール',
+        'lines.sme.subtitle': '人がエクセルやAccessでがんばっている作業を、<br>そのまま専用ツールにして「毎月の手間」をごっそり削減します。',
+
+        'tile.hint.more': '詳細 →',
+        'tile.hint.back': '← 戻る',
+        'tile.hint.return': '← Return',
+
+        'sme.usecases.title': '現場DXの「あるある課題」サンプル',
+        'sme.usecases.subtitle': 'Excel や Access、CSV、紙帳票などで回している「ちょっと困った」「誰もやりたくない」作業の例です。<br>AIBOD Factory は、これらをそのまま専用ツールにしてお渡しします。',
+
+        'sme.case001.title': '結合セルだらけのExcelが、システムに取り込めない',
+        'sme.case001.badge1': 'Excel',
+        'sme.case001.badge2': '帳票整形',
+        'sme.case001.content': '見やすくするために結合セル・色付け・空白行を多用したExcel帳票。<br>人は読めるが、設備やクラウドサービスには「列がずれている」「形式が合わない」と怒られる…。',
+        'sme.case001.meta1': '現状：目視で確認してコピペで調整',
+        'sme.case001.meta2': '対象：製造・品質・営業管理',
+        'sme.case001.hint': 'AIBOD Factoryなら？ →',
+        'sme.case001.solution': 'Excel → 機械が読みやすいCSV/JSONに自動整形',
+        'sme.case001.detail': '既存のExcel帳票のルールを読み取り、<strong>結合セル解除・列揃え・不要行削除</strong> を自動で実行。<br>設備やクラウドにそのまま投入できるCSV/JSONを出力します。',
+        'sme.case001.effect1': '効果：インポート前の手作業をほぼゼロに',
+        'sme.case001.effect2': '形態：Windows用ツール / スクリプト',
+        'sme.case001.btn': 'この課題で相談する',
+
+        'sme.case002.title': '毎月10個以上のExcelを「貼り替え」して集計している',
+        'sme.case002.badge1': 'Excel',
+        'sme.case002.badge2': '月次集計',
+        'sme.case002.content': '売上・仕入・稼働など、部門ごとにバラバラなExcel。<br>月末になると担当者が「今年分.xlsx」にコピー＆ペーストし続ける作業が発生している。',
+        'sme.case002.meta1': '現状：担当者しかやり方がわからない',
+        'sme.case002.meta2': '対象：管理部門 / 経営企画',
+        'sme.case002.hint': 'AIBOD Factoryなら？ →',
+        'sme.case002.solution': '複数Excel → 自動集計レポート生成',
+        'sme.case002.detail': '指定フォルダにExcelを入れるだけで、<strong>決まった形の集計表・グラフ</strong> を自動生成。<br>シート名や列位置の揺れにも対応し、担当者のノウハウをツールに固定します。',
+        'sme.case002.effect1': '効果：月3〜5時間 → 数分',
+        'sme.case002.effect2': '形態：デスクトップアプリ or Webアプリ',
+        'sme.case002.btn': 'この課題で相談する',
+
+        'sme.case003.title': 'キーエンスなどの装置が mdb で出すが、中身が見られない',
+        'sme.case003.badge1': 'Access / mdb',
+        'sme.case003.badge2': '計測器',
+        'sme.case003.content': '測定結果が <strong>Microsoft Access形式（.mdb）</strong>で保存されるが、<br>現場PCにはAccessが入っておらず、担当者のPCだけでしか中身を見られない。',
+        'sme.case003.meta1': '現状：担当者PCで開いてCSVに書き出し → 共有',
+        'sme.case003.meta2': '対象：品質管理・技術',
+        'sme.case003.hint': 'AIBOD Factoryなら？ →',
+        'sme.case003.solution': 'mdb → テーブル別CSV自動分解ツール',
+        'sme.case003.detail': 'mdbファイルを読み込み、<strong>テーブルごとのCSV</strong>に一括変換。<br>そのままExcelや他システムに読み込める形で出力します。',
+        'sme.case003.effect1': '効果：担当者依存の解消・自動化',
+        'sme.case003.effect2': '形態：Windowsツール（ダブルクリックで実行）',
+        'sme.case003.btn': 'この課題で相談する',
+
+        'sme.case004.title': 'Accessマクロで動く仕組みが、壊れても直せない',
+        'sme.case004.badge1': 'Access',
+        'sme.case004.badge2': '既存資産',
+        'sme.case004.content': '以前作ってもらったAccessマクロが、PC更新やOfficeバージョンアップで動かなくなった。<br>作った人も退職しており、誰も直せない。',
+        'sme.case004.meta1': '現状：危険を承知で「だましだまし」運用',
+        'sme.case004.meta2': '対象：管理部門・生産管理',
+        'sme.case004.hint': 'AIBOD Factoryなら？ →',
+        'sme.case004.solution': 'ロジックを読み解き、Python / Web にリプレイス',
+        'sme.case004.detail': 'Accessマクロの動きを分析し、<strong>PythonスクリプトやWebアプリ</strong>として作り直します。<br>将来の改修・拡張も行いやすい構成にリファクタリング。',
+        'sme.case004.effect1': '効果：ブラックボックスの解消',
+        'sme.case004.effect2': '形態：オンプレ / クラウド両対応',
+        'sme.case004.btn': 'この課題で相談する',
+
+        'sme.case005.title': '毎月のCSVから「特定項目だけ」手で集計している',
+        'sme.case005.badge1': 'CSV',
+        'sme.case005.badge2': '自動集計',
+        'sme.case005.content': '取引先やシステムから毎月送られてくるCSV。<br>その中の「特定列だけ」をフィルタ・集計して、グラフや報告資料を作っている。',
+        'sme.case005.meta1': '現状：担当者の「手順メモ」頼み',
+        'sme.case005.meta2': '対象：営業企画・管理部門',
+        'sme.case005.hint': 'AIBOD Factoryなら？ →',
+        'sme.case005.solution': 'CSV → 条件抽出 ＋ 集計 ＋ グラフを自動化',
+        'sme.case005.detail': '条件（例：特定仕入先・特定品目など）をツールに登録し、<br>フォルダにCSVを入れてボタンを押すだけで、必要な集計表とグラフを作成します。',
+        'sme.case005.effect1': '効果：属人化の解消・スピードアップ',
+        'sme.case005.effect2': '形態：デスクトップ or Web',
+        'sme.case005.btn': 'この課題で相談する',
+
+        'sme.case006.title': '画像・CSVファイルがフォルダに山積みで、整理できない',
+        'sme.case006.badge1': 'ファイル整理',
+        'sme.case006.badge2': 'バックアップ',
+        'sme.case006.content': '検査画像やログCSVが、共有フォルダに延々と溜まり続けている。<br>誰も消せない・整理できないので、探すだけで時間がかかる。',
+        'sme.case006.meta1': '現状：ファイル名_最新版(本物).xlsx などが乱立',
+        'sme.case006.meta2': '対象：全社',
+        'sme.case006.hint': 'AIBOD Factoryなら？ →',
+        'sme.case006.solution': '自動フォルダ分け＋命名ルール＋バックアップ',
+        'sme.case006.detail': '日付・ロット・設備などのルールにもとづき、<strong>自動でフォルダ分け＆ファイル名付与</strong>。<br>世代バックアップや古いファイルのアーカイブも自動化します。',
+        'sme.case006.effect1': '効果：探す時間と事故の大幅削減',
+        'sme.case006.effect2': '形態：常駐スクリプト or 定期実行バッチ',
+        'sme.case006.btn': 'この課題で相談する',
+
+        'lines.pn8001.body': '人間がみやすいエクセルは、空白行・結合セルなど、機械には読みづらい。<br>エクセルを、<strong>機械が読みやすいCSV / JSON形式</strong>に自動整形します。',
+        'lines.pn8001.meta1': '対象：一般中小企業',
+        'lines.pn8001.meta2': '入力：エクセル帳票',
+        'lines.pn8001.meta3': '出力：きれいなCSV/JSON',
+        'lines.pn8001.back.title': 'こんなときに',
+        'lines.pn8001.back.content': '・設備やクラウドサービスにエクセルを読ませたいがうまく入らない<br>・毎回「貼り付け用の整形シート」を手作業で作っている<br>・将来のDXを見据えて、まずは「データをきれいにしたい」',
+        'lines.pn8001.btn': 'このツールを相談',
+
+        'lines.pn8002.body': '<strong>Microsoft Access形式（.mdb）</strong>は、データを取り出しにくい。<br>mdbファイルを、<strong>各テーブルごとのCSVファイル</strong>に一括変換します。',
+        'lines.pn8002.meta1': '対象：計測器・装置を使っている企業',
+        'lines.pn8002.meta2': '入力：mdbファイル',
+        'lines.pn8002.meta3': '出力：テーブル別CSV',
+        'lines.pn8002.back.title': 'こんなときに',
+        'lines.pn8002.back.content': '・mdbから毎回手作業でコピペしている<br>・Accessが社内PCに入っておらず、中身が見られない<br>・品質データやログを、他システムやクラウドで活用したい',
+        'lines.pn8002.btn': 'このツールを相談',
+
+        'lines.pn8003.body': '売上CSV・検査結果CSVなど、毎月エクセルで開いて<strong>項目毎の集計作業</strong>を自動化。<br>CSVから集計結果を生成します。',
+        'lines.pn8003.meta1': '対象：管理部門・品質管理・営業企画',
+        'lines.pn8003.meta2': '入力：月次CSVファイル一式',
+        'lines.pn8003.meta3': '出力：集計CSV、グラフ画像',
+        'lines.pn8003.back.title': 'こんなときに',
+        'lines.pn8003.back.content': '・毎月同じ集計を3時間かけて行っている<br>・属人的で、担当者しかやり方がわからない<br>・DXツールを入れるほどではないが、時間だけは削減したい',
+        'lines.pn8003.btn': 'このツールを相談',
+
+        'common.solution': 'Solution',
 
         'filter.industry.label': '業界:',
         'filter.industry.automotive': '自動車',
@@ -1117,7 +1246,13 @@
         'services.prototype.title': 'Prototype Line（試作）',
         'services.prototype.body': '設計図をもとに、まずは小さく動く試作版を製造。 画面やレポート、AIモデルの組み合わせなど、 数週間レベルで検証できるアウトプットを出荷します。',
         'services.production.title': 'Production Line（製造・量産）',
-        'services.production.body': '試作で確認した要件をもとに、本番運用向けのソフトウェアとして製造。 テスト、自動デプロイ、監視まで含めた“工場レベルの製品”を提供します。',
+        'services.production.body': '試作で確認した要件をもとに、本番運用向けのソフトウェアとして製造。 テスト、自動デプロイ、監視まで含めた"工場レベルの製品"を提供します。',
+        'services.sme.step1.title': '困りごとヒアリング＆ツール設計',
+        'services.sme.step1.body': '「このエクセルを毎月手で直している」「mdbからデータを出したい」など、今やっている作業をそのまま見せてください。<br>それをもとに、<strong>どんなツールにすると一番ラクか</strong>を一緒に整理します。',
+        'services.sme.step2.title': 'まずは小さく動く試作ツール',
+        'services.sme.step2.body': 'いきなり大きなシステムにはせず、<strong>まずは1つの作業が楽になる小さなツール</strong>をお出しします。<br>現場で試していただき、「もう少しここをこうしたい」を反映していきます。',
+        'services.sme.step3.title': '安定版ツールとして納品・改善',
+        'services.sme.step3.body': '試作で使い方が固まったら、<strong>現場で長く使える安定版</strong>として作り込みます。<br>Windows用exe化や社内サーバーへの設置など、お客様のIT環境に合わせてご提供します。',
 
         'contact.title': 'お問い合わせ / ご相談',
         'contact.subtitle': '「工場モデルでソフトウェアを作ってみたい」「まずは試作から始めたい」など、お気軽にご相談ください。',
@@ -1140,12 +1275,18 @@
         'nav.services': 'Services',
         'nav.contact': 'Contact',
 
+        'mode.advanced': 'Industry Expert View',
+        'mode.sme': 'SME DX View',
+
         'hero.tagline': 'Software Manufacturing System',
         'hero.title': 'Your Software, Manufactured.',
         'hero.lead': 'AIBOD Factory is a <strong>Software Manufacturing Platform</strong> that turns software development into factory-style production. Once the blueprint is ready, we can deliver prototypes, production systems, and continuous improvements end to end.',
         'hero.btn.products': 'View Products',
         'hero.btn.services': 'View Factory Services',
         'hero.btn.contact': 'Talk to Us',
+        'hero.sme.tagline': 'Small DX Tools for SMEs',
+        'hero.sme.title': 'Quick Solutions for SME DX Challenges',
+        'hero.sme.lead': 'Manual Excel tasks, extracting data from mdb files, monthly CSV aggregation, etc.<br>We transform those "tedious" and "nobody wants to do" tasks<br>into <strong>dedicated tools</strong> and deliver them to you.',
 
         'hero-visual.rotating.0': 'Your Software, Manufactured.',
         'hero-visual.rotating.1': 'From "building" software to "manufacturing" it.',
@@ -1172,6 +1313,16 @@
         'factory.step4.label': '04 Quality Check',
         'factory.step4.title': 'Quality Check',
         'factory.step4.body': 'Guarantee quality with automated tests.',
+        'factory.sme.title': 'Delivered through: Product Design → Parts Shelf → Manufacturing Line → Quality Check',
+        'factory.sme.subtitle': 'Software Factory Model',
+        'factory.sme.step1.body': 'Quick design',
+        'factory.sme.step1.detail': 'Design using AIBOD templates.',
+        'factory.sme.step2.body': 'Leverage standard components',
+        'factory.sme.step2.detail': 'Use standardized parts.',
+        'factory.sme.step3.body': 'Assemble and manufacture.',
+        'factory.sme.step3.detail': 'Ready to use.',
+        'factory.sme.step4.body': 'Quality assurance',
+        'factory.sme.step4.detail': 'Ensure quality through testing.',
 
         'process.title': 'Factory Process｜Software Manufacturing Flow',
         'process.subtitle': 'Four stages starting from product design',
@@ -1233,6 +1384,119 @@
         'lines.pn8003.partnumber': '9050-000-8003-L',
         'lines.pn8003.title': 'Monthly CSV Aggregator',
         'lines.pn8003.badge': 'Win/Mac',
+        'lines.sme.title': 'Small DX Tools｜Mini DX Tools for SMEs',
+        'lines.sme.subtitle': 'Manual work with Excel and Access done by people,<br>transformed into dedicated tools to drastically reduce "monthly hassles".',
+
+        'tile.hint.more': 'More →',
+        'tile.hint.back': '← Back',
+        'tile.hint.return': '← Return',
+
+        'sme.usecases.title': 'Common SME DX Challenges Examples',
+        'sme.usecases.subtitle': 'Examples of "troublesome" and "nobody wants to do" tasks handled with Excel, Access, CSV, and paper forms.<br>AIBOD Factory transforms these directly into dedicated tools.',
+
+        'sme.case001.title': 'Excel with merged cells cannot be imported into systems',
+        'sme.case001.badge1': 'Excel',
+        'sme.case001.badge2': 'Form Formatting',
+        'sme.case001.content': 'Excel forms with many merged cells, colors, and blank rows for readability.<br>Humans can read them, but equipment and cloud services reject them with "misaligned columns" and "format mismatch" errors...',
+        'sme.case001.meta1': 'Current: Manual checking and copy-paste adjustments',
+        'sme.case001.meta2': 'Target: Manufacturing, Quality, Sales Management',
+        'sme.case001.hint': 'With AIBOD Factory? →',
+        'sme.case001.solution': 'Excel → Auto-format to machine-readable CSV/JSON',
+        'sme.case001.detail': 'Reads existing Excel form rules and automatically <strong>unmerges cells, aligns columns, removes unnecessary rows</strong>.<br>Outputs CSV/JSON that can be directly fed to equipment or cloud services.',
+        'sme.case001.effect1': 'Effect: Nearly zero manual work before import',
+        'sme.case001.effect2': 'Form: Windows tool / Script',
+        'sme.case001.btn': 'Consult on this issue',
+
+        'sme.case002.title': 'Monthly copy-pasting from 10+ Excel files for aggregation',
+        'sme.case002.badge1': 'Excel',
+        'sme.case002.badge2': 'Monthly Aggregation',
+        'sme.case002.content': 'Scattered Excel files for sales, purchasing, operations by department.<br>At month end, staff continuously copy & paste into "ThisYear.xlsx".',
+        'sme.case002.meta1': 'Current: Only the person in charge knows how',
+        'sme.case002.meta2': 'Target: Admin / Planning departments',
+        'sme.case002.hint': 'With AIBOD Factory? →',
+        'sme.case002.solution': 'Multiple Excel → Auto-generate aggregation reports',
+        'sme.case002.detail': 'Simply place Excel files in a designated folder to auto-generate <strong>standardized summary tables and charts</strong>.<br>Handles variations in sheet names and column positions, capturing staff know-how in the tool.',
+        'sme.case002.effect1': 'Effect: 3-5 hours/month → minutes',
+        'sme.case002.effect2': 'Form: Desktop or Web app',
+        'sme.case002.btn': 'Consult on this issue',
+
+        'sme.case003.title': 'Equipment like Keyence outputs mdb files that cannot be viewed',
+        'sme.case003.badge1': 'Access / mdb',
+        'sme.case003.badge2': 'Measurement Equipment',
+        'sme.case003.content': 'Measurement results saved in <strong>Microsoft Access format (.mdb)</strong>,<br>but Access is not installed on shop floor PCs, only viewable on specific staff PCs.',
+        'sme.case003.meta1': 'Current: Open on staff PC, export to CSV → Share',
+        'sme.case003.meta2': 'Target: Quality Control, Engineering',
+        'sme.case003.hint': 'With AIBOD Factory? →',
+        'sme.case003.solution': 'mdb → Auto-decompose into CSV by table',
+        'sme.case003.detail': 'Reads mdb files and batch converts to <strong>CSV files per table</strong>.<br>Outputs in a format that can be directly imported into Excel or other systems.',
+        'sme.case003.effect1': 'Effect: Eliminate staff dependency & automate',
+        'sme.case003.effect2': 'Form: Windows tool (double-click to run)',
+        'sme.case003.btn': 'Consult on this issue',
+
+        'sme.case004.title': 'Access macros broke and nobody can fix them',
+        'sme.case004.badge1': 'Access',
+        'sme.case004.badge2': 'Legacy Assets',
+        'sme.case004.content': 'Previously created Access macros stopped working after PC upgrades or Office version changes.<br>The creator left the company, and nobody can fix it.',
+        'sme.case004.meta1': 'Current: Operating "workarounds" at risk',
+        'sme.case004.meta2': 'Target: Admin / Production Management',
+        'sme.case004.hint': 'With AIBOD Factory? →',
+        'sme.case004.solution': 'Decode logic and replace with Python / Web',
+        'sme.case004.detail': 'Analyze Access macro behavior and rebuild as <strong>Python scripts or Web apps</strong>.<br>Refactor into a structure that is easy to modify and extend in the future.',
+        'sme.case004.effect1': 'Effect: Eliminate black box systems',
+        'sme.case004.effect2': 'Form: On-premise / Cloud compatible',
+        'sme.case004.btn': 'Consult on this issue',
+
+        'sme.case005.title': 'Manually aggregating "specific columns only" from monthly CSVs',
+        'sme.case005.badge1': 'CSV',
+        'sme.case005.badge2': 'Auto Aggregation',
+        'sme.case005.content': 'CSVs sent monthly from partners or systems.<br>Filtering and aggregating "specific columns only" to create charts and reports.',
+        'sme.case005.meta1': 'Current: Relying on staff "procedure notes"',
+        'sme.case005.meta2': 'Target: Sales Planning, Admin departments',
+        'sme.case005.hint': 'With AIBOD Factory? →',
+        'sme.case005.solution': 'CSV → Automate condition extraction + aggregation + charts',
+        'sme.case005.detail': 'Register conditions (e.g., specific supplier, specific item) in the tool,<br>then just drop CSV in a folder and press a button to create necessary summary tables and charts.',
+        'sme.case005.effect1': 'Effect: Eliminate staff dependency & speed up',
+        'sme.case005.effect2': 'Form: Desktop or Web',
+        'sme.case005.btn': 'Consult on this issue',
+
+        'sme.case006.title': 'Image and CSV files piled up in folders, impossible to organize',
+        'sme.case006.badge1': 'File Organization',
+        'sme.case006.badge2': 'Backup',
+        'sme.case006.content': 'Inspection images and log CSVs endlessly accumulating in shared folders.<br>Nobody can delete or organize them, so just finding files takes time.',
+        'sme.case006.meta1': 'Current: Files like "filename_latest(real).xlsx" proliferate',
+        'sme.case006.meta2': 'Target: Company-wide',
+        'sme.case006.hint': 'With AIBOD Factory? →',
+        'sme.case006.solution': 'Auto folder organization + naming rules + backup',
+        'sme.case006.detail': 'Based on rules like date, lot, equipment, <strong>automatically organize into folders & assign file names</strong>.<br>Automate generational backups and archiving of old files.',
+        'sme.case006.effect1': 'Effect: Drastically reduce search time and accidents',
+        'sme.case006.effect2': 'Form: Resident script or scheduled batch',
+        'sme.case006.btn': 'Consult on this issue',
+
+        'lines.pn8001.body': 'Human-readable Excel has blank rows, merged cells, etc., making it hard for machines to read.<br>Auto-format Excel into <strong>machine-readable CSV / JSON format</strong>.',
+        'lines.pn8001.meta1': 'Target: General SMEs',
+        'lines.pn8001.meta2': 'Input: Excel forms',
+        'lines.pn8001.meta3': 'Output: Clean CSV/JSON',
+        'lines.pn8001.back.title': 'When to use',
+        'lines.pn8001.back.content': '・Want to import Excel into equipment or cloud services but it doesn\'t work well<br>・Manually creating "paste-ready formatted sheets" every time<br>・Looking ahead to future DX, want to "clean up data" first',
+        'lines.pn8001.btn': 'Consult on this tool',
+
+        'lines.pn8002.body': '<strong>Microsoft Access format (.mdb)</strong> is difficult to extract data from.<br>Batch convert mdb files into <strong>CSV files per table</strong>.',
+        'lines.pn8002.meta1': 'Target: Companies using measurement/testing equipment',
+        'lines.pn8002.meta2': 'Input: mdb files',
+        'lines.pn8002.meta3': 'Output: CSV per table',
+        'lines.pn8002.back.title': 'When to use',
+        'lines.pn8002.back.content': '・Manually copy-pasting from mdb files every time<br>・Access not installed on company PCs, can\'t view contents<br>・Want to utilize quality data and logs in other systems or cloud',
+        'lines.pn8002.btn': 'Consult on this tool',
+
+        'lines.pn8003.body': 'Sales CSV, inspection result CSV, etc., automate <strong>item-by-item aggregation work</strong> done monthly in Excel.<br>Generate aggregation results from CSV.',
+        'lines.pn8003.meta1': 'Target: Admin, Quality Control, Sales Planning',
+        'lines.pn8003.meta2': 'Input: Monthly CSV file set',
+        'lines.pn8003.meta3': 'Output: Aggregated CSV, chart images',
+        'lines.pn8003.back.title': 'When to use',
+        'lines.pn8003.back.content': '・Spending 3 hours monthly on the same aggregation<br>・Staff-dependent, only the person in charge knows how<br>・Not worth installing a DX tool, but want to reduce time',
+        'lines.pn8003.btn': 'Consult on this tool',
+
+        'common.solution': 'Solution',
 
         'filter.industry.label': 'Industry:',
         'filter.industry.automotive': 'Automotive',
@@ -1251,6 +1515,12 @@
         'services.prototype.body': 'Based on the blueprint, we manufacture a small working prototype first: screens, reports, AI model combinations, etc., that can be validated in weeks.',
         'services.production.title': 'Production Line (Manufacturing)',
         'services.production.body': 'Using the validated prototype as a base, we manufacture production-ready software, including testing, automated deployment, and monitoring.',
+        'services.sme.step1.title': 'Problem Hearing & Tool Design',
+        'services.sme.step1.body': '"I manually fix this Excel file every month", "I want to extract data from mdb", etc.<br>Please show us the work you currently do.<br>Based on that, we will work together to determine <strong>what kind of tool would be most convenient</strong>.',
+        'services.sme.step2.title': 'Small Working Prototype First',
+        'services.sme.step2.body': 'Rather than going straight to a large system, we deliver <strong>a small tool that makes one task easier</strong> first.<br>We\'ll have you try it on-site and incorporate feedback like "I\'d like to tweak this a bit".',
+        'services.sme.step3.title': 'Stable Version Delivery & Improvement',
+        'services.sme.step3.body': 'Once the usage is established through prototyping, we refine it into <strong>a stable version for long-term use on-site</strong>.<br>We provide it tailored to your IT environment, such as Windows exe conversion or installation on in-house servers.',
 
         'contact.title': 'Contact / Inquiry',
         'contact.subtitle': 'If you want to try the factory model, or start from a small prototype, feel free to reach out.',
