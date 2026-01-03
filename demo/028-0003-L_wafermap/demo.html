@@ -491,7 +491,7 @@
         // Load demo data
         async function loadDemoData() {
             try {
-                const response = await fetch('./028-0003-L_wafermap/demo_data.json');
+                const response = await fetch('./demo_data.json');
                 demoData = await response.json();
 
                 document.getElementById('loading').style.display = 'none';
