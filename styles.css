@@ -474,7 +474,46 @@ opacity: .8;
     background-image: url('./img/Google Gemini Image.png');
     /* 画像パス変更OK */
 }
-  
+
+/* --- New Year Banner Overlay (above rotating text) --- */
+.hero-newyear{
+  position: absolute;
+  top: clamp(10px, 3.5vh, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;                 /* hero-content(=2)より前面 */
+  width: min(1120px, calc(100% - 2rem));
+  pointer-events: none;       /* 下のボタン等をクリック可能に */
+  display: flex;
+  justify-content: center;
+}
+
+.hero-newyear img{
+  width: 100%;
+  height: auto;
+  max-height: clamp(92px, 18vh, 160px);
+  object-fit: contain;
+  border-radius: 12px;
+  /* 背景に馴染ませたい場合のみ（不要なら削除OK） */
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+
+/* バナー分だけ hero-content を下げて、重なりすぎを防止 */
+.hero-visual .hero-content{
+  padding-top: clamp(110px, 22vh, 190px);
+}
+
+/* モバイルで高さが足りないときの調整 */
+@media (max-width: 640px){
+  .hero-visual .hero-content{
+    padding-top: clamp(100px, 20vh, 160px);
+  }
+  .hero-newyear img{
+    max-height: 120px;
+    border-radius: 10px;
+  }
+}
+
 .hero-overlay {
 position: absolute;
 inset: 0;
