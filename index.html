@@ -1681,8 +1681,11 @@
         btn.addEventListener('click', () => setMode(btn.dataset.mode));
       });
 
-      // 初期表示は Advanced
-      setMode('advanced');
+      // 初期化: URL ?mode= から取得、なければ advanced
+      const url = new URL(window.location.href);
+      const modeParam = url.searchParams.get('mode');
+      const initialMode = (modeParam === 'sme' || modeParam === 'advanced') ? modeParam : 'advanced';
+      setMode(initialMode);
     });
 
 </script>
