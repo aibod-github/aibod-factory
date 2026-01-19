@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>AIBOD Factory ポスター｜Software Manufacturing</title>
+  <style>
+    /* ========================================
+       展示会ポスター用CSS - A1サイズ (594mm x 841mm) 想定
+       印刷時は 300dpi で出力推奨
+       ブラウザで表示後、印刷→PDFで保存→印刷業者へ
+       ======================================== */
+
+    @page {
+      size: 594mm 841mm;
+      margin: 0;
+    }
+
+    :root {
+      --cyan: #0095c8;
+      --blue: #1d2087;
+      --navy: #0a1428;
+      --ink: #1a1a1a;
+      --muted: #555555;
+      --accent: #22c55e;
+      --card-bg: #f8f9fa;
+      --card-border: #e0e0e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      width: 594mm;
+      min-height: auto;
+      padding: 8mm;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ヘッダー・ブランド */
+    .poster-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15mm;
+      padding-bottom: 8mm;
+      border-bottom: 3px solid var(--cyan);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-dot {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--cyan), var(--blue), var(--navy), var(--cyan));
+    }
+
+    .brand-name {
+      font-size: 48pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .tagline {
+      font-size: 28pt;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+    }
+
+    /* ヒーローセクション */
+    .hero {
+      text-align: center;
+      margin-bottom: 20mm;
+      padding: 15mm 10mm;
+      background: linear-gradient(135deg, rgba(0, 149, 200, 0.08) 0%, rgba(29, 32, 135, 0.05) 100%);
+      border-radius: 8mm;
+    }
+
+    .hero-title {
+      font-size: 80pt;
+      font-weight: 800;
+      margin-bottom: 10mm;
+      color: var(--cyan);
+    }
+
+    .hero-subtitle {
+      font-size: 48pt;
+      color: var(--ink);
+      margin-bottom: 8mm;
+    }
+
+    .hero-desc {
+      font-size: 32pt;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 550mm;
+      margin: 0 auto;
+    }
+
+    .hero-desc strong {
+      color: var(--cyan);
+    }
+
+    /* セクションタイトル */
+    .section-title {
+      font-size: 44pt;
+      font-weight: 700;
+      margin-bottom: 8mm;
+      color: var(--ink);
+      position: relative;
+      padding-left: 20mm;
+    }
+
+    .section-title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12mm;
+      height: 12mm;
+      background: var(--cyan);
+      border-radius: 3mm;
+    }
+
+    .section-sub {
+      font-size: 28pt;
+      color: var(--muted);
+      margin-bottom: 12mm;
+      padding-left: 20mm;
+    }
+
+    /* Factory Model - 4ステップ */
+    .factory-section {
+      margin-bottom: 20mm;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8mm;
+    }
+
+    .process-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 5mm;
+      padding: 8mm;
+      text-align: center;
+    }
+
+    .process-number {
+      font-size: 18pt;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 4mm;
+    }
+
+    .process-title {
+      font-size: 48pt;
+      font-weight: 700;
+      margin-bottom: 6mm;
+    }
+
+    .process-body {
+      font-size: 24pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Production Lines - サービス一覧 */
+    .lines-section {
+      margin-bottom: 0;
+    }
+
+    .lines-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8mm;
+    }
+
+    .line-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 5mm;
+      padding: 8mm;
+      min-height: 85mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .line-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 5mm;
+      margin-bottom: 5mm;
+    }
+
+    .line-character {
+      width: 30mm;
+      height: 30mm;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .line-partnumber {
+      font-size: 20pt;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+    }
+
+    .line-title {
+      font-size: 32pt;
+      font-weight: 700;
+      margin: 3mm 0;
+    }
+
+    .line-badges {
+      display: flex;
+      gap: 4mm;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 18pt;
+      background: rgba(0, 149, 200, 0.15);
+      color: var(--cyan);
+      padding: 2mm 5mm;
+      border-radius: 3mm;
+      font-weight: 600;
+    }
+
+    .line-body {
+      font-size: 22pt;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 6mm;
+      flex-grow: 1;
+    }
+
+    .line-image {
+      margin-top: 5mm;
+      text-align: center;
+    }
+
+    .line-image img {
+      max-width: 100%;
+      max-height: 35mm;
+      object-fit: contain;
+      border-radius: 3mm;
+      border: 1px solid var(--card-border);
+    }
+
+    /* Factory Services - 工場でできること */
+    .services-section {
+      margin-bottom: 20mm;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8mm;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 5mm;
+      padding: 8mm;
+    }
+
+    .service-tag {
+      font-size: 20pt;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4mm;
+    }
+
+    .service-title {
+      font-size: 36pt;
+      font-weight: 700;
+      margin-bottom: 6mm;
+    }
+
+    .service-body {
+      font-size: 22pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* フッター・お問い合わせ */
+    .poster-footer {
+      padding-top: 10mm;
+      border-top: 3px solid var(--cyan);
+      text-align: center;
+    }
+
+    .footer-info-image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* 印刷用調整 */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="poster-header">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <span class="brand-name">AIBOD Factory</span>
+    </div>
+    <div class="tagline">Software Manufacturing Platform</div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <h1 class="hero-title">Your Software, Manufactured.</h1>
+    <p class="hero-subtitle">ほしいソフトウェアをすぐにご提供！</p>
+    <p class="hero-desc">
+      ソフトウェア開発を<strong>工場による製造</strong>に進化したAIBOD Factory<br>
+      設計図からソフトウェアを製造します。
+    </p>
+  </section>
+
+  <!-- Factory Model -->
+  <section class="factory-section">
+    <h2 class="section-title">Software Factory Model</h2>
+    <p class="section-sub">設計図、使用部品、製造工程、検査を見える形でソフトウェアを製造</p>
+
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-number">01 Product Design</div>
+        <h3 class="process-title">設計図</h3>
+        <p class="process-body">入出力、画面、データ等の設計項目をわかりやすく可視化</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">02 Parts Shelf</div>
+        <h3 class="process-title">部品</h3>
+        <p class="process-body">使用する部品をわかりやすく整理・管理</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">03 Manufacturing Line</div>
+        <h3 class="process-title">組み立て</h3>
+        <p class="process-body">組み立て工程をわかりやすく可視化</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">04 Quality Check</div>
+        <h3 class="process-title">検証</h3>
+        <p class="process-body">テスト・検証をわかりやすく実施</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Production Lines -->
+  <section class="lines-section">
+    <h2 class="section-title">Production Lines｜量産ソフトウェア</h2>
+    <p class="section-sub">すぐに使える「完成品ライン」。必要に応じて Factory でカスタマイズ可能です。</p>
+
+    <div class="lines-grid">
+      <div class="line-card">
+        <div class="line-header">
+          <img src="img/Factory_naiji.png" alt="Planner" class="line-character">
+          <div>
+            <div class="line-partnumber">9050-031-0001-C</div>
+            <h3 class="line-title">系列受注生産プランナ</h3>
+            <div class="line-badges">
+              <span class="badge">自動車</span>
+              <span class="badge">受注</span>
+              <span class="badge">クラウド</span>
+            </div>
+          </div>
+        </div>
+        <p class="line-body">
+          OEMからの「内示」「確定」注文CSVを取り込み、在庫ポリシーに基づいて
+          日々の生産数量を自動算出するプランニングエンジン。
+        </p>
+        <div class="line-image">
+          <img src="img/visual_example1.png" alt="生産プランナ イメージ">
+        </div>
+      </div>
+
+      <div class="line-card">
+        <div class="line-header">
+          <img src="img/Factory_ao.png" alt="Organizer" class="line-character">
+          <div>
+            <div class="line-partnumber">9050-031-0002-L</div>
+            <h3 class="line-title">自動倉庫オーガナイザ</h3>
+            <div class="line-badges">
+              <span class="badge">自動車</span>
+              <span class="badge">部品物流</span>
+              <span class="badge">ローカル</span>
+            </div>
+          </div>
+        </div>
+        <p class="line-body">
+          部品を製造ラインへタイムリーに搬送するための WMS サブシステム。
+          自動倉庫・AGVとTCPで連携し、供給の進捗を見える化。
+        </p>
+        <div class="line-image">
+          <img src="img/visual_example2.png" alt="自動倉庫 イメージ">
+        </div>
+      </div>
+
+      <div class="line-card">
+        <div class="line-header">
+          <img src="img/Factory_BIN.png" alt="Wafermap" class="line-character">
+          <div>
+            <div class="line-partnumber">9050-028-0003-L</div>
+            <h3 class="line-title">Wafermap アナライザ</h3>
+            <div class="line-badges">
+              <span class="badge">半導体</span>
+              <span class="badge">テスト分析</span>
+              <span class="badge">デスクトップ</span>
+            </div>
+          </div>
+        </div>
+        <p class="line-body">
+          半導体ウエーハマップ画像の特徴抽出と類似検索を行う解析ツール。
+          工程異常や不良パターンを素早く把握。
+        </p>
+        <div class="line-image">
+          <img src="img/visual_example3.png" alt="Wafermap イメージ">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="poster-footer">
+    <img src="./img/AIBOD_info.svg" alt="AIBOD お問い合わせ情報" class="footer-info-image">
+  </footer>
+
+</body>
+</html>
