@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <!-- AIBOD colors -->
+    <linearGradient id="aibodGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00b3ec"/>
+      <stop offset="1" stop-color="#0068b6"/>
+    </linearGradient>
+
+    <style>
+      .title { font: 700 28px "Inter", "Noto Sans JP", system-ui, sans-serif; fill: #0b1b2b; }
+      .subtitle { font: 500 16px "Inter", "Noto Sans JP", system-ui, sans-serif; fill: #35506a; }
+      .h { font: 700 16px "Inter", "Noto Sans JP", system-ui, sans-serif; fill: #0b1b2b; }
+      .t { font: 500 14px "Inter", "Noto Sans JP", system-ui, sans-serif; fill: #0b1b2b; }
+      .s { font: 500 13px "Inter", "Noto Sans JP", system-ui, sans-serif; fill: #35506a; }
+      .mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; fill: #35506a; }
+      .card { fill: #ffffff; stroke: #cfe3f3; stroke-width: 2; rx: 18; }
+      .pill { fill: #eef7ff; stroke: #cfe3f3; stroke-width: 1.5; rx: 999; }
+      .accent { fill: url(#aibodGrad); }
+      .accentStroke { stroke: #0068b6; stroke-width: 2.5; }
+      .arrow { stroke: #0068b6; stroke-width: 3; fill: none; }
+      .dash { stroke-dasharray: 7 7; }
+      .shadow { filter: drop-shadow(0 8px 18px rgba(0,0,0,0.08)); }
+    </style>
+
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0068b6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="760" fill="#f7fbff"/>
+  <rect x="40" y="40" width="1120" height="680" rx="26" fill="#ffffff" stroke="#e3f1fb" stroke-width="2" class="shadow"/>
+
+  <!-- Header -->
+  <text x="80" y="95" class="title">SVA（縦串）× 工場マイクログリッド：瞬時意思決定エネルギーデバイス</text>
+  <text x="80" y="125" class="subtitle">“計算”ではなく“判断”をエッジで完結させ、DR・安定ård shadow" x="0" y="0" width="255" height="235" rx="18"/>
+    <rect class="accent" x="16" y="16" width="223" height="34" rx="10"/>
+    <text x="28" y="39" class="h" fill="#ffffff">アウトカム（現場価値）</text>
+
+    <g transform="translate(18,70)">
+      <rect class="pill" x="0" y="0" width="219" height="34"/>
+      <text x="14" y="22" class="t">生産停止ゼロ（瞬低・異常耐性）</text>
+
+      <rect class="pill" x="0" y="48" width="219" height="34"/>
+      <text x="14" y="70" class="t">DR参加が“怖くない”（自動判断）</text>
+
+      <rect class="pill" x="0" y="96" width="219" height="34"/>
+      <text x="14" y="118" class="t">外貨獲得（調整力・裁定）</text>
+
+      <rect class="pill" x="0" y="144" width="219" height="34"/>
+      <text x="14" y="166" class="t">通信断でも制御継続（自律）</text>
+    </g>
+  </g>
+
+  <!-- Left-side trigger box -->
+  <g transform="translate(80,170)">
+    <rect class="card shadow" x="0" y="0" width="255" height="235" rx="（入力）</text>
+
+    <g transform="translate(18,70)">
+      <rect class="pill" x="0" y="0" width="219" height="34"/>
+      <text x="14" y="22" class="t">DRシグナル（逼迫/価格）</text>
+
+      <rect class="pill" x="0" y="48" width="219" height="34"/>
+      <text x="14" y="70" class="t">系統異常（瞬低・停電）</text>
+
+      <rect class="pill" x="0" y="96" width="219" height="34"/>
+      <text x="14" y="118" class="t">設備状態変化（負荷/温度）</text>
+
+      <rect class="pill" x="0" y="144" width="219" height="34"/>
+      <text x="14" y="166" class="t">契約制約（デマンド/上限）</text>
+    </g>
+  </g>
+
+  <!-- Central vertical SVA stack -->
+  <g transform="translate(365,165)">
+    <!-- Stack container -->
+    <rect x="0" y="0" width="470" height="520" rx="24" fill="#f2f9ff" stroke="#cfe3f3" stroke-width="2"/>
+
+    <!-- Column title -->
+    <g transform="translate(22,18)">
+      <rect class="accent" x="0" y="0" width="426" height="40" rx="14"/>
+      <text x="16" y="2>
+    <!-- 1: App -->
+    <g transform="translate(22,80)">
+      <rect class="card shadow" x="0" y="0" width="426" height="84" rx="18"/>
+      <rect class="accent" x="0" y="0" width="12" height="84" rx="18"/>
+      <text x="24" y="28" class="h">【アプリ層】エネルギー意思決定アプリ</text>
+      <text x="24" y="52" class="s">DR参加 / 価格裁定 / 設備保護 / BCPモード / KPI（外貨獲得）</text>
+      <text x="24" y="73" class="mono">goal: “止めずに稼ぐ”</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path class="arrow" marker-end="url(#arrowHead)" d="M 235 166 L 235 196"/>
+
+    <!-- 2: Model -->
+    <g transform="translate(22,196)">
+      <rect class="card shadow" x="0" y="0" width="426" height="88" rx="18"/>
+      <rect class="accent" x="0" y="0" width="12" height="88" rx="18"/>
+      <text x="24" y="28" class="h">【モデル層】工場固有の状態 × 制約</text>
+      <text x="24" y="52" class="s">契約（デマンド/上限）/ 設備制約（停止NG）/ 優先rrowHead)" d="M 235 284 L 235 314"/>
+
+    <!-- 3: Decision -->
+    <g transform="translate(22,314)">
+      <rect class="card shadow" x="0" y="0" width="426" height="92" rx="18"/>
+      <rect class="accent" x="0" y="0" width="12" height="92" rx="18"/>
+      <text x="24" y="28" class="h">【判断層】秒〜サブ秒の“反射”ロジック</text>
+      <text x="24" y="52" class="s">予測より即応 / 状態遷移 / フェイルセーフ / 例外を前提に設計</text>
+      <text x="24" y="76" class="mono">policy + guardrails</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <path class="arrow" marker-end="url(#arrowHead)" d="M 235 406 L 235 436"/>
+
+    <!-- 4: IO -->
+    <g transform="translate(22,436)">
+      <rect class="card shadow" x="0" y="0" width="426" height="84" rx="18"/>
+      <rect class="accent" x="0" y="0" width="12" height="84" rx="18"/>
+      <text x="24" y="28" class="h">【I/O層】センサー直結・リアルタイム入出力</text>
+      <text x="24" y="52" class="s">電力計 / BMS /    <path class="arrow" marker-end="url(#arrowHead)" d="M 235 520 L 235 550"/>
+
+    <!-- 5: Chip -->
+    <g transform="translate(22,550)">
+      <rect class="card shadow" x="0" y="0" width="426" height="110" rx="18"/>
+      <rect class="accent" x="0" y="0" width="12" height="110" rx="18"/>
+      <text x="24" y="28" class="h">【チップ層】エネルギー意思決定 SoC</text>
+      <text x="24" y="52" class="s">低遅延 / 高信頼 / 通信断でも自律 / 長期供給 / “現場で使える”を担ä    <rect class="pill" x="0" y="0" width="132" height="28"/>
+        <text x="12" y="19" class="mono">μs〜ms反応</text>
+
+        <rect class="pill" x="146" y="0" width="120" height="28"/>
+        <text x="158" class="mono">決定性</text>
+
+        <rect class="pill" x="278" y="0" width="130" height="28"/>
+        <text x="290" y="19" class="mono">ãtext>
+      </g>
+    </g>
+  </g>
+
+  <!-- Connections from left triggers to decision layer (dashed) -->
+  <path class="arrow dash" marker-end="url(#arrowHead)" d="M 335 285 C 360 285, 350 350, 365 360"/>
+  <text x="300" y="320" class="s">イベント</text>
+
+  <!-- Connections from chip to outcomes (dashed) -->
+  <path class="arrow dash" marker-end="url(#arrowHead)" d="M 835 565 C 860 565, 845 300, 865 290"/>
+  <text x="860" y="520" class="s">現場効果</text>
+
+  <!-- Footer note -->
+  <g transform="translate(80,700)">
+    <rect x="0" y="0" width="1040" height="44" rx="14" fill="#eef7ff" stroke="#cfe3f3" stroke-width="1.5"/>
+    <text x="18" y="28" class="t">
+      ポイント：チップ完成 = アプリが現場で動く（縦串で“同時立ち上げ”）。多品種でも「点在×大量導入」でスケールする。
+    </text>
+  </g>
+</svg>
+

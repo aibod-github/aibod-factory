@@ -5,13 +5,24 @@
   <title>AIBOD Factory ポスター｜Software Manufacturing</title>
   <style>
     /* ========================================
-       展示会ポスター用CSS - A1サイズ (594mm x 841mm) 想定
+       展示会ポスター用CSS
        印刷時は 300dpi で出力推奨
        ブラウザで表示後、印刷→PDFで保存→印刷業者へ
+       ========================================
+
+       【サイズ切り替え方法】
+       ■ A4確認用: 下の2箇所を変更
+         @page { size: A4; }
+         body { width: 210mm; }
+
+       ■ A1本番用: 下の2箇所を変更
+         @page { size: 594mm 841mm; }
+         body { width: 594mm; }
        ======================================== */
 
+    /* ===== 現在: A1本番用 ===== */
     @page {
-      size: 594mm 841mm;
+      size: 594mm 841mm;  /* A4の場合: size: A4; A1では594mm 841mm */
       margin: 0;
     }
 
@@ -36,7 +47,7 @@
       font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
       color: var(--ink);
       background: #ffffff;
-      width: 594mm;
+      width: 594mm;  /* A4の場合: 210mm A1では594mm */
       min-height: auto;
       padding: 8mm;
       -webkit-print-color-adjust: exact;
