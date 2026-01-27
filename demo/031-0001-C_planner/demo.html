@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series Make-to-Order Production Planner Demo | AIBOD Factory</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1500px; margin: 0 auto; padding: 20px; }
+
+        .back-btn {
+            position: absolute; top: 15px; left: 20px;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 12px; border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.15);
+            color: white; text-decoration: none; font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.3); }
+
+        .lang-switch {
+            position: absolute; top: 15px; right: 20px;
+            display: flex; gap: 5px;
+        }
+        .lang-btn {
+            padding: 5px 12px; border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1); color: white;
+            border-radius: 4px; cursor: pointer; font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover, .lang-btn.active { background: rgba(255,255,255,0.3); }
+
+        header {
+            background: linear-gradient(135deg, #0f766e 0%, #115e59 50%, #134e4a 100%);
+            color: white; padding: 30px 20px; margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(15, 118, 110, 0.4);
+            position: relative;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header p { opacity: 0.9; font-size: 1rem; }
+        .badge {
+            display: inline-block; background: rgba(255,255,255,0.2);
+            padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; margin-top: 10px;
+        }
+        .badge + .badge { margin-left: 8px; }
+
+        .main-grid {
+            display: grid; grid-template-columns: 440px 1fr; gap: 20px;
+        }
+        @media (max-width: 1024px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: white; border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 20px;
+        }
+
+        .panel-title {
+            font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;
+            padding-bottom: 10px; border-bottom: 2px solid #eee;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .panel-title .icon { font-size: 1.2rem; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block; font-weight: 500; margin-bottom: 5px;
+            font-size: 0.9rem; color: #555;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 10px 12px;
+            border: 1px solid #ddd; border-radius: 8px;
+            font-size: 0.95rem; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none; border-color: #0f766e;
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+        }
+        .form-group textarea {
+            min-height: 180px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.82rem; line-height: 1.5;
+        }
+
+        .btn {
+            padding: 12px 24px; border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.4);
+        }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-secondary { background: #e9ecef; color: #495057; }
+        .btn-secondary:hover { background: #dee2e6; }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+
+        .config-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        }
+
+        .summary-cards {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 15px; margin-bottom: 20px;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            padding: 15px; border-radius: 10px; text-align: center;
+        }
+        .summary-card .value {
+            font-size: 1.8rem; font-weight: 700; color: #0f766e;
+        }
+        .summary-card .label {
+            font-size: 0.85rem; color: #666; margin-top: 5px;
+        }
+
+        .tabs {
+            display: flex; gap: 5px; margin-bottom: 15px;
+            border-bottom: 2px solid #eee; padding-bottom: 5px;
+        }
+        .tab {
+            padding: 8px 16px; border: none; background: none;
+            font-size: 0.9rem; cursor: pointer;
+            border-radius: 6px 6px 0 0; color: #666; transition: all 0.2s;
+        }
+        .tab:hover { background: #f0f0f0; }
+        .tab.active { background: #0f766e; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .gantt-container { overflow-x: auto; margin-top: 15px; }
+        .gantt-chart { min-width: 100%; border-collapse: collapse; }
+        .gantt-header { background: #f8f9fa; position: sticky; top: 0; }
+        .gantt-header th {
+            padding: 10px 5px; font-size: 0.75rem; font-weight: 600;
+            color: #666; border-bottom: 2px solid #dee2e6; min-width: 60px;
+        }
+        .gantt-header th.product-col {
+            min-width: 130px; text-align: left; padding-left: 15px;
+        }
+        .gantt-row { border-bottom: 1px solid #eee; }
+        .gantt-row:hover { background: #f8f9fa; }
+        .gantt-row td { padding: 8px 2px; vertical-align: middle; position: relative; }
+        .gantt-row td.product-cell {
+            padding-left: 15px; font-weight: 500; font-size: 0.9rem;
+        }
+        .gantt-bar {
+            height: 30px; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.72rem; font-weight: 600; color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin: 2px;
+        }
+        .gantt-bar:hover {
+            transform: scale(1.08); box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .product-1 { background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%); }
+        .product-2 { background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%); }
+        .product-3 { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .product-4 { background: linear-gradient(135deg, #dc2626 0%, #f87171 100%); }
+        .product-5 { background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%); }
+        .product-6 { background: linear-gradient(135deg, #c026d3 0%, #e879f9 100%); }
+        .product-7 { background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%); }
+        .product-8 { background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); }
+
+        .stock-chart-container {
+            margin-top: 15px; padding: 15px; background: #f8fafb;
+            border-radius: 8px;
+        }
+        .stock-chart-container h3 {
+            font-size: 0.95rem; margin-bottom: 10px; color: #333;
+        }
+        .stock-canvas-wrap {
+            overflow-x: auto; background: white; border-radius: 6px;
+            padding: 10px; border: 1px solid #eee;
+        }
+
+        .order-table-container { overflow-x: auto; margin-top: 10px; }
+        .order-table {
+            width: 100%; border-collapse: collapse; font-size: 0.85rem;
+        }
+        .order-table th {
+            background: #f0fdfa; padding: 10px 12px; text-align: left;
+            font-weight: 600; color: #0f766e; border-bottom: 2px solid #ccfbf1;
+        }
+        .order-table td {
+            padding: 8px 12px; border-bottom: 1px solid #eee;
+        }
+        .order-table tr:hover { background: #f0fdfa; }
+        .order-type-confirmed {
+            display: inline-block; padding: 2px 8px; border-radius: 12px;
+            font-size: 0.75rem; font-weight: 600;
+            background: #dcfce7; color: #16a34a;
+        }
+        .order-type-forecast {
+            display: inline-block; padding: 2px 8px; border-radius: 12px;
+            font-size: 0.75rem; font-weight: 600;
+            background: #fef3c7; color: #d97706;
+        }
+
+        .timeline-view { margin-top: 15px; }
+        .timeline-day { margin-bottom: 20px; }
+        .timeline-day-header {
+            font-weight: 600; padding: 10px 15px;
+            background: #0f766e; color: white;
+            border-radius: 8px 8px 0 0;
+        }
+        .timeline-slots {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px; padding: 15px; background: #f8f9fa;
+            border-radius: 0 0 8px 8px;
+        }
+        .timeline-slot {
+            background: white; border-radius: 8px; padding: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid #0f766e;
+        }
+        .timeline-slot .time { font-size: 0.8rem; color: #666; margin-bottom: 5px; }
+        .timeline-slot .product { font-weight: 600; margin-bottom: 3px; }
+        .timeline-slot .quantity { font-size: 0.85rem; color: #888; }
+
+        .legend {
+            display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;
+            padding: 15px; background: #f8f9fa; border-radius: 8px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+
+        .status {
+            padding: 12px 15px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem;
+        }
+        .status-error { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+        .status-success { background: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+        .status-loading { background: #e0e7ff; color: #4f46e5; border: 1px solid #c7d2fe; }
+
+        .info-box {
+            background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px;
+            padding: 12px 15px; margin-bottom: 15px; font-size: 0.85rem; color: #0f766e;
+        }
+        .info-box strong { display: block; margin-bottom: 5px; }
+
+        .json-output {
+            background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.8rem; overflow-x: auto; max-height: 400px;
+            overflow-y: auto; white-space: pre-wrap; word-break: break-all;
+        }
+        .json-key { color: #9cdcfe; }
+        .json-string { color: #ce9178; }
+        .json-number { color: #b5cea8; }
+
+        .empty-state { text-align: center; padding: 60px 20px; color: #888; }
+        .empty-state .icon { font-size: 4rem; margin-bottom: 15px; }
+
+        footer {
+            text-align: center; padding: 30px 20px; color: #888; font-size: 0.85rem;
+        }
+        footer a { color: #0f766e; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        .csv-preview {
+            background: #f8f9fa; border-radius: 8px; padding: 10px;
+            margin-top: 10px; font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.78rem; overflow-x: auto; max-height: 200px;
+            overflow-y: auto; border: 1px solid #eee;
+        }
+
+        .section-divider {
+            border: none; border-top: 1px solid #eee; margin: 20px 0;
+        }
+
+        .stock-status-ok { color: #16a34a; font-weight: 600; }
+        .stock-status-low { color: #d97706; font-weight: 600; }
+        .stock-status-shortage { color: #dc2626; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://aibod-github.github.io/aibod-factory/index.html" class="back-btn" data-i18n-text="back_btn">&#8592; AIBOD Factory</a>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">JA</button>
+            </div>
+            <h1 data-i18n="title"></h1>
+            <p data-i18n="subtitle"></p>
+            <span class="badge" data-i18n="badge1"></span>
+            <span class="badge" data-i18n="badge2"></span>
+            <span class="badge" data-i18n="badge3"></span>
+        </header>
+
+        <div class="main-grid">
+            <!-- Left Panel: Input -->
+            <div>
+                <div class="panel" style="margin-bottom: 20px;">
+                    <div class="panel-title">
+                        <span class="icon">&#x1F4E5;</span>
+                        <span data-i18n="input_title"></span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong data-i18n="info_title"></strong>
+                        <span data-i18n="info_desc"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="csv_label"></label>
+                        <textarea id="csvInput" placeholder=""></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" onclick="loadSampleCSV('confirmed')" data-i18n="sample_confirmed"></button>
+                        <button class="btn btn-secondary" onclick="loadSampleCSV('forecast')" data-i18n="sample_forecast"></button>
+                        <button class="btn btn-secondary" onclick="loadSampleCSV('both')" data-i18n="sample_both"></button>
+                    </div>
+                </div>
+
+                <div class="panel" style="margin-bottom: 20px;">
+                    <div class="panel-title">
+                        <span class="icon">&#x2699;&#xFE0F;</span>
+                        <span data-i18n="policy_title"></span>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="form-group">
+                            <label for="planningDays" data-i18n="planning_days"></label>
+                            <input type="number" id="planningDays" value="14" min="1" max="60">
+                        </div>
+                        <div class="form-group">
+                            <label for="lotSize" data-i18n="lot_size"></label>
+                            <input type="number" id="lotSize" value="50" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="safetyStock" data-i18n="safety_stock"></label>
+                            <input type="number" id="safetyStock" value="100" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="minStock" data-i18n="min_stock"></label>
+                            <input type="number" id="minStock" value="30" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="dailyCapacity" data-i18n="daily_capacity"></label>
+                            <input type="number" id="dailyCapacity" value="200" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="forecastRate" data-i18n="forecast_rate"></label>
+                            <input type="number" id="forecastRate" value="80" min="0" max="100" step="5">
+                        </div>
+                    </div>
+
+                    <div class="config-grid" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label for="startDate" data-i18n="start_date"></label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="currentStock" data-i18n="current_stock"></label>
+                            <input type="number" id="currentStock" value="150" min="0">
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="runPlanner" onclick="runPlanner()" data-i18n="run_planner"></button>
+                        <button class="btn btn-secondary" onclick="clearAll()" data-i18n="clear"></button>
+                    </div>
+
+                    <div id="statusMessage"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="panel">
+                <div class="panel-title">
+                    <span class="icon">&#x1F4CA;</span>
+                    <span data-i18n="results_title"></span>
+                </div>
+                <div id="resultsContainer">
+                    <div class="empty-state">
+                        <div class="icon">&#x1F4CB;</div>
+                        <p data-i18n="empty_state"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong data-i18n="footer_product"></strong> by <a href="https://aibod-github.github.io/aibod-factory/">AIBOD Factory</a></p>
+            <p data-i18n="footer_desc"></p>
+        </footer>
+    </div>
+
+<script>
+// ==================== i18n ====================
+const i18n = {
+    ja: {
+        back_btn: "\u2190 AIBOD Factory",
+        title: "\u7CFB\u5217\u53D7\u6CE8\u751F\u7523\u30D7\u30E9\u30F3\u30CA",
+        subtitle: "OEM\u304B\u3089\u306E\u300C\u5185\u793A\u300D\u300C\u78BA\u5B9A\u300D\u6CE8\u6587CSV\u3092\u53D6\u308A\u8FBC\u307F\u3001\u5728\u5EAB\u30DD\u30EA\u30B7\u30FC\u306B\u57FA\u3065\u3044\u3066\u65E5\u3005\u306E\u751F\u7523\u6570\u91CF\u3092\u81EA\u52D5\u7B97\u51FA",
+        badge1: "\u5BFE\u8C61\uFF1A\u81EA\u52D5\u8ECA\u7CFB\u5217",
+        badge2: "\u5165\u529B\uFF1A\u5185\u793A/\u78BA\u5B9ACSV",
+        badge3: "\u51FA\u529B\uFF1A\u65E5\u6B21\u751F\u7523\u8A08\u753B",
+        input_title: "\u30AA\u30FC\u30C0\u30FC CSV \u5165\u529B",
+        info_title: "\u4F7F\u3044\u65B9\uFF1A",
+        info_desc: "OEM\u304B\u3089\u5C4A\u304F\u300C\u5185\u793A\u300D(\u4E88\u6E2C)\u30FB\u300C\u78BA\u5B9A\u300D\u6CE8\u6587CSV\u3092\u8CBC\u308A\u4ED8\u3051\u307E\u3059\u3002\u30D7\u30E9\u30F3\u30CA\u304C\u5728\u5EAB\u30DD\u30EA\u30B7\u30FC\u3068\u7D0D\u671F\u306B\u57FA\u3065\u304D\u3001\u65E5\u6B21\u751F\u7523\u6570\u91CF\u3092\u81EA\u52D5\u7B97\u51FA\u3057\u307E\u3059\u3002",
+        csv_label: "\u30AA\u30FC\u30C0\u30FC\u30C7\u30FC\u30BF (CSV)",
+        sample_confirmed: "\u78BA\u5B9A\u30B5\u30F3\u30D7\u30EB",
+        sample_forecast: "\u5185\u793A\u30B5\u30F3\u30D7\u30EB",
+        sample_both: "\u5185\u793A+\u78BA\u5B9A\u30B5\u30F3\u30D7\u30EB",
+        policy_title: "\u5728\u5EAB\u30DD\u30EA\u30B7\u30FC\u30FB\u8A2D\u5B9A",
+        planning_days: "\u8A08\u753B\u65E5\u6570",
+        lot_size: "\u30ED\u30C3\u30C8\u30B5\u30A4\u30BA",
+        safety_stock: "\u5B89\u5168\u5728\u5EAB",
+        min_stock: "\u6700\u4F4E\u5728\u5EAB",
+        daily_capacity: "\u65E5\u6B21\u751F\u7523\u80FD\u529B",
+        forecast_rate: "\u5185\u793A\u63A1\u7528\u7387 (%)",
+        start_date: "\u8A08\u753B\u958B\u59CB\u65E5",
+        current_stock: "\u73FE\u5728\u5728\u5EAB\u6570",
+        run_planner: "\u25B6 \u751F\u7523\u8A08\u753B\u3092\u751F\u6210",
+        clear: "\u30AF\u30EA\u30A2",
+        results_title: "\u751F\u7523\u8A08\u753B\u7D50\u679C",
+        empty_state: "\u30D7\u30E9\u30F3\u30CA\u3092\u5B9F\u884C\u3057\u3066\u7D50\u679C\u3092\u8868\u793A",
+        footer_product: "\u7CFB\u5217\u53D7\u6CE8\u751F\u7523\u30D7\u30E9\u30F3\u30CA",
+        footer_desc: "OEM\u306E\u5185\u793A\u30FB\u78BA\u5B9A\u30AA\u30FC\u30C0\u30FC\u304B\u3089\u5728\u5EAB\u30DD\u30EA\u30B7\u30FC\u3092\u53CD\u6620\u3057\u305F\u65E5\u6B21\u751F\u7523\u8A08\u753BCSV\u3092\u81EA\u52D5\u751F\u6210\u3059\u308B\u30D7\u30E9\u30F3\u30CB\u30F3\u30B0\u30A8\u30F3\u30B8\u30F3\u3067\u3059\u3002",
+        tab_gantt: "\u30AC\u30F3\u30C8\u30C1\u30E3\u30FC\u30C8",
+        tab_stock: "\u5728\u5EAB\u63A8\u79FB",
+        tab_orders: "\u30AA\u30FC\u30C0\u30FC\u4E00\u89A7",
+        tab_plan_csv: "\u8A08\u753BCSV",
+        tab_json: "JSON",
+        card_total_orders: "\u30AA\u30FC\u30C0\u30FC\u6570",
+        card_prod_days: "\u751F\u7523\u65E5\u6570",
+        card_total_qty: "\u7DCF\u751F\u7523\u6570",
+        card_stock_status: "\u6700\u7D42\u5728\u5EAB\u72B6\u614B",
+        product: "\u88FD\u54C1",
+        date: "\u65E5\u4ED8",
+        confirmed: "\u78BA\u5B9A",
+        forecast: "\u5185\u793A",
+        quantity: "\u6570\u91CF",
+        due_date: "\u7D0D\u671F",
+        type: "\u7A2E\u5225",
+        planned_qty: "\u8A08\u753B\u6570",
+        stock_level: "\u5728\u5EAB\u6570",
+        demand: "\u9700\u8981",
+        production: "\u751F\u7523",
+        units: "\u500B",
+        status_ok: "OK",
+        status_low: "\u4F4E\u4E0B",
+        status_shortage: "\u4E0D\u8DB3",
+        running: "\u751F\u7523\u8A08\u753B\u751F\u6210\u4E2D...",
+        success: "{0}\u65E5\u9593\u306E\u751F\u7523\u8A08\u753B\u3092 {1}\u79D2 \u3067\u751F\u6210",
+        error_no_csv: "CSV\u30C7\u30FC\u30BF\u304C\u5165\u529B\u3055\u308C\u3066\u3044\u307E\u305B\u3093",
+        error_csv_format: "CSV\u5F62\u5F0F\u304C\u4E0D\u6B63\u3067\u3059\u3002\u30D8\u30C3\u30C0\u30FC\u884C\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044",
+        stock_chart_title: "\u5728\u5EAB\u63A8\u79FB\u30B0\u30E9\u30D5",
+        csv_output_title: "\u65E5\u6B21\u751F\u7523\u8A08\u753BCSV\u51FA\u529B",
+        csv_header: "\u65E5\u4ED8,\u88FD\u54C1,\u8A08\u753B\u751F\u7523\u6570,\u51FA\u8377\u6570,\u898B\u8FBC\u5728\u5EAB,\u30B9\u30C6\u30FC\u30BF\u30B9"
+    },
+    en: {
+        back_btn: "\u2190 AIBOD Factory",
+        title: "Series Make-to-Order Production Planner",
+        subtitle: "Import forecast & confirmed order CSVs from OEM, auto-calculate daily production quantities based on inventory policy",
+        badge1: "Target: Automotive OEM Supply",
+        badge2: "Input: Forecast / Confirmed CSV",
+        badge3: "Output: Daily Production Plan",
+        input_title: "Order CSV Input",
+        info_title: "How it works:",
+        info_desc: "Paste forecast and confirmed order CSVs from your OEM. The planner auto-calculates daily production quantities based on inventory policies, due dates, and demand forecasts.",
+        csv_label: "Order Data (CSV)",
+        sample_confirmed: "Confirmed Sample",
+        sample_forecast: "Forecast Sample",
+        sample_both: "Both Sample",
+        policy_title: "Inventory Policy & Settings",
+        planning_days: "Planning Days",
+        lot_size: "Lot Size",
+        safety_stock: "Safety Stock",
+        min_stock: "Minimum Stock",
+        daily_capacity: "Daily Capacity",
+        forecast_rate: "Forecast Adoption Rate (%)",
+        start_date: "Plan Start Date",
+        current_stock: "Current Stock",
+        run_planner: "\u25B6 Generate Production Plan",
+        clear: "Clear",
+        results_title: "Production Plan Results",
+        empty_state: "Run the planner to see results",
+        footer_product: "Series Make-to-Order Production Planner",
+        footer_desc: "A planning engine that auto-generates daily production plan CSV reflecting inventory policy from OEM forecast & confirmed orders.",
+        tab_gantt: "Gantt Chart",
+        tab_stock: "Stock Trend",
+        tab_orders: "Order List",
+        tab_plan_csv: "Plan CSV",
+        tab_json: "JSON",
+        card_total_orders: "Orders",
+        card_prod_days: "Production Days",
+        card_total_qty: "Total Production",
+        card_stock_status: "Final Stock Status",
+        product: "Product",
+        date: "Date",
+        confirmed: "Confirmed",
+        forecast: "Forecast",
+        quantity: "Quantity",
+        due_date: "Due Date",
+        type: "Type",
+        planned_qty: "Planned Qty",
+        stock_level: "Stock Level",
+        demand: "Demand",
+        production: "Production",
+        units: "units",
+        status_ok: "OK",
+        status_low: "LOW",
+        status_shortage: "SHORTAGE",
+        running: "Generating production plan...",
+        success: "Generated {0}-day production plan in {1}s",
+        error_no_csv: "No CSV data provided",
+        error_csv_format: "Invalid CSV format. Please check the header row.",
+        stock_chart_title: "Stock Level Trend",
+        csv_output_title: "Daily Production Plan CSV Output",
+        csv_header: "date,product,planned_qty,shipment_qty,projected_stock,status"
+    }
+};
+
+let currentLang = 'ja';
+
+function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[lang][key]) el.textContent = i18n[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-text]').forEach(el => {
+        const key = el.getAttribute('data-i18n-text');
+        if (i18n[lang][key]) el.textContent = i18n[lang][key];
+    });
+    // Reload sample if textarea has content
+    const csv = document.getElementById('csvInput').value.trim();
+    if (csv) loadSampleCSV('both');
+}
+
+function t(key, ...args) {
+    let text = i18n[currentLang][key] || i18n['en'][key] || key;
+    args.forEach((arg, i) => { text = text.replace(`{${i}}`, arg); });
+    return text;
+}
+
+// ==================== Date helpers ====================
+function getDateStr(daysFromNow) {
+    const d = new Date();
+    d.setDate(d.getDate() + daysFromNow);
+    return d.toISOString().split('T')[0];
+}
+function formatDateShort(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getMonth()+1}/${d.getDate()}`;
+}
+
+// ==================== Initialization ====================
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('startDate').value = getDateStr(0);
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && (langParam === 'en' || langParam === 'ja')) {
+        setLang(langParam);
+    } else {
+        setLang('ja');
+    }
+    loadSampleCSV('both');
+});
+
+// ==================== Sample CSV Data ====================
+function getSampleProducts() {
+    return currentLang === 'ja'
+        ? ["BRK-A100", "BRK-B200", "BRK-C300"]
+        : ["BRK-A100", "BRK-B200", "BRK-C300"];
+}
+
+function loadSampleCSV(type) {
+    const products = getSampleProducts();
+    const header = currentLang === 'ja'
+        ? "\u6CE8\u6587\u756A\u53F7,\u88FD\u54C1\u30B3\u30FC\u30C9,\u6570\u91CF,\u7D0D\u671F,\u7A2E\u5225"
+        : "order_no,product_code,quantity,due_date,type";
+
+    const confirmed = [
+        `ORD-001,${products[0]},120,${getDateStr(3)},confirmed`,
+        `ORD-002,${products[1]},80,${getDateStr(4)},confirmed`,
+        `ORD-003,${products[0]},60,${getDateStr(6)},confirmed`,
+        `ORD-004,${products[2]},100,${getDateStr(5)},confirmed`,
+        `ORD-005,${products[1]},40,${getDateStr(7)},confirmed`,
+    ];
+
+    const forecast = [
+        `FCT-001,${products[0]},200,${getDateStr(8)},forecast`,
+        `FCT-002,${products[1]},150,${getDateStr(9)},forecast`,
+        `FCT-003,${products[2]},180,${getDateStr(10)},forecast`,
+        `FCT-004,${products[0]},160,${getDateStr(12)},forecast`,
+        `FCT-005,${products[1]},120,${getDateStr(13)},forecast`,
+        `FCT-006,${products[2]},90,${getDateStr(11)},forecast`,
+    ];
+
+    let rows;
+    if (type === 'confirmed') rows = confirmed;
+    else if (type === 'forecast') rows = forecast;
+    else rows = [...confirmed, ...forecast];
+
+    document.getElementById('csvInput').value = header + '\n' + rows.join('\n');
+}
+
+function clearAll() {
+    document.getElementById('csvInput').value = '';
+    document.getElementById('resultsContainer').innerHTML =
+        `<div class="empty-state"><div class="icon">&#x1F4CB;</div><p>${t('empty_state')}</p></div>`;
+    document.getElementById('statusMessage').innerHTML = '';
+}
+
+// ==================== CSV Parser ====================
+function parseCSV(csvText) {
+    const lines = csvText.trim().split('\n').map(l => l.trim()).filter(l => l);
+    if (lines.length < 2) throw new Error(t('error_csv_format'));
+
+    const headers = lines[0].split(',').map(h => h.trim());
+    const orders = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const cells = lines[i].split(',').map(c => c.trim());
+        if (cells.length < 5) continue;
+        orders.push({
+            order_no: cells[0],
+            product_code: cells[1],
+            quantity: parseInt(cells[2]) || 0,
+            due_date: cells[3],
+            type: cells[4].toLowerCase().includes('confirm') ? 'confirmed'
+                : cells[4].toLowerCase().includes('forecast') ? 'forecast'
+                : cells[4].toLowerCase()
+        });
+    }
+    return orders;
+}
+
+// ==================== Planner Engine ====================
+function runPlanner() {
+    const btn = document.getElementById('runPlanner');
+    const statusDiv = document.getElementById('statusMessage');
+    btn.disabled = true;
+    statusDiv.innerHTML = `<div class="status status-loading">${t('running')}</div>`;
+
+    setTimeout(() => {
+        try {
+            const startTime = performance.now();
+            const csvText = document.getElementById('csvInput').value.trim();
+            if (!csvText) throw new Error(t('error_no_csv'));
+
+            const orders = parseCSV(csvText);
+            if (orders.length === 0) throw new Error(t('error_no_csv'));
+
+            const config = {
+                planning_days: parseInt(document.getElementById('planningDays').value) || 14,
+                lot_size: parseInt(document.getElementById('lotSize').value) || 50,
+                safety_stock: parseInt(document.getElementById('safetyStock').value) || 100,
+                min_stock: parseInt(document.getElementById('minStock').value) || 30,
+                daily_capacity: parseInt(document.getElementById('dailyCapacity').value) || 200,
+                forecast_rate: (parseInt(document.getElementById('forecastRate').value) || 80) / 100,
+                start_date: document.getElementById('startDate').value || getDateStr(0),
+                current_stock: parseInt(document.getElementById('currentStock').value) || 150
+            };
+
+            const result = generatePlan(orders, config);
+            const elapsed = ((performance.now() - startTime) / 1000).toFixed(3);
+            result.elapsed = parseFloat(elapsed);
+
+            statusDiv.innerHTML = `<div class="status status-success">${t('success', result.production_days, elapsed)}</div>`;
+            renderResults(result);
+        } catch (err) {
+            statusDiv.innerHTML = `<div class="status status-error">${err.message}</div>`;
+        } finally {
+            btn.disabled = false;
+        }
+    }, 80);
+}
+
+function generatePlan(orders, config) {
+    // Group orders by product
+    const productGroups = {};
+    orders.forEach(o => {
+        if (!productGroups[o.product_code]) productGroups[o.product_code] = [];
+        productGroups[o.product_code].push(o);
+    });
+
+    const products = Object.keys(productGroups);
+    const startDate = new Date(config.start_date);
+    const dailyPlan = [];
+    const stockHistory = {};
+
+    // Initialize stock per product (split evenly for demo)
+    const stockPerProduct = {};
+    products.forEach((p, i) => {
+        stockPerProduct[p] = Math.round(config.current_stock / products.length);
+    });
+
+    let totalProduction = 0;
+    let productionDayCount = 0;
+
+    // Generate daily plan for each day
+    for (let day = 0; day < config.planning_days; day++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(currentDate.getDate() + day);
+        const dateStr = currentDate.toISOString().split('T')[0];
+
+        let dayHasProduction = false;
+        let remainingCapacity = config.daily_capacity;
+
+        products.forEach(productCode => {
+            const productOrders = productGroups[productCode];
+            // Calculate demand for this date
+            let demand = 0;
+            productOrders.forEach(o => {
+                const dueDate = new Date(o.due_date);
+                const daysUntilDue = Math.ceil((dueDate - currentDate) / (1000 * 60 * 60 * 24));
+
+                if (daysUntilDue >= 0 && daysUntilDue <= 3) {
+                    // Approaching due date - high urgency
+                    const effectiveQty = o.type === 'forecast'
+                        ? Math.round(o.quantity * config.forecast_rate)
+                        : o.quantity;
+                    demand += Math.round(effectiveQty / Math.max(1, daysUntilDue + 1));
+                }
+            });
+
+            // Check stock policy
+            const currentStock = stockPerProduct[productCode] || 0;
+            let plannedQty = 0;
+
+            if (currentStock - demand < config.min_stock) {
+                // Need to produce to reach safety stock
+                plannedQty = config.safety_stock - (currentStock - demand);
+            } else if (currentStock - demand < config.safety_stock) {
+                // Top up to safety stock
+                plannedQty = config.safety_stock - (currentStock - demand);
+                plannedQty = Math.round(plannedQty * 0.5); // Partial top-up
+            }
+
+            // Round to lot size
+            if (plannedQty > 0) {
+                plannedQty = Math.ceil(plannedQty / config.lot_size) * config.lot_size;
+                plannedQty = Math.min(plannedQty, remainingCapacity);
+                remainingCapacity -= plannedQty;
+            }
+
+            const newStock = currentStock - demand + plannedQty;
+            stockPerProduct[productCode] = Math.max(0, newStock);
+
+            let status;
+            if (newStock >= config.safety_stock) status = 'ok';
+            else if (newStock >= config.min_stock) status = 'low';
+            else status = 'shortage';
+
+            dailyPlan.push({
+                date: dateStr,
+                product: productCode,
+                demand: demand,
+                planned_qty: plannedQty,
+                projected_stock: Math.max(0, newStock),
+                status: status
+            });
+
+            if (plannedQty > 0) {
+                dayHasProduction = true;
+                totalProduction += plannedQty;
+            }
+
+            // Track stock history
+            if (!stockHistory[productCode]) stockHistory[productCode] = [];
+            stockHistory[productCode].push({
+                date: dateStr,
+                stock: Math.max(0, newStock),
+                demand: demand,
+                production: plannedQty,
+                status: status
+            });
+        });
+
+        if (dayHasProduction) productionDayCount++;
+    }
+
+    return {
+        orders: orders,
+        daily_plan: dailyPlan,
+        stock_history: stockHistory,
+        products: products,
+        config: config,
+        production_days: productionDayCount,
+        total_production: totalProduction
+    };
+}
+
+// ==================== Rendering ====================
+function renderResults(result) {
+    const container = document.getElementById('resultsContainer');
+    const finalStatuses = {};
+    result.products.forEach(p => {
+        const history = result.stock_history[p];
+        finalStatuses[p] = history[history.length - 1].status;
+    });
+    const worstStatus = Object.values(finalStatuses).includes('shortage') ? 'shortage'
+        : Object.values(finalStatuses).includes('low') ? 'low' : 'ok';
+
+    const statusClass = worstStatus === 'ok' ? 'stock-status-ok'
+        : worstStatus === 'low' ? 'stock-status-low' : 'stock-status-shortage';
+
+    let html = `
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="value">${result.orders.length}</div>
+                <div class="label">${t('card_total_orders')}</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">${result.production_days}</div>
+                <div class="label">${t('card_prod_days')}</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">${result.total_production.toLocaleString()}</div>
+                <div class="label">${t('card_total_qty')}</div>
+            </div>
+            <div class="summary-card">
+                <div class="value ${statusClass}">${t('status_' + worstStatus)}</div>
+                <div class="label">${t('card_stock_status')}</div>
+            </div>
+        </div>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'gantt')">${t('tab_gantt')}</button>
+            <button class="tab" onclick="switchTab(this,'stock')">${t('tab_stock')}</button>
+            <button class="tab" onclick="switchTab(this,'orders')">${t('tab_orders')}</button>
+            <button class="tab" onclick="switchTab(this,'plancsv')">${t('tab_plan_csv')}</button>
+            <button class="tab" onclick="switchTab(this,'json')">${t('tab_json')}</button>
+        </div>
+        <div id="gantt" class="tab-content active">
+            ${renderGantt(result)}
+        </div>
+        <div id="stock" class="tab-content">
+            ${renderStockChart(result)}
+        </div>
+        <div id="orders" class="tab-content">
+            ${renderOrderTable(result)}
+        </div>
+        <div id="plancsv" class="tab-content">
+            ${renderPlanCSV(result)}
+        </div>
+        <div id="json" class="tab-content">
+            <div class="json-output">${syntaxHighlight(JSON.stringify(result, null, 2))}</div>
+        </div>
+        <div class="legend">
+            ${result.products.map((p, i) => `
+                <div class="legend-item">
+                    <div class="legend-color product-${(i % 8) + 1}"></div>
+                    <span>${p}</span>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    container.innerHTML = html;
+
+    // Draw canvas stock chart
+    drawStockCanvas(result);
+}
+
+function renderGantt(result) {
+    const dates = [...new Set(result.daily_plan.map(d => d.date))].sort();
+    const products = result.products;
+
+    let html = '<div class="gantt-container"><table class="gantt-chart">';
+    html += `<thead class="gantt-header"><tr><th class="product-col">${t('product')}</th>`;
+    dates.forEach(d => { html += `<th>${formatDateShort(d)}</th>`; });
+    html += '</tr></thead><tbody>';
+
+    products.forEach((prod, pi) => {
+        html += `<tr class="gantt-row"><td class="product-cell">${prod}</td>`;
+        dates.forEach(date => {
+            const entry = result.daily_plan.find(e => e.product === prod && e.date === date);
+            if (entry && entry.planned_qty > 0) {
+                html += `<td><div class="gantt-bar product-${(pi % 8) + 1}" title="${prod}: ${entry.planned_qty} ${t('units')}">${entry.planned_qty}</div></td>`;
+            } else {
+                html += '<td></td>';
+            }
+        });
+        html += '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+    return html;
+}
+
+function renderStockChart(result) {
+    let html = `<div class="stock-chart-container">
+        <h3>${t('stock_chart_title')}</h3>
+        <div class="stock-canvas-wrap">
+            <canvas id="stockCanvas" width="900" height="350"></canvas>
+        </div>
+    </div>`;
+    return html;
+}
+
+function drawStockCanvas(result) {
+    const canvas = document.getElementById('stockCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const padding = { top: 30, right: 20, bottom: 60, left: 60 };
+    const chartW = W - padding.left - padding.right;
+    const chartH = H - padding.top - padding.bottom;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, W, H);
+
+    const colors = ['#0f766e', '#b45309', '#7c3aed', '#dc2626', '#2563eb', '#c026d3', '#ea580c', '#0284c7'];
+    const products = result.products;
+    const allStockValues = [];
+    products.forEach(p => {
+        result.stock_history[p].forEach(h => allStockValues.push(h.stock));
+    });
+    const maxStock = Math.max(...allStockValues, result.config.safety_stock + 50);
+    const dates = result.stock_history[products[0]].map(h => h.date);
+
+    // Grid lines
+    ctx.strokeStyle = '#eee';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+        const y = padding.top + (chartH / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(W - padding.right, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#999';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(Math.round(maxStock - (maxStock / 5) * i), padding.left - 8, y + 4);
+    }
+
+    // Safety stock line
+    const safetyY = padding.top + chartH * (1 - result.config.safety_stock / maxStock);
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(padding.left, safetyY);
+    ctx.lineTo(W - padding.right, safetyY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#f59e0b';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'left';
+    const safetyLabel = currentLang === 'ja' ? '\u5B89\u5168\u5728\u5EAB' : 'Safety Stock';
+    ctx.fillText(safetyLabel, W - padding.right - 70, safetyY - 5);
+
+    // Min stock line
+    const minY = padding.top + chartH * (1 - result.config.min_stock / maxStock);
+    ctx.strokeStyle = '#dc2626';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(padding.left, minY);
+    ctx.lineTo(W - padding.right, minY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#dc2626';
+    const minLabel = currentLang === 'ja' ? '\u6700\u4F4E\u5728\u5EAB' : 'Min Stock';
+    ctx.fillText(minLabel, W - padding.right - 70, minY - 5);
+
+    // Date labels
+    ctx.fillStyle = '#666';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    dates.forEach((d, i) => {
+        const x = padding.left + (chartW / (dates.length - 1 || 1)) * i;
+        ctx.save();
+        ctx.translate(x, H - padding.bottom + 15);
+        ctx.rotate(-0.5);
+        ctx.fillText(formatDateShort(d), 0, 0);
+        ctx.restore();
+    });
+
+    // Draw lines per product
+    products.forEach((prod, pi) => {
+        const history = result.stock_history[prod];
+        const color = colors[pi % colors.length];
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        history.forEach((h, i) => {
+            const x = padding.left + (chartW / (dates.length - 1 || 1)) * i;
+            const y = padding.top + chartH * (1 - h.stock / maxStock);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        // Dots
+        history.forEach((h, i) => {
+            const x = padding.left + (chartW / (dates.length - 1 || 1)) * i;
+            const y = padding.top + chartH * (1 - h.stock / maxStock);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Product label at end
+        const lastH = history[history.length - 1];
+        const lx = padding.left + chartW;
+        const ly = padding.top + chartH * (1 - lastH.stock / maxStock);
+        ctx.fillStyle = color;
+        ctx.font = 'bold 10px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(prod, lx + 5, ly + 4);
+    });
+}
+
+function renderOrderTable(result) {
+    let html = '<div class="order-table-container"><table class="order-table">';
+    html += `<thead><tr>
+        <th>${t('type')}</th>
+        <th>No.</th>
+        <th>${t('product')}</th>
+        <th>${t('quantity')}</th>
+        <th>${t('due_date')}</th>
+    </tr></thead><tbody>`;
+
+    result.orders
+        .sort((a, b) => new Date(a.due_date) - new Date(b.due_date))
+        .forEach(o => {
+            const typeClass = o.type === 'confirmed' ? 'order-type-confirmed' : 'order-type-forecast';
+            const typeLabel = o.type === 'confirmed' ? t('confirmed') : t('forecast');
+            html += `<tr>
+                <td><span class="${typeClass}">${typeLabel}</span></td>
+                <td>${o.order_no}</td>
+                <td>${o.product_code}</td>
+                <td>${o.quantity.toLocaleString()}</td>
+                <td>${o.due_date}</td>
+            </tr>`;
+        });
+
+    html += '</tbody></table></div>';
+    return html;
+}
+
+function renderPlanCSV(result) {
+    const header = t('csv_header');
+    const rows = result.daily_plan
+        .filter(e => e.planned_qty > 0 || e.demand > 0)
+        .map(e => {
+            const statusLabel = t('status_' + e.status);
+            return `${e.date},${e.product},${e.planned_qty},${e.demand},${e.projected_stock},${statusLabel}`;
+        });
+
+    const csvContent = header + '\n' + rows.join('\n');
+
+    let html = `<div>
+        <h3 style="font-size:0.95rem; margin-bottom:10px;">${t('csv_output_title')}</h3>
+        <div class="csv-preview">${csvContent}</div>
+        <div class="btn-group">
+            <button class="btn btn-secondary" onclick="copyCSV()">&#x1F4CB; Copy CSV</button>
+            <button class="btn btn-secondary" onclick="downloadCSV()">&#x1F4E5; Download CSV</button>
+        </div>
+    </div>`;
+    return html;
+}
+
+function copyCSV() {
+    const csvEl = document.querySelector('.csv-preview');
+    if (csvEl) {
+        navigator.clipboard.writeText(csvEl.textContent).then(() => {
+            const btn = event.target;
+            const orig = btn.textContent;
+            btn.textContent = currentLang === 'ja' ? 'Copied!' : 'Copied!';
+            setTimeout(() => btn.textContent = orig, 1500);
+        });
+    }
+}
+
+function downloadCSV() {
+    const csvEl = document.querySelector('.csv-preview');
+    if (csvEl) {
+        const blob = new Blob([csvEl.textContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'production_plan.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+}
+
+// ==================== Utility ====================
+function switchTab(btn, tabId) {
+    btn.closest('.panel').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.closest('.panel').querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+
+    if (tabId === 'stock') {
+        setTimeout(() => drawStockCanvas(window._lastResult), 50);
+    }
+}
+
+function syntaxHighlight(json) {
+    return json
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            let cls = 'json-number';
+            if (/^"/.test(match)) cls = /:$/.test(match) ? 'json-key' : 'json-string';
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+}
+
+// Store last result for canvas redraw
+const _origRender = renderResults;
+renderResults = function(result) {
+    window._lastResult = result;
+    _origRender(result);
+};
+</script>
+</body>
+</html>
