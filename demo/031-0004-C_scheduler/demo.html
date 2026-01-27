@@ -25,6 +25,28 @@
             padding: 20px;
         }
 
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
         /* Language Switcher */
         .lang-switch {
             position: absolute;
@@ -514,6 +536,7 @@
 <body>
     <div class="container">
         <header>
+            <a class="back-btn" href="../../index.html" data-i18n="back">← Back</a>
             <div class="lang-switch">
                 <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">JA</button>
@@ -598,6 +621,7 @@
         // ==================== Internationalization ====================
         const i18n = {
             en: {
+                back: "Back",
                 title: "Simple Scheduler",
                 subtitle: "Orders-only scheduling - No master data required",
                 badge: "100% Client-side - No server needed",
@@ -630,6 +654,7 @@
                 units: "units"
             },
             ja: {
+                back: "戻る",
                 title: "シンプル スケジューラ",
                 subtitle: "オーダーのみで稼働 - マスタデータ不要",
                 badge: "100% クライアント側 - サーバー不要",
