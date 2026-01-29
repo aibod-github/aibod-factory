@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DIO Demo UI (Microgrid / Factory Energy)</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1b30;
+      --panel2:#0c172a;
+      --text:#e9f1ff;
+      --muted:#9bb0d1;
+      --line:#223a63;
+      --ok:#31d0aa;
+      --warn:#ffcc66;
+      --bad:#ff6b6b;
+      --aibod1:#00b3ec;
+      --aibod2:#0068b6;
+      --aibod3:#1d2087;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 15% 10%, rgba(0,179,236,.18), transparent 60%),
+                  radial-gradient(900px 700px at 80% 25%, rgba(29,32,135,.18), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      line-height:1.35;
+    }
+    header{
+      padding:18px 18px 8px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, var(--aibod1), var(--aibod2) 55%, var(--aibod3));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), transparent 45%);
+      transform: rotate(20deg);
+    }
+    h1{
+      font-size:16px; margin:0;
+      letter-spacing:.2px;
+    }
+    .sub{color:var(--muted); font-size:12px; margin-top:2px}
+    .controls{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+    button{
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      cursor:pointer;
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      font-weight:600;
+      font-size:12px;
+    }
+    button:hover{border-color: rgba(255,255,255,.22)}
+    button.primary{
+      border-color: rgba(0,179,236,.45);
+      background: linear-gradient(180deg, rgba(0,179,236,.22), rgba(0,104,182,.10));
+    }
+    .wrap{
+      padding:10px 18px 22px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 14px 10px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(0,179,236,.12), transparent 75%);
+    }
+    .card .hd .t{font-weight:800; font-size:13px}
+    .card .hd .meta{color:var(--muted); font-size:12px}
+    .card .bd{padding:14px}
+    .kpis{
+      display:grid; grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    .kpi{
+      background: rgba(15,27,48,.55);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    .kpi .label{color:var(--muted); font-size:11px}
+    .kpi .value{font-weight:900; font-size:18px; margin-top:4px}
+    .kpi .delta{margin-top:6px; font-size:11px; color:var(--muted)}
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    canvas{
+      width:100%;
+      height:320px;
+      background: rgba(10,18,34,.55);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+    }
+    .legend{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .dot{width:10px;height:10px;border-radius:99px;display:inline-block;margin-right:6px}
+    .dot.before{background: rgba(255,204,102,.9)}
+    .dot.after{background: rgba(49,208,170,.9)}
+    .dot.limit{background: rgba(155,176,209,.9)}
+    .list{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .item{
+      background: rgba(15,27,48,.55);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    .item .top{display:flex; justify-content:space-between; gap:10px; align-items:center}
+    .tag{
+      font-size:11px; font-weight:800;
+      padding:6px 9px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+    .tag.plan{border-color: rgba(0,179,236,.35); color: rgba(0,179,236,.95)}
+    .tag.exec{border-color: rgba(49,208,170,.35); color: rgba(49,208,170,.95)}
+    .tag.risk{border-color: rgba(255,107,107,.35); color: rgba(255,107,107,.95)}
+    .item .desc{color:var(--text); margin-top:6px; font-size:12px}
+    .item .subdesc{color:var(--muted); margin-top:4px; font-size:11px}
+    .split{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    .io{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    textarea{
+      width:100%;
+      min-height:220px;
+      resize:vertical;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,18,34,.55);
+      color:var(--text);
+      padding:12px 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:11px;
+      line-height:1.35;
+      outline:none;
+    }
+    .row{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .pill{
+      font-size:11px; color:var(--muted);
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    footer{
+      padding:0 18px 18px;
+      color:var(--muted);
+      font-size:11px;
+    }
+    @media (max-width: 1100px){
+      .wrap{grid-template-columns: 1fr}
+      .kpis{grid-template-columns: repeat(2, 1fr)}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>DIO Demo UI — 工場/倉庫エネルギー最適化</h1>
+        <div class="sub">Before/After需要・ピーク・DIOアクション・価値(¥) を一画面で提示</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="primary" id="btnRun">DIOで計画生成</button>
+      <button id="btnRandom">ダミーデータ生成</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- Left: Visualization -->
+    <section class="card">
+      <div class="hd">
+        <div>
+          <div class="t">需要カーブ（Before / After）</div>
+          <div class="meta" id="metaLine">15分粒度 / 1日分</div>
+        </div>
+        <div class="legend">
+          <span><span class="dot before"></span>Before</span>
+          <span><span class="dot after"></span>After</span>
+          <span><span class="dot limit"></span>契約/目標ピーク</span>
+        </div>
+      </div>
+
+      <div class="bd">
+        <div class="kpis">
+          <div class="kpi">
+            <div class="label">予測ピーク (Before)</div>
+            <div class="value" id="kpiPeakBefore">—</div>
+            <div class="delta" id="kpiPeakBeforeT">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">予測ピーク (After)</div>
+            <div class="value" id="kpiPeakAfter">—</div>
+            <div class="delta" id="kpiPeakAfterT">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">基本料金削減 (月)</div>
+            <div class="value" id="kpiBasicSave">—</div>
+            <div class="delta">ピーク抑制 × 円/kW/月</div>
+          </div>
+          <div class="kpi">
+            <div class="label">従量料金削減 (日)</div>
+            <div class="value" id="kpiEnergySave">—</div>
+            <div class="delta">ピーク→オフピーク移動</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <canvas id="chart" width="1200" height="640"></canvas>
+            <div class="row">
+              <span class="pill" id="pillTariff">TOU: peak/offpeak</span>
+              <span class="pill" id="pillGoal">Goal peak: — kW</span>
+              <span class="pill" id="pillDR">DR: off</span>
+            </div>
+          </div>
+
+          <div class="split">
+            <div class="card" style="background:rgba(15,27,48,.35); border-color: rgba(255,255,255,.08)">
+              <div class="hd" style="border-bottom-color: rgba(255,255,255,.06)">
+                <div>
+                  <div class="t">DIOアクション（Plan）</div>
+                  <div class="meta">アクションを文章で出す</div>
+                </div>
+              </div>
+              <div class="bd">
+                <div class="list" id="actionList"></div>
+              </div>
+            </div>
+
+            <div class="card" style="background:rgba(15,27,48,.35); border-color: rgba(255,255,255,.08)">
+              <div class="hd" style="border-bottom-color: rgba(255,255,255,.06)">
+                <div>
+                  <div class="t">状態とリスク</div>
+                  <div class="meta">現場に刺さる"ひとこと"</div>
+                </div>
+              </div>
+              <div class="bd">
+                <div class="list" id="riskList"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: JSON IO -->
+    <aside class="card">
+      <div class="hd">
+        <div>
+          <div class="t">入力JSON（デモ用）</div>
+          <div class="meta">ここを差し替えるだけで、UIの見た目が変わる</div>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="io">
+          <textarea id="jsonInput"></textarea>
+          <div class="row">
+            <button id="btnCopy">JSONをコピー</button>
+            <span class="pill">Tip: 工場なら compressor / furnace / HVAC、倉庫なら freezer を入れると刺さる</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    ※このUIは「DIOの計画（Plan）を見せる」ためのα版です。実制御は後からAPI接続で差し替えできます（MVPは"判断の可視化"が勝ち）。
+  </footer>
+
+<script>
+/** ---------- Utilities ---------- **/
+const fmtKW  = v => (v != null && isFinite(v)) ? Math.round(v) + " kW" : "—";
+const fmtYen = v => (v != null && isFinite(v)) ? "¥" + Math.round(v).toLocaleString() : "—";
+const clamp  = (v, a, b) => Math.max(a, Math.min(b, v));
+const hhmm = (i, stepMin=15) => {
+  const m = i * stepMin;
+  const hh = String(Math.floor(m/60)).padStart(2,"0");
+  const mm = String(m%60).padStart(2,"0");
+  return `${hh}:${mm}`;
+};
+
+/** ---------- Sample Data Model ---------- **/
+function makeDefaultModel(){
+  const stepMin = 15;
+  const points = 96; // 24h * 4
+  // Baseline demand shape: morning ramp + afternoon peak + evening
+  const base = Array.from({length: points}, (_, i) => {
+    const t = i / points;
+    let v = 650
+      + 180*Math.sin((t*2*Math.PI) - 1.1)
+      + 120*Math.sin((t*4*Math.PI) + 0.4);
+    // Add peak around 14:00
+    const peakCenter = 14*60/stepMin;
+    v += 320*Math.exp(-Math.pow((i-peakCenter)/8,2));
+    // Noise
+    v += (Math.random()-0.5)*50;
+    return Math.max(350, v);
+  });
+
+  return {
+    meta: {
+      site: "Factory A",
+      date: "2026-01-27",
+      time_series: "15min",
+      unit: "kW"
+    },
+    tariff: {
+      basic_fee_yen_per_kw_month: 1600,
+      tou: {
+        peak_yen_per_kwh: 25,
+        offpeak_yen_per_kwh: 15,
+        peak_hours: [["13:00","17:00"]]
+      }
+    },
+    constraints: {
+      goal_peak_kw: 980,
+      dr: { enabled: false, capacity_kw: 0, price_yen_per_kw_event: 0 }
+    },
+    assets: [
+      { id:"compressor_2", type:"load", max_kw:180, controllability:"shiftable", note:"コンプレッサ2号" },
+      { id:"hvac", type:"load", max_kw:140, controllability:"curtailable", note:"空調" },
+      { id:"battery", type:"storage", max_kw:200, capacity_kwh:400, soc:0.65, note:"蓄電池" }
+    ],
+    demand_before_kw: base,
+    // production plan stub
+    production_plan: [
+      { line:"Line-1", from:"13:00", to:"15:00", note:"乾燥工程（可変）" }
+    ]
+  };
+}
+
+/** ---------- DIO Plan (Toy Logic) ---------- **/
+function dioPlan(model){
+  const stepMin = 15;
+  const before = model.demand_before_kw.slice();
+  const after = model.demand_before_kw.slice();
+
+  const goal = model.constraints?.goal_peak_kw ?? Math.max(...before);
+  const basicFee = model.tariff?.basic_fee_yen_per_kw_month ?? 0;
+  const peakP = model.tariff?.tou?.peak_yen_per_kwh ?? 0;
+  const offP  = model.tariff?.tou?.offpeak_yen_per_kwh ?? 0;
+  const peakHours = model.tariff?.tou?.peak_hours ?? [];
+
+  // Build peak-hour mask
+  const isPeak = Array.from({length: before.length}, (_, i) => {
+    const t = hhmm(i, stepMin);
+    const toMin = (s)=>{const [h,m]=s.split(":").map(Number); return h*60+m;}
+    const tm = toMin(t);
+    return peakHours.some(([a,b]) => toMin(a) <= tm && tm < toMin(b));
+  });
+
+  const peakBefore = Math.max(...before);
+  const idxPeak = before.indexOf(peakBefore);
+
+  const actions = [];
+  const risks = [];
+
+  // Risk statement
+  if(peakBefore > goal){
+    risks.push({
+      tag:"risk",
+      title:"ピーク超過リスク",
+      desc:`予測ピーク ${Math.round(peakBefore)}kW が目標 ${Math.round(goal)}kW を超えています。基本料金・設備負荷が増加。`,
+      sub:`対策：負荷シフト + 蓄電池放電でピークを潰す`
+    });
+  }else{
+    risks.push({
+      tag:"exec",
+      title:"安定状態",
+      desc:`予測ピーク ${Math.round(peakBefore)}kW は目標 ${Math.round(goal)}kW 以内。`,
+      sub:`改善余地：時間帯単価最適化（従量料金の削減）`
+    });
+  }
+
+  // Simple action: battery discharge around peak
+  const battery = (model.assets||[]).find(a=>a.type==="storage");
+  if(battery){
+    // Discharge window: idxPeak-2 .. idxPeak+2
+    const w0 = clamp(idxPeak-2, 0, after.length-1);
+    const w1 = clamp(idxPeak+2, 0, after.length-1);
+    const dischargeKW = Math.min(battery.max_kw || 0, Math.max(0, peakBefore - goal + 30));
+    if(dischargeKW > 0){
+      for(let i=w0;i<=w1;i++) after[i] = Math.max(0, after[i] - dischargeKW);
+      actions.push({
+        tag:"plan",
+        title:`蓄電池放電：${battery.note || battery.id}`,
+        desc:`${hhmm(w0,stepMin)}–${hhmm(w1+1,stepMin)} に ${Math.round(dischargeKW)}kW 放電し、ピークを抑制します。`,
+        sub:`理由：ピーク帯での需要を削り、基本料金（契約/最大需要）を下げる`
+      });
+    }
+  }
+
+  // Simple action: shift a shiftable load from peak to offpeak
+  const shiftable = (model.assets||[]).find(a=>a.controllability==="shiftable");
+  if(shiftable){
+    // Find a peak segment and move energy to nearest off-peak later
+    const amount = Math.min(shiftable.max_kw || 0, 80);
+    const reduceIdx = [];
+    for(let i=0;i<after.length;i++){
+      if(isPeak[i] && Math.abs(i-idxPeak) <= 6) reduceIdx.push(i);
+    }
+    // Add to offpeak later (evening)
+    const addIdx = [];
+    for(let i=0;i<after.length;i++){
+      if(!isPeak[i] && i > idxPeak && i <= idxPeak+16) addIdx.push(i);
+    }
+    if(reduceIdx.length && addIdx.length){
+      // Apply small reductions
+      const per = amount / reduceIdx.length;
+      reduceIdx.forEach(i => after[i] = Math.max(0, after[i] - per));
+      const perAdd = amount / addIdx.length;
+      addIdx.forEach(i => after[i] = after[i] + perAdd);
+
+      actions.push({
+        tag:"plan",
+        title:`負荷シフト：${shiftable.note || shiftable.id}`,
+        desc:`ピーク帯の一部負荷をオフピークへ移動（概算 ${Math.round(amount)}kW）し、従量料金を削減`,
+        sub:`理由：ピーク単価とオフピーク単価の差額を活用`
+      });
+    }
+  }
+
+  // Compute KPIs
+  const peakAfter = Math.max(...after);
+  const peakReduction = Math.max(0, peakBefore - peakAfter);
+  const monthlyBasicSave = peakReduction * basicFee;
+
+  // Energy saving from time shift (toy): measure peak-hour kWh reduction * price diff
+  // Convert kW (avg over 15min) -> kWh: kW * (15/60)
+  const kwhBeforePeak = before.reduce((s,v,i)=> s + (isPeak[i] ? v*(stepMin/60) : 0), 0);
+  const kwhAfterPeak  = after.reduce((s,v,i)=> s + (isPeak[i] ? v*(stepMin/60) : 0), 0);
+  const shiftedKwh = Math.max(0, kwhBeforePeak - kwhAfterPeak);
+  const dailyEnergySave = shiftedKwh * Math.max(0, peakP - offP);
+
+  // DR (optional)
+  const dr = model.constraints?.dr;
+  let drInfo = { enabled: false, annual_yen: 0 };
+  if(dr?.enabled){
+    // Estimate DR revenue
+    drInfo = { enabled: true, annual_yen: (dr.capacity_kw || 0) * (dr.price_yen_per_kw_event || 0) * 12 };
+  }
+
+  if(actions.length === 0){
+    actions.push({
+      tag:"plan",
+      title:"アクションなし（現状維持）",
+      desc:'目標ピーク内のため、ピーク抑制は不要。次は"単価最適化"や"原単位改善"に進めます。',
+      sub:"例：工程開始時刻を前後させる / 空調最適 / 圧縮機の漏れ診断"
+    });
+  }
+
+  return {
+    demand_after_kw: after,
+    kpis: {
+      peak_before_kw: peakBefore,
+      peak_after_kw: peakAfter,
+      monthly_basic_fee_saving_yen: monthlyBasicSave,
+      daily_energy_saving_yen: dailyEnergySave,
+      shifted_kwh: shiftedKwh
+    },
+    actions,
+    risks,
+    meta: {
+      idx_peak: idxPeak,
+      goal_peak_kw: goal,
+      step_min: stepMin
+    }
+  };
+}
+
+/** ---------- Rendering ---------- **/
+const el = (id)=>document.getElementById(id);
+
+function drawChart(canvas, before, after, goal){
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  // margins
+  const m = {l:56, r:18, t:18, b:44};
+  const x0=m.l, y0=m.t, x1=W-m.r, y1=H-m.b;
+  const n = before.length;
+
+  const maxV = Math.max(goal||0, ...before, ...after) * 1.08;
+  const minV = Math.min(...before, ...after) * 0.85;
+
+  const X = (i)=> x0 + (x1-x0)*(i/(n-1));
+  const Y = (v)=> y1 - (y1-y0)*((v-minV)/(maxV-minV));
+
+  // grid
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "rgba(255,255,255,.06)";
+  ctx.fillStyle = "rgba(255,255,255,.55)";
+  ctx.font = "12px ui-sans-serif, system-ui";
+
+  const gridY = 5;
+  for(let g=0; g<=gridY; g++){
+    const y = y0 + (y1-y0)*(g/gridY);
+    ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1,y); ctx.stroke();
+    const v = maxV - (maxV-minV)*(g/gridY);
+    ctx.fillText(Math.round(v)+" kW", 10, y+4);
+  }
+  // x labels every 3 hours (12 points)
+  const every = 12; // 12*15min=3h
+  for(let i=0;i<n;i+=every){
+    const x = X(i);
+    ctx.beginPath(); ctx.moveTo(x,y1); ctx.lineTo(x,y1+6); ctx.stroke();
+    ctx.fillText(hhmm(i), x-16, y1+26);
+  }
+
+  // goal line
+  if(isFinite(goal)){
+    ctx.strokeStyle = "rgba(155,176,209,.75)";
+    ctx.setLineDash([6,6]);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x0, Y(goal));
+    ctx.lineTo(x1, Y(goal));
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function plot(arr, stroke){
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    arr.forEach((v,i)=>{
+      const x = X(i), y = Y(v);
+      if(i===0) ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+  }
+
+  plot(before, "rgba(255,204,102,.9)");
+  plot(after,  "rgba(49,208,170,.9)");
+
+  // peak markers
+  const peakB = Math.max(...before);
+  const idxB = before.indexOf(peakB);
+  ctx.fillStyle = "rgba(255,204,102,.9)";
+  ctx.beginPath(); ctx.arc(X(idxB), Y(peakB), 6, 0, Math.PI*2); ctx.fill();
+
+  const peakA = Math.max(...after);
+  const idxA = after.indexOf(peakA);
+  ctx.fillStyle = "rgba(49,208,170,.9)";
+  ctx.beginPath(); ctx.arc(X(idxA), Y(peakA), 6, 0, Math.PI*2); ctx.fill();
+}
+
+function render(model, result){
+  const before = model.demand_before_kw;
+  const after  = result.demand_after_kw;
+  const goal   = result.meta.goal_peak_kw;
+
+  // KPI
+  el("kpiPeakBefore").textContent = fmtKW(result.kpis.peak_before_kw);
+  el("kpiPeakAfter").textContent  = fmtKW(result.kpis.peak_after_kw);
+  el("kpiBasicSave").textContent  = fmtYen(result.kpis.monthly_basic_fee_saving_yen);
+  el("kpiEnergySave").textContent = fmtYen(result.kpis.daily_energy_saving_yen);
+
+  const tB = hhmm(before.indexOf(Math.max(...before)));
+  const tA = hhmm(after.indexOf(Math.max(...after)));
+  el("kpiPeakBeforeT").textContent = `ピーク時刻: ${tB}`;
+  el("kpiPeakAfterT").textContent  = `ピーク時刻: ${tA}`;
+
+  // Pills
+  const tou = model.tariff?.tou;
+  el("pillTariff").textContent = `TOU: peak ¥${tou.peak_yen_per_kwh}/kWh / offpeak ¥${tou.offpeak_yen_per_kwh}/kWh`;
+  el("pillGoal").textContent = `Goal peak: ${Math.round(goal)} kW`;
+  el("pillDR").textContent = `DR: ${(model.constraints?.dr?.enabled) ? "on" : "off"}`;
+
+  // Lists
+  const a = el("actionList");
+  a.innerHTML = "";
+  result.actions.forEach(x=>{
+    a.appendChild(makeListItem(x.tag, x.title, x.desc, x.sub));
+  });
+
+  const r = el("riskList");
+  r.innerHTML = "";
+  result.risks.forEach(x=>{
+    r.appendChild(makeListItem(x.tag, x.title, x.desc, x.sub));
+  });
+
+  // Chart
+  drawChart(el("chart"), before, after, goal);
+
+  // Meta
+  const m = model.meta || {};
+  el("metaLine").textContent = `${m.time_series || "15min"} / 1日分 — Site: ${m.site || "—"} / Date: ${m.date || "—"}`;
+}
+
+function makeListItem(tag, title, desc, sub){
+  const wrap = document.createElement("div");
+  wrap.className = "item";
+  const top = document.createElement("div");
+  top.className = "top";
+  const t = document.createElement("div");
+  t.style.fontWeight = "700";
+  t.style.fontSize = "12px";
+  t.textContent = title;
+  const tg = document.createElement("span");
+  tg.className = "tag " + (tag==="risk" ? "risk" : (tag==="exec" ? "exec" : "plan"));
+  tg.textContent = (tag==="risk") ? "RISK" : (tag==="exec" ? "OK" : "PLAN");
+  top.appendChild(t); top.appendChild(tg);
+
+  const d = document.createElement("div");
+  d.className = "desc"; d.textContent = desc || "";
+  const s = document.createElement("div");
+  s.className = "subdesc"; s.textContent = sub || "";
+
+  wrap.appendChild(top);
+  wrap.appendChild(d);
+  if(sub) wrap.appendChild(s);
+  return wrap;
+}
+
+/** ---------- App ---------- **/
+let currentModel = makeDefaultModel();
+
+function syncTextarea(){
+  el("jsonInput").value = JSON.stringify(currentModel, null, 2);
+}
+function parseTextarea(){
+  const txt = el("jsonInput").value;
+  const obj = JSON.parse(txt);
+  // minimal validation
+  if(!Array.isArray(obj.demand_before_kw)) throw new Error("demand_before_kw が配列ではありません");
+  if(obj.demand_before_kw.length < 24) throw new Error("demand_before_kw の点数が少なすぎます（例: 96点）");
+  return obj;
+}
+
+function run(){
+  try{
+    const model = parseTextarea();
+    currentModel = model;
+    const res = dioPlan(model);
+    render(model, res);
+  }catch(e){
+    alert("JSONエラー: " + e.message);
+  }
+}
+
+document.getElementById("btnRun").addEventListener("click", run);
+
+document.getElementById("btnRandom").addEventListener("click", ()=>{
+  currentModel = makeDefaultModel();
+  syncTextarea();
+  run();
+});
+
+document.getElementById("btnCopy").addEventListener("click", async ()=>{
+  try{
+    await navigator.clipboard.writeText(el("jsonInput").value);
+    alert("JSONをコピーしました");
+  }catch{
+    // fallback
+    el("jsonInput").select();
+    document.execCommand("copy");
+    alert("JSONをコピーしました（fallback）");
+  }
+});
+
+// init
+syncTextarea();
+run();
+</script>
+</body>
+</html>
