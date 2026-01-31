@@ -70,11 +70,10 @@
       gap: 12px;
     }
 
-    .brand-dot {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, var(--cyan), var(--blue), var(--navy), var(--cyan));
+    .brand-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
     }
 
     .brand-name {
@@ -87,8 +86,9 @@
 
     .tagline {
       font-size: 28pt;
-      color: var(--muted);
+      color: magenta;
       letter-spacing: 0.15em;
+      font-weight: 700;
     }
 
     /* ヒーローセクション */
@@ -340,10 +340,10 @@
   <!-- ヘッダー -->
   <header class="poster-header">
     <div class="brand">
-      <div class="brand-dot"></div>
+      <img class="brand-logo" src="./img/Factory_Logo.png" alt="AIBOD Factory logo">
       <span class="brand-name">AIBOD Factory</span>
     </div>
-    <div class="tagline">Software Manufacturing Platform</div>
+    <div class="tagline">ソフトウェア製造工場</div>
   </header>
 
   <!-- ヒーローセクション -->
@@ -409,7 +409,7 @@
           日々の生産数量を自動算出するプランニングエンジン。
         </p>
         <div class="line-image">
-          <img src="img/031-0001.png" alt="生産プランナ イメージ">
+          <img src="img/factory-031-0001-icon.svg" alt="生産プランナ イメージ">
         </div>
       </div>
 
@@ -431,7 +431,7 @@
           自動倉庫・AGVとTCPで連携し、供給の進捗を見える化。
         </p>
         <div class="line-image">
-          <img src="img/031-0002.png" alt="自動倉庫 イメージ">
+          <img src="img/factory-031-0002-icon.svg" alt="自動倉庫 イメージ">
         </div>
       </div>
 
@@ -453,16 +453,16 @@
           金型や機械の稼働時間を考慮し、最適なスケジュールを生成します。
         </p>
         <div class="line-image">
-          <img src="img/031-0004.png" alt="製造スケジューラ イメージ">
+          <img src="img/factory-031-0004-icon.svg" alt="製造スケジューラ イメージ">
         </div>
       </div>
     </div>
   </section>
 
   <!-- フッター -->
-  <footer class="poster-footer">
+  <!-- <footer class="poster-footer">
     <img src="./img/AIBOD_info.svg" alt="AIBOD お問い合わせ情報" class="footer-info-image">
-  </footer>
+  </footer> -->
 
 </body>
 </html>
