@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-label="AIBOD Factory conceptual diagram">
+  <title>AIBOD Factory — Software Manufacturing Concept</title>
+  <desc>Conceptual system-style diagram showing intent -> parts -> jigs -> production line -> shipped software outputs.</desc>
+
+  <!-- ====== Style ====== -->
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .stroke { stroke: #1f2937; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .muted { stroke: #94a3b8; stroke-width: 3; }
+      .thin { stroke-width: 3; }
+      .dash { stroke-dasharray: 10 10; }
+      .fillA { fill: #00b3ec; }   /* AIBOD light */
+      .fillB { fill: #0068b6; }   /* AIBOD mid */
+      .fillC { fill: #1d2087; }   /* AIBOD deep */
+      .fillG { fill: #f1f5f9; }   /* light gray */
+      .fillW { fill: #ffffff; }
+      .label { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; font-size: 24px; fill: #334155; }
+      .small { font-size: 18px; fill: #475569; }
+    </style>
+
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2937"/>
+    </marker>
+
+    <!-- Soft shadow (subtle) -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="800"/>
+
+  <!-- ====== Main pipeline line ====== -->
+  <path d="M110 420 C 220 420, 260 420, 330 420 S 470 420, 560 420 S 710 420, 820 420 S 980 420, 1110 420 S 1240 420, 1490 420"
+        fill="none" class="stroke" marker-end="url(#arrow)"/>
+
+  <!-- ====== Stage containers ====== -->
+  <!-- Stage 1: Intent -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="210" rx="24" ry="24" width="240" height="420" class="fillW stroke"/>
+  </g>
+
+  <!-- Stage 2: Parts -->
+  <g filter="url(#shadow)">
+    <rect x="360" y="210" rx="24" ry="24" width="240" height="420" class="fillW stroke"/>
+  </g>
+
+  <!-- Stage 3: Jigs -->
+  <g filter="url(#shadow)">
+    <rect x="640" y="210" rx="24" ry="24" width="240" height="420" class="fillW stroke"/>
+  </g>
+
+  <!-- Stage 4: Line -->
+  <g filter="url(#shadow)">
+    <rect x="920" y="210" rx="24" ry="24" width="280" height="420" class="fillW stroke"/>
+  </g>
+
+  <!-- Stage 5: Output (moved right) -->
+  <g filter="url(#shadow)">
+    <rect x="1320" y="210" rx="24" ry="24" width="160" height="420" class="fillW stroke"/>
+  </g>
+
+  <!-- ====== Labels (remove if you want zero text) ====== -->
+  <text x="110" y="255" class="label">Intent</text>
+  <text x="390" y="255" class="label">Parts</text>
+  <text x="670" y="255" class="label">Jigs</text>
+  <text x="950" y="255" class="label">Line</text>
+  <text x="1345" y="255" class="label">Ship</text>
+
+  <!-- ====== Stage 1 Icon: Human + Idea (intent) ====== -->
+  <g transform="translate(110,290)">
+    <!-- person -->
+    <circle cx="70" cy="65" r="28" class="fillG stroke"/>
+    <path d="M35 165 C40 125, 100 125, 105 165" class="fillG stroke"/>
+    <path d="M55 165 V220" class="stroke"/>
+    <path d="M85 165 V220" class="stroke"/>
+    <!-- idea bubble -->
+    <path d="M150 40 C190 40, 205 70, 205 90 C205 120, 180 140, 150 140 C130 140, 115 130, 108 118"
+          fill="none" class="muted"/>
+    <circle cx="140" cy="85" r="20" class="fillA stroke"/>
+    <path d="M140 105 V120" class="stroke"/>
+    <path d="M130 120 H150" class="stroke"/>
+    <!-- input tokens -->
+    <rect x="20" y="260" width="48" height="48" rx="10" class="fillA stroke"/>
+    <rect x="80" y="260" width="48" height="48" rx="10" class="fillB stroke"/>
+    <rect x="140" y="260" width="48" height="48" rx="10" class="fillC stroke"/>
+    <path d="M210 285 H240" class="muted" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ====== Stage 2 Icon: Reusable modules (parts) ====== -->
+  <g transform="translate(390,300)">
+    <!-- modular blocks -->
+    <rect x="20" y="40" width="70" height="70" rx="16" class="fillA stroke"/>
+    <rect x="110" y="40" width="70" height="70" rx="16" class="fillB stroke"/>
+    <rect x="65" y="125" width="70" height="70" rx="16" class="fillC stroke"/>
+    <!-- link nodes -->
+    <circle cx="40" cy="240" r="14" class="fillG stroke"/>
+    <circle cx="120" cy="220" r="14" class="fillG stroke"/>
+    <circle cx="180" cy="250" r="14" class="fillG stroke"/>
+    <path d="M40 240 L120 220 L180 250" fill="none" class="muted"/>
+    <!-- code bracket -->
+    <path d="M25 280 C10 280, 10 320, 25 320" fill="none" class="stroke thin"/>
+    <path d="M190 280 C205 280, 205 320, 190 320" fill="none" class="stroke thin"/>
+    <path d="M80 300 H155" class="muted"/>
+  </g>
+
+  <!-- ====== Stage 3 Icon: Jigs (schema/template) ====== -->
+  <g transform="translate(670,295)">
+    <!-- template frame -->
+    <rect x="20" y="40" width="160" height="220" rx="18" class="fillG stroke"/>
+    <path d="M45 85 H165" class="muted"/>
+    <path d="M45 120 H145" class="muted"/>
+    <path d="M45 155 H165" class="muted"/>
+    <path d="M45 190 H140" class="muted"/>
+    <path d="M45 225 H160" class="muted"/>
+    <!-- "schema" nodes -->
+    <circle cx="40" cy="300" r="14" class="fillA stroke"/>
+    <circle cx="100" cy="300" r="14" class="fillB stroke"/>
+    <circle cx="160" cy="300" r="14" class="fillC stroke"/>
+    <path d="M40 300 L100 300 L160 300" fill="none" class="stroke thin"/>
+    <!-- jig clamp -->
+    <path d="M15 55 H5 V95 H15" fill="none" class="stroke"/>
+    <path d="M185 55 H195 V95 H185" fill="none" class="stroke"/>
+  </g>
+
+  <!-- ====== Stage 4 Icon: Production line (orchestration/pipeline) ====== -->
+  <g transform="translate(950,295)">
+    <!-- hub -->
+    <circle cx="120" cy="160" r="46" class="fillW stroke"/>
+    <circle cx="120" cy="160" r="10" class="fillB stroke"/>
+    <!-- spokes -->
+    <path d="M120 114 V70" class="muted" marker-end="url(#arrow)"/>
+    <path d="M120 206 V250" class="muted" marker-end="url(#arrow)"/>
+    <path d="M74 160 H30" class="muted" marker-end="url(#arrow)"/>
+    <path d="M166 160 H210" class="muted" marker-end="url(#arrow)"/>
+    <!-- stage blocks around -->
+    <rect x="92" y="30" width="56" height="34" rx="10" class="fillA stroke"/>
+    <rect x="92" y="260" width="56" height="34" rx="10" class="fillC stroke"/>
+    <rect x="10" y="143" width="56" height="34" rx="10" class="fillB stroke"/>
+    <rect x="174" y="143" width="56" height="34" rx="10" class="fillB stroke"/>
+    <!-- gears (symbolic automation) -->
+    <g transform="translate(20,320)">
+      <circle cx="40" cy="40" r="22" class="fillG stroke"/>
+      <path d="M40 10 V0 M40 80 V70 M10 40 H0 M80 40 H70 M18 18 L10 10 M62 62 L70 70 M62 18 L70 10 M18 62 L10 70"
+            class="stroke thin"/>
+      <circle cx="40" cy="40" r="8" class="fillW stroke"/>
+    </g>
+  </g>
+
+  <!-- ====== Stage 5 Icon: Output (app + cloud) moved right ====== -->
+  <g transform="translate(1340,295)">
+    <!-- cloud -->
+    <path d="M95 95 C95 70, 115 55, 138 62 C148 40, 177 38, 190 58
+             C214 56, 232 74, 228 96
+             C246 108, 242 135, 220 140
+             H108 C90 138, 78 125, 82 110
+             C70 108, 64 98, 70 88
+             C76 78, 86 74, 95 76 Z"
+          class="fillG stroke"/>
+    <path d="M155 150 V190" class="muted" marker-end="url(#arrow)"/>
+    <!-- phone -->
+    <rect x="105" y="210" width="100" height="170" rx="22" class="fillW stroke"/>
+    <rect x="128" y="240" width="54" height="80" rx="12" class="fillG stroke"/>
+    <path d="M130 350 H180" class="muted"/>
+    <circle cx="155" cy="370" r="8" class="fillB stroke"/>
+    <!-- check mark -->
+    <path d="M138 285 L152 300 L178 270" fill="none" class="stroke"/>
+  </g>
+
+  <!-- ====== Inline stage connectors (visual emphasis) ====== -->
+  <path d="M320 420 H360" class="muted" marker-end="url(#arrow)"/>
+  <path d="M600 420 H640" class="muted" marker-end="url(#arrow)"/>
+  <path d="M880 420 H920" class="muted" marker-end="url(#arrow)"/>
+  <path d="M1160 420 H1320" class="muted" marker-end="url(#arrow)"/>
+
+  <!-- ====== Optional: subtle title (comment out if you want zero text) ====== -->
+  <text x="80" y="120" class="label">AIBOD Factory</text>
+  <text x="80" y="155" class="small">Software manufacturing: Intent → Parts → Jigs → Line → Ship</text>
+</svg>
