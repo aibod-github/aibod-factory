@@ -1681,20 +1681,30 @@
         });
       });
 
-      // Check URL hash for filter parameters
-      function checkHashFilters() {
-        const hash = window.location.hash;
-        if (hash === '#services') {
-          // Check if there's a filter parameter in the link that was clicked
-          // This will be handled by the click event above
+      // Check URL for industry filter parameter
+      function checkUrlFilters() {
+        const url = new URL(window.location.href);
+        const industryParam = url.searchParams.get('industry');
+        // Only apply if mode is advanced (filter section is only shown in advanced mode)
+        const modeParam = url.searchParams.get('mode');
+        const currentMode = (modeParam === 'sme' || modeParam === 'advanced') ? modeParam : 'advanced';
+
+        if (currentMode === 'advanced' && industryParam) {
+          // Map English URL values to Japanese filter values
+          const industryMap = {
+            'automotive': '自動車',
+            'semiconductor': '半導体',
+            'energy': 'エネルギー'
+          };
+          const filterValue = industryMap[industryParam.toLowerCase()];
+          if (filterValue) {
+            setFilter('industry', filterValue);
+          }
         }
       }
 
       // Check on page load
-      checkHashFilters();
-      
-      // Check on hash change
-      window.addEventListener('hashchange', checkHashFilters);
+      checkUrlFilters();
     });
 
     // LINEへ
